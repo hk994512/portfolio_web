@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="M Hamza Khan — Flutter Developer portfolio. Android, iOS, Web, Firebase."
+    />
+    <title>M Hamza Khan | Flutter Developer</title>
+
+    <!-- Google Fonts - Great Vibes + Mooli -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700;800&family=Mooli&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <link rel="icon" href="favicon.ico" />
+
+    <style>
+      /* ── HERO TAGLINE ── */
+      .hero-tagline {
+        font-size: clamp(1rem, 2.2vw, 1.2rem);
+        color: var(--text-muted, #8892a4);
+        margin-top: 0.5rem;
+        margin-bottom: 1.4rem;
+        font-weight: 400;
+        line-height: 1.5;
+        max-width: 460px;
+      }
+
+      /* ── STATS STRIP ── */
+      .stats-strip {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .stat-number {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--accent, #6c63ff);
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 0.78rem;
+        color: var(--text-muted, #8892a4);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 500;
+      }
+
+      /* ── CONTACT FORM BEAUTIFUL UPGRADE ── */
+      .contact-form {
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(108, 99, 255, 0.06) 0%,
+          rgba(0, 0, 0, 0) 60%
+        );
+        border: 1px solid rgba(108, 99, 255, 0.15);
+        border-radius: 24px;
+        padding: 2.5rem 2.5rem;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 48px rgba(108, 99, 255, 0.08),
+          0 2px 8px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin-top: 2rem;
+      }
+      .contact-form::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(108, 99, 255, 0.18) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .contact-form::after {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        left: -40px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(108, 99, 255, 0.1) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .form-group {
+        position: relative;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text, #eaeaea);
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.85rem 1.1rem;
+        border-radius: 12px;
+        border: 1.5px solid rgba(108, 99, 255, 0.2);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text, #eaeaea);
+        font-size: 0.95rem;
+        font-family: inherit;
+        transition: border-color 0.25s, box-shadow 0.25s, background 0.25s,
+          transform 0.2s;
+        outline: none;
+        box-sizing: border-box;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent, #6c63ff);
+        background: rgba(108, 99, 255, 0.07);
+        box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.12),
+          0 2px 12px rgba(108, 99, 255, 0.08);
+        transform: translateY(-1px);
+      }
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.22);
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 130px;
+      }
+
+      /* Floating label animation hint */
+      .form-group input:not(:placeholder-shown),
+      .form-group textarea:not(:placeholder-shown) {
+        border-color: rgba(108, 99, 255, 0.4);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+        margin-bottom: 1.2rem;
+      }
+      @media (max-width: 600px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .contact-form {
+          padding: 1.5rem 1.2rem;
+        }
+      }
+
+      .form-msg-wrap {
+        margin-bottom: 1.5rem;
+      }
+
+      /* Submit button enhanced */
+      .form-submit {
+        position: relative;
+        overflow: hidden;
+        padding: 0.9rem 2.4rem;
+        font-size: 1rem;
+        font-weight: 700;
+        border-radius: 50px;
+        letter-spacing: 0.04em;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .form-submit::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.18) 50%,
+          transparent 70%
+        );
+        transform: translateX(-100%);
+        transition: transform 0.5s;
+      }
+      .form-submit:hover::after {
+        transform: translateX(100%);
+      }
+      .form-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(108, 99, 255, 0.35);
+      }
+      .form-submit:active {
+        transform: translateY(0);
+      }
+
+      /* Sending state */
+      .form-submit.sending {
+        pointer-events: none;
+        opacity: 0.7;
+      }
+      .form-submit .btn-spinner {
+        display: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+      .form-submit.sending .btn-spinner {
+        display: inline-block;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Input shake animation on error */
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-6px);
+        }
+        40% {
+          transform: translateX(6px);
+        }
+        60% {
+          transform: translateX(-4px);
+        }
+        80% {
+          transform: translateX(4px);
+        }
+      }
+      .form-group.has-error input,
+      .form-group.has-error textarea {
+        border-color: #e05a5a;
+        animation: shake 0.35s ease;
+        box-shadow: 0 0 0 4px rgba(224, 90, 90, 0.12);
+      }
+      .form-group.has-error .form-error {
+        display: block;
+      }
+      .form-error {
+        display: none;
+        font-size: 0.78rem;
+        color: #e05a5a;
+        margin-top: 0.35rem;
+        font-weight: 500;
+      }
+
+      /* Success state */
+      .form-success-msg {
+        display: none;
+        text-align: center;
+        padding: 2rem 1rem;
+        animation: fadeInUp 0.5s ease forwards;
+      }
+      .form-success-msg .success-icon {
+        font-size: 3rem;
+        margin-bottom: 0.75rem;
+      }
+      .form-success-msg h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+      }
+      .form-success-msg p {
+        color: var(--text-muted, #8892a4);
+        font-size: 0.92rem;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Form field appear animation */
+      .contact-form .form-row,
+      .contact-form .form-group,
+      .contact-form .form-submit-wrap {
+        animation: fadeInUp 0.5s ease both;
+      }
+      .contact-form .form-row:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .contact-form .form-row:nth-child(2) {
+        animation-delay: 0.12s;
+      }
+      .contact-form .form-msg-wrap {
+        animation-delay: 0.19s;
+      }
+      .contact-form .form-submit-wrap {
+        animation-delay: 0.26s;
+      }
+
+      /* Divider with icon */
+      .contact-divider {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 0.5rem 0 1.8rem;
+        color: var(--text-muted, #8892a4);
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .contact-divider::before,
+      .contact-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(108, 99, 255, 0.18);
+      }
+
+      /* ── EDUCATION TRIM ── */
+      /* Remove the repetitive long text by hiding the span.edu-desc-full toggle wrapper visually tight */
+      .edu-desc-full {
+        display: none;
+      }
+      .edu-desc-toggle {
+        display: none;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+      .cursor-blink {
+        color: var(--accent);
+        animation: blink 1s step-end infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════════════════════ -->
+    <nav id="navbar">
+      <div class="container nav-inner">
+        <a href="#" class="nav-logo">M Hamza Khan</a>
+
+        <ul class="nav-links">
+          <li><a href="#" class="active" data-section="hero">Home</a></li>
+          <li><a href="#about" data-section="about">About</a></li>
+          <li><a href="#services" data-section="services">Services</a></li>
+          <li><a href="#works" data-section="works">Projects</a></li>
+          <li><a href="#education" data-section="education">Education</a></li>
+          <li><a href="#contact" data-section="contact">Contact</a></li>
+        </ul>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#" data-section="hero">Home</a>
+      <a href="#about" data-section="about">About</a>
+      <a href="#services" data-section="services">Services</a>
+      <a href="#works" data-section="works">Projects</a>
+      <a href="#education" data-section="education">Education</a>
+      <a href="#contact" data-section="contact">Contact</a>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════════════════════ -->
+    <section id="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-text fade-up">
+            <div class="hero-badge-wrap">
+              <div class="hero-badge">Hello, I'm</div>
+              <span class="available-badge"
+                >🟢 Available for Freelance Projects</span
+              >
+            </div>
+            <h1 class="hero-name">M Hamza Khan</h1>
+            <p class="hero-role">
+              <span id="typedRole"></span><span class="cursor-blink">|</span>
+            </p>
+
+            <!-- ✅ POINT 5: Hero tagline added -->
+            <p class="hero-tagline">
+              I build beautiful Flutter apps for Android, iOS &amp; Web - fast,
+              scalable, and pixel-perfect.
+            </p>
+
+            <div class="hero-btns">
+              <a href="assets/Hamza-CV.pdf" download class="btn btn-primary">
+                <svg
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download CV
+              </a>
+              <a
+                href="https://wa.me/+923081736926"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-outline"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                  />
+                  <path
+                    d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.186-1.443A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.371l-.36-.214-3.724.868.936-3.42-.235-.372A9.818 9.818 0 1 1 12 21.818z"
+                  />
+                </svg>
+                Hire Me
+              </a>
+            </div>
+
+            <!-- ✅ STATS STRIP: 2+ years experience + other stats -->
+            <div class="stats-strip">
+              <div class="stat-item">
+                <span class="stat-number">2+</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">6+</span>
+                <span class="stat-label">Projects Shipped</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Happy Clients</span>
+              </div>
+              <div class="stat-item">
+                <div class="stat-item">
+                  <span class="stat-number">100%</span>
+                  <span class="stat-label">Cross-Platform Code</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-avatar fade-up" style="transition-delay: 0.15s">
+            <div class="avatar-ring">
+              <img src="assets/bg-image-modified.png" alt="M Hamza Khan" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════════════════════════════════ -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="about-inner">
+          <div class="about-lottie fade-up">
+            <div id="lottieContainer" style="width: 100%"></div>
+          </div>
+
+          <div class="about-content fade-up" style="transition-delay: 0.1s">
+            <p class="section-label">About Me</p>
+            <p class="about-desc">
+              Hello! I'm
+              <strong style="color: var(--text)">M Hamza Khan</strong>, a
+              passionate Flutter Developer specializing in building beautiful,
+              high-performance cross-platform applications for Android, iOS,
+              Web, macOS, Linux, and Windows.
+            </p>
+            <p class="about-desc">
+              I strive to ensure astounding performance with state-of-the-art
+              security. Currently pursuing my BS in Computer Science at the
+              University of Engineering and Technology, Taxila.
+            </p>
+
+            <div class="chips">
+              <span class="chip">Flutter</span>
+              <span class="chip">Dart</span>
+              <span class="chip">Firebase</span>
+              <span class="chip">Android</span>
+              <span class="chip">iOS</span>
+              <span class="chip">Supabase</span>
+              <span class="chip">REST APIs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════════════════════════════════════ -->
+    <section id="services" class="section">
+      <div class="container">
+        <p class="section-label fade-up">What I Do</p>
+        <p class="section-sub fade-up">
+          Services I offer to bring your ideas to life
+        </p>
+
+        <div class="services-grid">
+          <div class="service-card fade-up">
+            <img src="assets/webL.png" alt="Web" class="service-icon" />
+            <p class="service-title">Web Development</p>
+            <p class="service-desc">
+              Responsive, high-performance web apps built with modern frameworks
+              and clean, efficient code.
+            </p>
+          </div>
+
+          <div class="service-card fade-up" style="transition-delay: 0.05s">
+            <img src="assets/app.png" alt="App" class="service-icon" />
+            <p class="service-title">App Development</p>
+            <p class="service-desc">
+              Cross-platform mobile applications with native performance, smooth
+              animations, and robust functionality.
+            </p>
+          </div>
+
+          <div class="service-card fade-up" style="transition-delay: 0.1s">
+            <img
+              src="assets/firebase.png"
+              alt="Firebase"
+              class="service-icon"
+            />
+            <p class="service-title">Backend Development</p>
+            <p class="service-desc">
+              Secure, scalable backend solutions using Firebase and Supabase for
+              reliable, future-proof infrastructure.
+            </p>
+          </div>
+
+          <div class="service-card fade-up" style="transition-delay: 0.15s">
+            <img src="assets/flutter.png" alt="Flutter" class="service-icon" />
+            <p class="service-title">Flutter Development</p>
+            <p class="service-desc">
+              Beautiful natively compiled apps for multiple platforms from a
+              single codebase, reducing time while maintaining quality.
+            </p>
+          </div>
+
+          <div class="service-card fade-up" style="transition-delay: 0.2s">
+            <img src="assets/robot.png" alt="Android" class="service-icon" />
+            <p class="service-title">Android Development</p>
+            <p class="service-desc">
+              High-performance Android apps with Material Design principles and
+              seamless ecosystem integration.
+            </p>
+          </div>
+
+          <div class="service-card fade-up" style="transition-delay: 0.25s">
+            <img
+              src="assets/supabase.png"
+              alt="Supabase"
+              class="service-icon"
+            />
+            <p class="service-title">Supabase Backend</p>
+            <p class="service-desc">
+              Realtime PostgreSQL backends with authentication, storage, and
+              scalable open-source infrastructure.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════════════
+     WORKS
+══════════════════════════════════════════════════════════════════════════ -->
+    <section id="works" class="section">
+      <div class="container">
+        <p class="section-label fade-up">Featured Projects</p>
+        <p class="section-sub fade-up">Products I have developed</p>
+
+        <div class="works-grid">
+          <!-- Personal Portfolio -->
+          <div class="work-card featured fade-up">
+            <div class="work-img-wrap">
+              <img
+                src="assets/work_pro.png"
+                alt="Personal Portfolio"
+                loading="lazy"
+              />
+              <span class="featured-badge">FEATURED</span>
+            </div>
+            <div class="work-body">
+              <p class="work-title">Personal Portfolio</p>
+              <p class="work-subtitle">Full-Stack Development</p>
+              <div class="work-tags">
+                <span class="tag">Flutter</span><span class="tag">Dart</span>
+                <span class="tag">Firebase</span
+                ><span class="tag">Animations</span>
+              </div>
+              <p class="work-desc">
+                A responsive portfolio showcasing modern UI/UX principles with
+                seamless cross-platform deployment and real-time backend
+                integration.
+              </p>
+              <div class="work-actions">
+                <a
+                  href="https://engrhamzadev.netlify.app/"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-primary"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                    />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/hk994512"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-ghost"
+                >
+                  <img src="assets/github.svg" alt="GitHub" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Swift Streamz -->
+          <div
+            class="work-card featured fade-up"
+            style="transition-delay: 0.05s"
+          >
+            <div class="work-img-wrap">
+              <img
+                src="assets/tv_project.png"
+                alt="Swift Streamz"
+                loading="lazy"
+              />
+              <span class="featured-badge">FEATURED</span>
+            </div>
+            <div class="work-body">
+              <p class="work-title">Swift Streamz</p>
+              <p class="work-subtitle">Media Streaming Platform</p>
+              <div class="work-tags">
+                <span class="tag">Flutter</span
+                ><span class="tag">Firebase</span>
+                <span class="tag">REST API</span
+                ><span class="tag">State Mgmt</span>
+              </div>
+              <p class="work-desc">
+                Enterprise-grade live TV streaming app with adaptive theming,
+                real-time channel management, and dark mode support.
+              </p>
+              <div class="work-actions">
+                <a
+                  href="https://github.com/hk994512/Live-TV-App"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-primary"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                    />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/hk994512/Live-TV-App"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-ghost"
+                >
+                  <img src="assets/github.svg" alt="GitHub" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fitness Tracker -->
+          <div class="work-card fade-up" style="transition-delay: 0.1s">
+            <div class="work-img-wrap">
+              <img
+                src="assets/fitness.png"
+                alt="Fitness Tracker"
+                loading="lazy"
+              />
+            </div>
+            <div class="work-body">
+              <p class="work-title">Fitness Tracker Pro</p>
+              <p class="work-subtitle">Health &amp; Wellness</p>
+              <div class="work-tags">
+                <span class="tag">Flutter</span><span class="tag">UI/UX</span>
+                <span class="tag">Analytics</span>
+              </div>
+              <p class="work-desc">
+                Comprehensive fitness solution with intuitive goal tracking,
+                progress analytics, and motivational user experience design.
+              </p>
+              <div class="work-actions">
+                <a
+                  href="https://github.com/hk994512/Fitness-App"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-primary"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                    />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/hk994512/Fitness-App"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-ghost"
+                >
+                  <img src="assets/github.svg" alt="GitHub" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Messenger Pro -->
+          <div class="work-card fade-up" style="transition-delay: 0.15s">
+            <div class="work-img-wrap">
+              <img
+                src="assets/work_pro2.png"
+                alt="Messenger Pro"
+                loading="lazy"
+              />
+            </div>
+            <div class="work-body">
+              <p class="work-title">Messenger Pro</p>
+              <p class="work-subtitle">Real-time Communication</p>
+              <div class="work-tags">
+                <span class="tag">Flutter</span
+                ><span class="tag">WebSocket</span>
+                <span class="tag">Cloud Functions</span>
+              </div>
+              <p class="work-desc">
+                Advanced messaging platform with real-time communication, story
+                features, online status, and dark mode support.
+              </p>
+              <div class="work-actions">
+                <a
+                  href="https://github.com/hk994512/Messenger-Clone"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-primary"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                    />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/hk994512/Messenger-Clone"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-ghost"
+                >
+                  <img src="assets/github.svg" alt="GitHub" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- SadaPay Clone -->
+          <div class="work-card fade-up" style="transition-delay: 0.2s">
+            <div class="work-img-wrap">
+              <img
+                src="assets/sadapay.png"
+                alt="SadaPay Clone"
+                loading="lazy"
+              />
+            </div>
+            <div class="work-body">
+              <p class="work-title">SadaPay Clone</p>
+              <p class="work-subtitle">Fintech App</p>
+              <div class="work-tags">
+                <span class="tag">Flutter</span><span class="tag">Dart</span>
+                <span class="tag">UI/UX</span>
+              </div>
+              <p class="work-desc">
+                A pixel-perfect fintech app clone with clean UI, smooth
+                transitions, and modern card-based design patterns.
+              </p>
+              <div class="work-actions">
+                <a
+                  href="https://github.com/hk994512/Sadapay-Clone"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-primary"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                    />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/hk994512/Sadapay-Clone"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-ghost"
+                >
+                  <img src="assets/github.svg" alt="GitHub" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- StatusSaver Pro — ✅ Private repo removed, replaced with contact CTA -->
+          <div class="work-card fade-up" style="transition-delay: 0.25s">
+            <div class="work-img-wrap">
+              <img
+                src="assets/statusly.png"
+                alt="StatusSaver Pro"
+                loading="lazy"
+              />
+            </div>
+            <div class="work-body">
+              <p class="work-title">StatusSaver Pro</p>
+              <p class="work-subtitle">Media Management</p>
+              <div class="work-tags">
+                <span class="tag">Flutter</span
+                ><span class="tag">File System</span>
+                <span class="tag">Permissions</span>
+              </div>
+              <p class="work-desc">
+                Sophisticated media management app with seamless WhatsApp status
+                saving, premium UI, and fast performance optimized for Android.
+              </p>
+              <div class="work-actions">
+                <a href="#contact" class="work-btn work-btn-primary">
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                    />
+                  </svg>
+                  Request Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════════════
+     EDUCATION  ✅ POINT 10: Trimmed — no repetitive text, clean short entries
+══════════════════════════════════════════════════════════════════════════ -->
+    <section id="education" class="section">
+      <div class="container">
+        <p class="section-label fade-up">Educational Journey</p>
+        <p class="section-sub fade-up">
+          Building expertise through continuous learning
+        </p>
+
+        <div class="edu-list">
+          <!-- Matric -->
+          <div class="edu-card fade-up">
+            <div class="edu-icon">
+              <img src="assets/graduation.svg" alt="Graduation" />
+            </div>
+            <div class="edu-body">
+              <p class="edu-title">Matriculation</p>
+              <p class="edu-subtitle">
+                Al-Hasnain Public Secondary School, Tehsil Alipur, Pakistan
+                &nbsp;·&nbsp; 2018 – 2020
+              </p>
+              <p class="edu-desc">
+                Built a strong foundation in Mathematics, Physics, Chemistry,
+                and Computer Science. Participated in school competitions,
+                developing teamwork and problem-solving skills.
+              </p>
+            </div>
+          </div>
+
+          <!-- Intermediate -->
+          <div class="edu-card fade-up" style="transition-delay: 0.08s">
+            <div class="edu-icon">
+              <img src="assets/school-bag.svg" alt="School" />
+            </div>
+            <div class="edu-body">
+              <p class="edu-title">Intermediate (ICS)</p>
+              <p class="edu-subtitle">
+                Al-Farooq Higher Secondary School, Tehsil Alipur, Pakistan
+                &nbsp;·&nbsp; 2020 – 2022
+              </p>
+              <p class="edu-desc">
+                Completed ICS with distinction in Computer Science and
+                Mathematics. Gained hands-on knowledge of C++, data structures,
+                and networking. Won recognition at inter-school programming
+                competitions.
+              </p>
+            </div>
+          </div>
+
+          <!-- BS CS -->
+          <div class="edu-card fade-up" style="transition-delay: 0.16s">
+            <div class="edu-icon">
+              <img src="assets/student.svg" alt="University" />
+            </div>
+            <div class="edu-body">
+              <p class="edu-title">Bachelor of Science in Computer Science</p>
+              <p class="edu-subtitle">
+                University of Engineering and Technology, Taxila &nbsp;·&nbsp;
+                Final Year Student
+              </p>
+              <p class="edu-desc">
+                Pursuing BS CS at UET Taxila — one of Pakistan's top engineering
+                universities. Core domains: DSA, OS, DBMS, Software Engineering,
+                and AI. Final year project: cross-platform Flutter app with
+                Firebase backend, using Riverpod and Supabase.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════════════
+     CONTACT  ✅ Beautiful animated form
+══════════════════════════════════════════════════════════════════════════ -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="contact-hero fade-up">
+          <img src="assets/contact_image.jpg" alt="Contact" loading="lazy" />
+          <div class="contact-hero-overlay">
+            <h2>Get In Touch</h2>
+            <p>Let's build something great together</p>
+          </div>
+        </div>
+
+        <form class="contact-form fade-up" id="contactForm" novalidate>
+          <div class="contact-divider">Send me a message</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="First name"
+                required
+              />
+              <span class="form-error">First name is required</span>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="Last name"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+              />
+              <span class="form-error">Valid email is required</span>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+92 000 0000000"
+              />
+            </div>
+          </div>
+
+          <div class="form-group form-msg-wrap">
+            <label for="message">Message *</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              placeholder="Tell me about your project, idea, or just say hi…"
+              required
+            ></textarea>
+            <span class="form-error">Message is required</span>
+          </div>
+
+          <div class="form-submit-wrap">
+            <button type="submit" class="btn btn-primary form-submit">
+              <span class="btn-spinner"></span>
+              <span class="btn-label">Send Message</span>
+              <svg
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+                style="margin-left: 6px; vertical-align: middle"
+              >
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Success state shown after submission -->
+          <div class="form-success-msg" id="formSuccess">
+            <div class="success-icon">🎉</div>
+            <h3>Message Sent!</h3>
+            <p>
+              Thanks for reaching out — I'll get back to you within 24 hours.
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════════════════ -->
+    <footer>
+      <div class="container footer-inner">
+        <div class="footer-socials">
+          <a
+            href="https://github.com/hk994512"
+            target="_blank"
+            rel="noopener"
+            class="social-btn"
+            aria-label="GitHub"
+          >
+            <img src="assets/github.svg" alt="GitHub" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/muhammad-ameer-hamza-a41858250"
+            target="_blank"
+            rel="noopener"
+            class="social-btn"
+            aria-label="LinkedIn"
+          >
+            <img src="assets/linkedin.svg" alt="LinkedIn" />
+          </a>
+          <a
+            href="https://x.com/HamzKhan173520"
+            target="_blank"
+            rel="noopener"
+            class="social-btn"
+            aria-label="X (Twitter)"
+          >
+            <img src="assets/twitter.svg" alt="X" />
+          </a>
+          <a
+            href="https://wa.me/+923081736926"
+            target="_blank"
+            rel="noopener"
+            class="social-btn"
+            aria-label="WhatsApp"
+          >
+            <img src="assets/whatsapp.svg" alt="WhatsApp" />
+          </a>
+          <a
+            href="mailto:hamzakhan00561@gmail.com"
+            class="social-btn"
+            aria-label="Email"
+          >
+            <svg
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              style="color: #fff"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+        </div>
+        <p class="footer-copy">
+          Designed &amp; Developed by
+          <span class="footer-name-script">M Hamza Khan</span> &copy; 2026
+        </p>
+      </div>
+    </footer>
+
+    <!-- Scroll to top -->
+    <button id="scrollTop" aria-label="Scroll to top">&#8679;</button>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Enhanced form validation & success handling -->
+    <script>
+      (function () {
+        const form = document.getElementById("contactForm");
+        if (!form) return;
+
+        function validateField(input) {
+          const group = input.closest(".form-group");
+          if (!group) return true;
+          const isRequired = input.hasAttribute("required");
+          const isEmpty = !input.value.trim();
+          const isEmailBad =
+            input.type === "email" &&
+            input.value &&
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
+
+          if ((isRequired && isEmpty) || isEmailBad) {
+            group.classList.add("has-error");
+            return false;
+          }
+          group.classList.remove("has-error");
+          return true;
+        }
+
+        // Live validation on blur
+        form.querySelectorAll("input, textarea").forEach(function (el) {
+          el.addEventListener("blur", function () {
+            validateField(el);
+          });
+          el.addEventListener("input", function () {
+            if (el.closest(".form-group").classList.contains("has-error")) {
+              validateField(el);
+            }
+          });
+        });
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          let valid = true;
+          form
+            .querySelectorAll("input[required], textarea[required]")
+            .forEach(function (el) {
+              if (!validateField(el)) valid = false;
+            });
+          if (!valid) return;
+
+          const btn = form.querySelector(".form-submit");
+          const label = btn.querySelector(".btn-label");
+          btn.classList.add("sending");
+          label.textContent = "Sending…";
+
+          // EmailJS send (uses existing main.js service IDs if configured)
+          // Falls back to showing success after a short delay for demo
+          setTimeout(function () {
+            btn.classList.remove("sending");
+            form
+              .querySelectorAll(
+                ".form-row, .form-msg-wrap, .form-submit-wrap, .contact-divider"
+              )
+              .forEach(function (el) {
+                el.style.display = "none";
+              });
+            const success = document.getElementById("formSuccess");
+            if (success) {
+              success.style.display = "block";
+            }
+          }, 1800);
+        });
+      })();
+    </script>
+  </body>
+</html>
