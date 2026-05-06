@@ -1,6 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        var threshold = 160;
+
+        function isDevToolsOpen() {
+          return (
+            window.outerWidth - window.innerWidth > threshold ||
+            window.outerHeight - window.innerHeight > threshold
+          );
+        }
+
+        function handleDevTools() {
+          if (isDevToolsOpen()) {
+            document.body.innerHTML = "";
+            window.location.replace("about:blank");
+          }
+        }
+
+        // Check on resize (catches docking/undocking devtools)
+        window.addEventListener("resize", handleDevTools);
+
+        // Check every second continuously
+        setInterval(handleDevTools, 1000);
+
+        // Block right-click
+        document.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
+
+        // Block F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        document.addEventListener("keydown", function (e) {
+          if (
+            e.key === "F12" ||
+            (e.ctrlKey &&
+              e.shiftKey &&
+              (e.key === "I" || e.key === "J" || e.key === "C")) ||
+            (e.ctrlKey && e.key === "U")
+          ) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -641,9 +685,9 @@
                 ><span class="tag">Animations</span>
               </div>
               <p class="work-desc">
-                A responsive portfolio showcasing modern UI/UX principles with
-                seamless cross-platform deployment and real-time backend
-                integration.
+                A production-ready web — built solo from scratch, integrating
+                Firebase backend, clean MVVM architecture, and pixel-perfect UI
+                across iOS and Android.
               </p>
               <div class="work-actions">
                 <a
@@ -754,7 +798,8 @@
               <p class="work-title">Fitness Tracker Pro</p>
               <p class="work-subtitle">Health &amp; Wellness</p>
               <div class="work-tags">
-                <span class="tag">Flutter</span><span class="tag">UI/UX</span>
+                <span class="tag">Flutter</span
+                ><span class="tag">Performance Metrics</span>
                 <span class="tag">Analytics</span>
               </div>
               <p class="work-desc">
@@ -866,7 +911,7 @@
               <p class="work-subtitle">Fintech App</p>
               <div class="work-tags">
                 <span class="tag">Flutter</span><span class="tag">Dart</span>
-                <span class="tag">UI/UX</span>
+                <span class="tag">State Mgmt</span>
               </div>
               <p class="work-desc">
                 A pixel-perfect fintech app clone with clean UI, smooth
