@@ -1059,3 +1059,123 @@ footer {
     height: 150px;
   }
 }
+
+/* ═══════════════════════════════════════════════════
+   PHONE POPUP MENU STYLES
+═══════════════════════════════════════════════════ */
+
+/* Backdrop */
+.phone-popup {
+  position: fixed;
+  z-index: 99999;
+  width: 360px;
+  max-width: 92vw;
+  max-height: 480px;
+  background: #1a1f2e;
+  border: 1.5px solid rgba(108, 99, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.phone-popup.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Search */
+.phone-popup-search {
+  padding: 12px;
+  border-bottom: 1px solid rgba(108, 99, 255, 0.15);
+  flex-shrink: 0;
+}
+.phone-popup-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(108, 99, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #eaeaea;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.phone-popup-search-input:focus {
+  border-color: rgba(108, 99, 255, 0.6);
+  background: rgba(108, 99, 255, 0.1);
+}
+
+/* List */
+.phone-popup-list {
+  overflow-y: auto;
+  max-height: 340px;
+  padding: 6px 0;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(108, 99, 255, 0.3) transparent;
+}
+.phone-popup-list::-webkit-scrollbar {
+  width: 5px;
+}
+.phone-popup-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.phone-popup-list::-webkit-scrollbar-thumb {
+  background: rgba(108, 99, 255, 0.3);
+  border-radius: 99px;
+}
+
+/* Items */
+.phone-popup-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.12s;
+  font-size: 0.9rem;
+  color: #cfd3df;
+  outline: none;
+  user-select: none;
+}
+.phone-popup-item:hover,
+.phone-popup-item:focus {
+  background: rgba(108, 99, 255, 0.18);
+  color: #fff;
+}
+.phone-popup-item.selected {
+  background: rgba(108, 99, 255, 0.22);
+  font-weight: 600;
+  color: #fff;
+}
+.pp-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pp-code {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent, #6c63ff);
+  flex-shrink: 0;
+}
+
+/* Empty state */
+.phone-popup-empty {
+  padding: 24px 16px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.85rem;
+}
+
+/* Open flag button caret */
+.phone-flag-btn.open .phone-flag-caret {
+  transform: rotate(180deg);
+}

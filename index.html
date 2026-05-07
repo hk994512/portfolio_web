@@ -4,33 +4,23 @@
     <script>
       (function () {
         var threshold = 160;
-
         function isDevToolsOpen() {
           return (
             window.outerWidth - window.innerWidth > threshold ||
             window.outerHeight - window.innerHeight > threshold
           );
         }
-
         function handleDevTools() {
           if (isDevToolsOpen()) {
             document.body.innerHTML = "";
             window.location.replace("about:blank");
           }
         }
-
-        // Check on resize (catches docking/undocking devtools)
         window.addEventListener("resize", handleDevTools);
-
-        // Check every second continuously
         setInterval(handleDevTools, 1000);
-
-        // Block right-click
         document.addEventListener("contextmenu", function (e) {
           e.preventDefault();
         });
-
-        // Block F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
         document.addEventListener("keydown", function (e) {
           if (
             e.key === "F12" ||
@@ -53,19 +43,14 @@
     />
     <title>M Hamza Khan | Flutter Developer</title>
 
-    <!-- Google Fonts - Great Vibes + Mooli -->
     <link
       href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700;800&family=Mooli&display=swap"
       rel="stylesheet"
     />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="css/style.css" />
-
-    <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
     <link rel="icon" href="favicon.ico" />
 
     <style>
@@ -106,7 +91,7 @@
         font-weight: 500;
       }
 
-      /* ── CONTACT FORM BEAUTIFUL UPGRADE ── */
+      /* ── CONTACT FORM ── */
       .contact-form {
         position: relative;
         background: linear-gradient(
@@ -120,7 +105,8 @@
         backdrop-filter: blur(12px);
         box-shadow: 0 8px 48px rgba(108, 99, 255, 0.08),
           0 2px 8px rgba(0, 0, 0, 0.08);
-        overflow: hidden;
+        /* IMPORTANT: overflow must be visible so dropdown shows outside form */
+        overflow: visible;
         margin-top: 2rem;
       }
       .contact-form::before {
@@ -193,15 +179,13 @@
       .form-group textarea::placeholder {
         color: rgba(255, 255, 255, 0.22);
       }
-      .form-group textarea {
-        resize: vertical;
-        min-height: 130px;
-      }
-
-      /* Floating label animation hint */
       .form-group input:not(:placeholder-shown),
       .form-group textarea:not(:placeholder-shown) {
         border-color: rgba(108, 99, 255, 0.4);
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 130px;
       }
 
       .form-row {
@@ -218,12 +202,10 @@
           padding: 1.5rem 1.2rem;
         }
       }
-
       .form-msg-wrap {
         margin-bottom: 1.5rem;
       }
 
-      /* Submit button enhanced */
       .form-submit {
         position: relative;
         overflow: hidden;
@@ -257,8 +239,6 @@
       .form-submit:active {
         transform: translateY(0);
       }
-
-      /* Sending state */
       .form-submit.sending {
         pointer-events: none;
         opacity: 0.7;
@@ -283,7 +263,6 @@
         }
       }
 
-      /* Input shake animation on error */
       @keyframes shake {
         0%,
         100% {
@@ -303,10 +282,11 @@
         }
       }
       .form-group.has-error input,
-      .form-group.has-error textarea {
-        border-color: #e05a5a;
+      .form-group.has-error textarea,
+      .form-group.has-error .phone-input-wrapper {
+        border-color: #e05a5a !important;
         animation: shake 0.35s ease;
-        box-shadow: 0 0 0 4px rgba(224, 90, 90, 0.12);
+        box-shadow: 0 0 0 4px rgba(224, 90, 90, 0.12) !important;
       }
       .form-group.has-error .form-error {
         display: block;
@@ -319,7 +299,6 @@
         font-weight: 500;
       }
 
-      /* Success state */
       .form-success-msg {
         display: none;
         text-align: center;
@@ -339,6 +318,7 @@
         color: var(--text-muted, #8892a4);
         font-size: 0.92rem;
       }
+
       @keyframes fadeInUp {
         from {
           opacity: 0;
@@ -350,7 +330,6 @@
         }
       }
 
-      /* Form field appear animation */
       .contact-form .form-row,
       .contact-form .form-group,
       .contact-form .form-submit-wrap {
@@ -369,7 +348,6 @@
         animation-delay: 0.26s;
       }
 
-      /* Divider with icon */
       .contact-divider {
         display: flex;
         align-items: center;
@@ -389,8 +367,6 @@
         background: rgba(108, 99, 255, 0.18);
       }
 
-      /* ── EDUCATION TRIM ── */
-      /* Remove the repetitive long text by hiding the span.edu-desc-full toggle wrapper visually tight */
       .edu-desc-full {
         display: none;
       }
@@ -411,16 +387,194 @@
         color: var(--accent);
         animation: blink 1s step-end infinite;
       }
+
+      /* ═══════════════════════════════════════════════
+         PHONE INPUT — FIXED VERSION
+      ═══════════════════════════════════════════════ */
+
+      .flag-img {
+        width: 22px;
+        height: 15px;
+        border-radius: 2px;
+        object-fit: cover;
+        display: inline-block;
+        flex-shrink: 0;
+        vertical-align: middle;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+      }
+
+      /* phoneGroup is the anchor for the absolutely-positioned dropdown.
+         z-index must be high enough to sit above ALL siblings in the form */
+      #phoneGroup {
+        position: relative;
+        /* z-index must beat the form's stacking context — set it explicitly */
+        z-index: 1000;
+      }
+
+      .phone-input-wrapper {
+        display: flex;
+        align-items: stretch;
+        border-radius: 12px;
+        border: 1.5px solid rgba(108, 99, 255, 0.2);
+        background: rgba(255, 255, 255, 0.04);
+        transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+        /* overflow MUST be visible so the dropdown can escape */
+        overflow: visible;
+        position: relative;
+        height: 50px; /* fixed height so wrapper doesn't resize */
+      }
+      .phone-input-wrapper:focus-within {
+        border-color: var(--accent, #6c63ff);
+        background: rgba(108, 99, 255, 0.07);
+        box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.12),
+          0 2px 12px rgba(108, 99, 255, 0.08);
+      }
+
+      /* Trigger button */
+      .phone-flag-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 10px 0 12px;
+        background: transparent;
+        border: none;
+        border-right: 1.5px solid rgba(108, 99, 255, 0.18);
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: background 0.2s;
+        border-radius: 10px 0 0 10px;
+        min-width: 90px;
+        height: 100%;
+        outline: none;
+      }
+      .phone-flag-btn:hover {
+        background: rgba(108, 99, 255, 0.1);
+      }
+
+      .phone-dial-code {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--accent, #6c63ff);
+        letter-spacing: 0.02em;
+        font-family: inherit;
+        line-height: 1;
+      }
+      .phone-flag-caret {
+        font-size: 0.52rem;
+        opacity: 0.5;
+        transition: transform 0.2s;
+        color: var(--text, #eaeaea);
+        line-height: 1;
+        display: inline-block;
+      }
+      .phone-flag-btn.open .phone-flag-caret {
+        transform: rotate(180deg);
+      }
+
+      /* Phone number input (right side) */
+      .phone-number-input {
+        flex: 1;
+        padding: 0 1.1rem !important;
+        border: none !important;
+        background: transparent !important;
+        border-radius: 0 12px 12px 0 !important;
+        outline: none !important;
+        box-shadow: none !important;
+        transform: none !important;
+        color: var(--text, #eaeaea);
+        font-size: 0.95rem;
+        font-family: inherit;
+        min-width: 0;
+        height: 100%;
+      }
+      .phone-number-input::placeholder {
+        color: rgba(255, 255, 255, 0.22);
+      }
+      .phone-number-input:focus {
+        border: none !important;
+        box-shadow: none !important;
+        transform: none !important;
+        background: transparent !important;
+      }
+
+      /* ── DROPDOWN PANEL ──
+         Positioned fixed to the viewport so it is NEVER clipped by any
+         ancestor's overflow:hidden or stacking context.
+         JavaScript sets top/left based on the button's getBoundingClientRect().
+      */
+
+      @keyframes dropIn {
+        from {
+          opacity: 0;
+          transform: translateY(-8px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Search box */
+
+      /* Search icon — properly centered inside the search input */
+
+      .phone-country-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        cursor: pointer;
+        transition: background 0.14s;
+        font-size: 0.88rem;
+        color: #cfd3df;
+        outline: none;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .phone-country-item:hover,
+      .phone-country-item:focus {
+        background: rgba(108, 99, 255, 0.16);
+        color: #fff;
+      }
+      .phone-country-item.selected {
+        background: rgba(108, 99, 255, 0.22);
+        font-weight: 600;
+        color: #fff;
+      }
+      .phone-country-item .ci-name {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+      .phone-country-item .ci-code {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--accent, #6c63ff);
+        flex-shrink: 0;
+        pointer-events: none;
+      }
+      .phone-country-item img {
+        pointer-events: none;
+        flex-shrink: 0;
+      }
+
+      .phone-no-results {
+        padding: 18px 14px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.28);
+        font-size: 0.84rem;
+      }
     </style>
   </head>
   <body>
-    <!-- ══════════════════════════════════════════════════════════════════════════
-     NAVBAR
-══════════════════════════════════════════════════════════════════════════ -->
+    <!-- NAVBAR -->
     <nav id="navbar">
       <div class="container nav-inner">
         <a href="#" class="nav-logo">M Hamza Khan</a>
-
         <ul class="nav-links">
           <li><a href="#" class="active" data-section="hero">Home</a></li>
           <li><a href="#about" data-section="about">About</a></li>
@@ -429,7 +583,6 @@
           <li><a href="#education" data-section="education">Education</a></li>
           <li><a href="#contact" data-section="contact">Contact</a></li>
         </ul>
-
         <button class="hamburger" id="hamburger" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -446,9 +599,7 @@
       <a href="#contact" data-section="contact">Contact</a>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════════════════════════
-     HERO
-══════════════════════════════════════════════════════════════════════════ -->
+    <!-- HERO -->
     <section id="hero">
       <div class="container">
         <div class="hero-inner">
@@ -463,13 +614,10 @@
             <p class="hero-role">
               <span id="typedRole"></span><span class="cursor-blink">|</span>
             </p>
-
-            <!-- ✅ POINT 5: Hero tagline added -->
             <p class="hero-tagline">
               I build beautiful Flutter apps for Android, iOS &amp; Web - fast,
               scalable, and pixel-perfect.
             </p>
-
             <div class="hero-btns">
               <a href="assets/Hamza-CV.pdf" download class="btn btn-primary">
                 <svg
@@ -509,8 +657,6 @@
                 Hire Me
               </a>
             </div>
-
-            <!-- ✅ STATS STRIP: 2+ years experience + other stats -->
             <div class="stats-strip">
               <div class="stat-item">
                 <span class="stat-number">2+</span>
@@ -525,14 +671,11 @@
                 <span class="stat-label">Happy Clients</span>
               </div>
               <div class="stat-item">
-                <div class="stat-item">
-                  <span class="stat-number">100%</span>
-                  <span class="stat-label">Cross-Platform Code</span>
-                </div>
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Cross-Platform Code</span>
               </div>
             </div>
           </div>
-
           <div class="hero-avatar fade-up" style="transition-delay: 0.15s">
             <div class="avatar-ring">
               <img src="assets/bg-image-modified.png" alt="M Hamza Khan" />
@@ -542,16 +685,13 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════════════════════
-     ABOUT
-══════════════════════════════════════════════════════════════════════════ -->
+    <!-- ABOUT -->
     <section id="about" class="section">
       <div class="container">
         <div class="about-inner">
           <div class="about-lottie fade-up">
             <div id="lottieContainer" style="width: 100%"></div>
           </div>
-
           <div class="about-content fade-up" style="transition-delay: 0.1s">
             <p class="section-label">About Me</p>
             <p class="about-desc">
@@ -566,7 +706,6 @@
               security. Currently pursuing my BS in Computer Science at the
               University of Engineering and Technology, Taxila.
             </p>
-
             <div class="chips">
               <span class="chip">Flutter</span>
               <span class="chip">Dart</span>
@@ -581,16 +720,13 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════════════════════
-     SERVICES
-══════════════════════════════════════════════════════════════════════════ -->
+    <!-- SERVICES -->
     <section id="services" class="section">
       <div class="container">
         <p class="section-label fade-up">What I Do</p>
         <p class="section-sub fade-up">
           Services I offer to bring your ideas to life
         </p>
-
         <div class="services-grid">
           <div class="service-card fade-up">
             <img src="assets/webL.png" alt="Web" class="service-icon" />
@@ -600,7 +736,6 @@
               and clean, efficient code.
             </p>
           </div>
-
           <div class="service-card fade-up" style="transition-delay: 0.05s">
             <img src="assets/app.png" alt="App" class="service-icon" />
             <p class="service-title">App Development</p>
@@ -609,7 +744,6 @@
               animations, and robust functionality.
             </p>
           </div>
-
           <div class="service-card fade-up" style="transition-delay: 0.1s">
             <img
               src="assets/firebase.png"
@@ -622,7 +756,6 @@
               reliable, future-proof infrastructure.
             </p>
           </div>
-
           <div class="service-card fade-up" style="transition-delay: 0.15s">
             <img src="assets/flutter.png" alt="Flutter" class="service-icon" />
             <p class="service-title">Flutter Development</p>
@@ -631,7 +764,6 @@
               single codebase, reducing time while maintaining quality.
             </p>
           </div>
-
           <div class="service-card fade-up" style="transition-delay: 0.2s">
             <img src="assets/robot.png" alt="Android" class="service-icon" />
             <p class="service-title">Android Development</p>
@@ -640,7 +772,6 @@
               seamless ecosystem integration.
             </p>
           </div>
-
           <div class="service-card fade-up" style="transition-delay: 0.25s">
             <img
               src="assets/supabase.png"
@@ -657,16 +788,12 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════════════════════
-     WORKS
-══════════════════════════════════════════════════════════════════════════ -->
+    <!-- WORKS -->
     <section id="works" class="section">
       <div class="container">
         <p class="section-label fade-up">Featured Projects</p>
         <p class="section-sub fade-up">Products I have developed</p>
-
         <div class="works-grid">
-          <!-- Personal Portfolio -->
           <div class="work-card featured fade-up">
             <div class="work-img-wrap">
               <img
@@ -723,8 +850,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Swift Streamz -->
           <div
             class="work-card featured fade-up"
             style="transition-delay: 0.05s"
@@ -784,8 +909,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Fitness Tracker -->
           <div class="work-card fade-up" style="transition-delay: 0.1s">
             <div class="work-img-wrap">
               <img
@@ -798,8 +921,8 @@
               <p class="work-title">Fitness Tracker Pro</p>
               <p class="work-subtitle">Health &amp; Wellness</p>
               <div class="work-tags">
-                <span class="tag">Flutter</span
-                ><span class="tag">Performance Metrics</span>
+                <span class="tag">Flutter</span>
+                <span class="tag">Performance Metrics</span>
                 <span class="tag">Analytics</span>
               </div>
               <p class="work-desc">
@@ -840,8 +963,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Messenger Pro -->
           <div class="work-card fade-up" style="transition-delay: 0.15s">
             <div class="work-img-wrap">
               <img
@@ -854,8 +975,8 @@
               <p class="work-title">Messenger Pro</p>
               <p class="work-subtitle">Real-time Communication</p>
               <div class="work-tags">
-                <span class="tag">Flutter</span
-                ><span class="tag">WebSocket</span>
+                <span class="tag">Flutter</span>
+                <span class="tag">WebSocket</span>
                 <span class="tag">Cloud Functions</span>
               </div>
               <p class="work-desc">
@@ -896,8 +1017,6 @@
               </div>
             </div>
           </div>
-
-          <!-- SadaPay Clone -->
           <div class="work-card fade-up" style="transition-delay: 0.2s">
             <div class="work-img-wrap">
               <img
@@ -910,7 +1029,8 @@
               <p class="work-title">SadaPay Clone</p>
               <p class="work-subtitle">Fintech App</p>
               <div class="work-tags">
-                <span class="tag">Flutter</span><span class="tag">Dart</span>
+                <span class="tag">Flutter</span>
+                <span class="tag">Dart</span>
                 <span class="tag">State Mgmt</span>
               </div>
               <p class="work-desc">
@@ -951,8 +1071,6 @@
               </div>
             </div>
           </div>
-
-          <!-- StatusSaver Pro — ✅ Private repo removed, replaced with contact CTA -->
           <div class="work-card fade-up" style="transition-delay: 0.25s">
             <div class="work-img-wrap">
               <img
@@ -965,8 +1083,8 @@
               <p class="work-title">StatusSaver Pro</p>
               <p class="work-subtitle">Media Management</p>
               <div class="work-tags">
-                <span class="tag">Flutter</span
-                ><span class="tag">File System</span>
+                <span class="tag">Flutter</span>
+                <span class="tag">File System</span>
                 <span class="tag">Permissions</span>
               </div>
               <p class="work-desc">
@@ -996,18 +1114,14 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════════════════════
-     EDUCATION  ✅ POINT 10: Trimmed — no repetitive text, clean short entries
-══════════════════════════════════════════════════════════════════════════ -->
+    <!-- EDUCATION -->
     <section id="education" class="section">
       <div class="container">
         <p class="section-label fade-up">Educational Journey</p>
         <p class="section-sub fade-up">
           Building expertise through continuous learning
         </p>
-
         <div class="edu-list">
-          <!-- Matric -->
           <div class="edu-card fade-up">
             <div class="edu-icon">
               <img src="assets/graduation.svg" alt="Graduation" />
@@ -1025,8 +1139,6 @@
               </p>
             </div>
           </div>
-
-          <!-- Intermediate -->
           <div class="edu-card fade-up" style="transition-delay: 0.08s">
             <div class="edu-icon">
               <img src="assets/school-bag.svg" alt="School" />
@@ -1045,8 +1157,6 @@
               </p>
             </div>
           </div>
-
-          <!-- BS CS -->
           <div class="edu-card fade-up" style="transition-delay: 0.16s">
             <div class="edu-icon">
               <img src="assets/student.svg" alt="University" />
@@ -1069,9 +1179,7 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════════════════════
-     CONTACT  ✅ Beautiful animated form
-══════════════════════════════════════════════════════════════════════════ -->
+    <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="container">
         <div class="contact-hero fade-up">
@@ -1120,17 +1228,40 @@
               />
               <span class="form-error">Valid email is required</span>
             </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="+92 000 0000000"
-              />
+
+            <!-- PHONE FIELD — phoneGroup is the dropdown anchor -->
+            <div class="form-group" id="phoneGroup">
+              <label>Phone</label>
+              <!-- wrapper: flex row, fixed height, overflow visible -->
+              <div class="phone-input-wrapper" id="phoneWrapper">
+                <button
+                  type="button"
+                  class="phone-flag-btn"
+                  id="phoneFlagBtn"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-label="Select country code"
+                >
+                  <img
+                    id="selectedFlagImg"
+                    class="flag-img"
+                    src="https://flagcdn.com/w40/pk.png"
+                    alt="Pakistan"
+                  />
+                  <span class="phone-dial-code" id="selectedCode">+92</span>
+                  <span class="phone-flag-caret" aria-hidden="true">▼</span>
+                </button>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="phone-number-input"
+                  placeholder="Enter phone number"
+                  autocomplete="tel-national"
+                />
+              </div>
             </div>
           </div>
-
           <div class="form-group form-msg-wrap">
             <label for="message">Message *</label>
             <textarea
@@ -1162,7 +1293,6 @@
             </button>
           </div>
 
-          <!-- Success state shown after submission -->
           <div class="form-success-msg" id="formSuccess">
             <div class="success-icon">🎉</div>
             <h3>Message Sent!</h3>
@@ -1174,9 +1304,7 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════════════════════════════════════ -->
+    <!-- FOOTER -->
     <footer>
       <div class="container footer-inner">
         <div class="footer-socials">
@@ -1244,16 +1372,375 @@
       </div>
     </footer>
 
-    <!-- Scroll to top -->
     <button id="scrollTop" aria-label="Scroll to top">&#8679;</button>
-
-    <!-- Toast -->
     <div id="toast" class="toast"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script src="js/main.js"></script>
 
-    <!-- Enhanced form validation & success handling -->
+    <!-- ═══════════════════════════════════════════════════════
+         PHONE PICKER — FULLY FIXED
+         Fixes applied:
+         1. Dropdown uses position:fixed + JS-computed coords → never clipped
+         2. Repositions on scroll/resize so it stays anchored to the button
+         3. Country click: event delegation on listEl, pointer-events:none on children
+         4. Flag + code update immediately on selection
+         5. Search icon properly centered using position:absolute inside search-wrap
+    ═══════════════════════════════════════════════════════ -->
+    <script>
+      /* ═══════════════════════════════════════════════════════
+   PHONE PICKER — POPUP MENU (No overflow issues)
+═══════════════════════════════════════════════════════ */
+      (function () {
+        "use strict";
+
+        /* ── Country data ── */
+        var C = [
+          ["Afghanistan", "93", "af"],
+          ["Albania", "355", "al"],
+          ["Algeria", "213", "dz"],
+          ["Andorra", "376", "ad"],
+          ["Angola", "244", "ao"],
+          ["Argentina", "54", "ar"],
+          ["Armenia", "374", "am"],
+          ["Australia", "61", "au"],
+          ["Austria", "43", "at"],
+          ["Azerbaijan", "994", "az"],
+          ["Bahrain", "973", "bh"],
+          ["Bangladesh", "880", "bd"],
+          ["Belarus", "375", "by"],
+          ["Belgium", "32", "be"],
+          ["Belize", "501", "bz"],
+          ["Benin", "229", "bj"],
+          ["Bhutan", "975", "bt"],
+          ["Bolivia", "591", "bo"],
+          ["Bosnia", "387", "ba"],
+          ["Brazil", "55", "br"],
+          ["Brunei", "673", "bn"],
+          ["Bulgaria", "359", "bg"],
+          ["Burkina Faso", "226", "bf"],
+          ["Cambodia", "855", "kh"],
+          ["Cameroon", "237", "cm"],
+          ["Canada", "1", "ca"],
+          ["Chile", "56", "cl"],
+          ["China", "86", "cn"],
+          ["Colombia", "57", "co"],
+          ["Congo", "243", "cd"],
+          ["Costa Rica", "506", "cr"],
+          ["Croatia", "385", "hr"],
+          ["Cuba", "53", "cu"],
+          ["Cyprus", "357", "cy"],
+          ["Czech Republic", "420", "cz"],
+          ["Denmark", "45", "dk"],
+          ["Ecuador", "593", "ec"],
+          ["Egypt", "20", "eg"],
+          ["El Salvador", "503", "sv"],
+          ["Estonia", "372", "ee"],
+          ["Ethiopia", "251", "et"],
+          ["Finland", "358", "fi"],
+          ["France", "33", "fr"],
+          ["Georgia", "995", "ge"],
+          ["Germany", "49", "de"],
+          ["Ghana", "233", "gh"],
+          ["Greece", "30", "gr"],
+          ["Guatemala", "502", "gt"],
+          ["Honduras", "504", "hn"],
+          ["Hong Kong", "852", "hk"],
+          ["Hungary", "36", "hu"],
+          ["Iceland", "354", "is"],
+          ["India", "91", "in"],
+          ["Indonesia", "62", "id"],
+          ["Iran", "98", "ir"],
+          ["Iraq", "964", "iq"],
+          ["Ireland", "353", "ie"],
+          ["Israel", "972", "il"],
+          ["Italy", "39", "it"],
+          ["Jamaica", "1876", "jm"],
+          ["Japan", "81", "jp"],
+          ["Jordan", "962", "jo"],
+          ["Kazakhstan", "7", "kz"],
+          ["Kenya", "254", "ke"],
+          ["Kuwait", "965", "kw"],
+          ["Kyrgyzstan", "996", "kg"],
+          ["Latvia", "371", "lv"],
+          ["Lebanon", "961", "lb"],
+          ["Libya", "218", "ly"],
+          ["Lithuania", "370", "lt"],
+          ["Luxembourg", "352", "lu"],
+          ["Malaysia", "60", "my"],
+          ["Maldives", "960", "mv"],
+          ["Mali", "223", "ml"],
+          ["Malta", "356", "mt"],
+          ["Mexico", "52", "mx"],
+          ["Moldova", "373", "md"],
+          ["Mongolia", "976", "mn"],
+          ["Morocco", "212", "ma"],
+          ["Mozambique", "258", "mz"],
+          ["Myanmar", "95", "mm"],
+          ["Nepal", "977", "np"],
+          ["Netherlands", "31", "nl"],
+          ["New Zealand", "64", "nz"],
+          ["Nicaragua", "505", "ni"],
+          ["Nigeria", "234", "ng"],
+          ["North Korea", "850", "kp"],
+          ["Norway", "47", "no"],
+          ["Oman", "968", "om"],
+          ["Pakistan", "92", "pk"],
+          ["Palestine", "970", "ps"],
+          ["Panama", "507", "pa"],
+          ["Paraguay", "595", "py"],
+          ["Peru", "51", "pe"],
+          ["Philippines", "63", "ph"],
+          ["Poland", "48", "pl"],
+          ["Portugal", "351", "pt"],
+          ["Qatar", "974", "qa"],
+          ["Romania", "40", "ro"],
+          ["Russia", "7", "ru"],
+          ["Rwanda", "250", "rw"],
+          ["Saudi Arabia", "966", "sa"],
+          ["Senegal", "221", "sn"],
+          ["Serbia", "381", "rs"],
+          ["Singapore", "65", "sg"],
+          ["Slovakia", "421", "sk"],
+          ["Slovenia", "386", "si"],
+          ["Somalia", "252", "so"],
+          ["South Africa", "27", "za"],
+          ["South Korea", "82", "kr"],
+          ["Spain", "34", "es"],
+          ["Sri Lanka", "94", "lk"],
+          ["Sudan", "249", "sd"],
+          ["Sweden", "46", "se"],
+          ["Switzerland", "41", "ch"],
+          ["Syria", "963", "sy"],
+          ["Taiwan", "886", "tw"],
+          ["Tajikistan", "992", "tj"],
+          ["Tanzania", "255", "tz"],
+          ["Thailand", "66", "th"],
+          ["Tunisia", "216", "tn"],
+          ["Turkey", "90", "tr"],
+          ["Turkmenistan", "993", "tm"],
+          ["Uganda", "256", "ug"],
+          ["Ukraine", "380", "ua"],
+          ["UAE", "971", "ae"],
+          ["United Kingdom", "44", "gb"],
+          ["United States", "1", "us"],
+          ["Uruguay", "598", "uy"],
+          ["Uzbekistan", "998", "uz"],
+          ["Venezuela", "58", "ve"],
+          ["Vietnam", "84", "vn"],
+          ["Yemen", "967", "ye"],
+          ["Zambia", "260", "zm"],
+          ["Zimbabwe", "263", "zw"],
+        ];
+
+        /* ── DOM refs ── */
+        var flagBtn = document.getElementById("phoneFlagBtn");
+        var flagImgEl = document.getElementById("selectedFlagImg");
+        var codeEl = document.getElementById("selectedCode");
+        var phoneEl = document.getElementById("phone");
+        var phoneGroup = document.getElementById("phoneGroup");
+
+        if (!flagBtn) return;
+
+        /* ── State ── */
+        var selected = null;
+        var popup = null;
+        var isOpen = false;
+
+        /* Default to Pakistan */
+        for (var i = 0; i < C.length; i++) {
+          if (C[i][2] === "pk") {
+            selected = C[i];
+            break;
+          }
+        }
+
+        function flagSrc(iso) {
+          return "https://flagcdn.com/w40/" + iso + ".png";
+        }
+
+        /* ── Create Popup Menu ── */
+        function createPopup() {
+          popup = document.createElement("div");
+          popup.className = "phone-popup";
+          popup.setAttribute("role", "dialog");
+          popup.setAttribute("aria-label", "Select country code");
+
+          // Search
+          var searchWrap = document.createElement("div");
+          searchWrap.className = "phone-popup-search";
+          var searchInput = document.createElement("input");
+          searchInput.type = "text";
+          searchInput.className = "phone-popup-search-input";
+          searchInput.placeholder = "Search country or code...";
+          searchInput.setAttribute("aria-label", "Search countries");
+          searchWrap.appendChild(searchInput);
+          popup.appendChild(searchWrap);
+
+          // List
+          var listEl = document.createElement("div");
+          listEl.className = "phone-popup-list";
+          listEl.setAttribute("role", "listbox");
+          popup.appendChild(listEl);
+
+          document.body.appendChild(popup);
+
+          // Search handler
+          var debounce;
+          searchInput.addEventListener("input", function () {
+            clearTimeout(debounce);
+            debounce = setTimeout(function () {
+              renderList(listEl, searchInput.value);
+            }, 100);
+          });
+
+          // Keyboard: search
+          searchInput.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
+              doClose();
+              flagBtn.focus();
+              return;
+            }
+            if (e.key === "ArrowDown") {
+              e.preventDefault();
+              var first = listEl.querySelector(".phone-popup-item");
+              if (first) first.focus();
+            }
+          });
+
+          // List click (event delegation)
+          listEl.addEventListener("click", function (e) {
+            var item = e.target.closest(".phone-popup-item");
+            if (item) doSelect(item.getAttribute("data-iso"));
+          });
+
+          // Keyboard: list navigation
+          listEl.addEventListener("keydown", function (e) {
+            var items = listEl.querySelectorAll(".phone-popup-item");
+            var arr = Array.prototype.slice.call(items);
+            var idx = arr.indexOf(document.activeElement);
+            if (e.key === "ArrowDown") {
+              e.preventDefault();
+              if (idx < arr.length - 1) arr[idx + 1].focus();
+            } else if (e.key === "ArrowUp") {
+              e.preventDefault();
+              if (idx > 0) arr[idx - 1].focus();
+              else searchInput.focus();
+            } else if (e.key === "Enter") {
+              e.preventDefault();
+              if (idx >= 0) doSelect(arr[idx].getAttribute("data-iso"));
+            } else if (e.key === "Escape") {
+              doClose();
+              flagBtn.focus();
+            }
+          });
+        }
+
+        /* ── Render country list ── */
+        function renderList(listEl, q) {
+          q = (q || "").toLowerCase().replace(/^\+/, "").trim();
+          var filtered = q
+            ? C.filter(function (c) {
+                return (
+                  c[0].toLowerCase().indexOf(q) !== -1 || c[1].indexOf(q) === 0
+                );
+              })
+            : C;
+
+          if (!filtered.length) {
+            listEl.innerHTML =
+              '<div class="phone-popup-empty">No country found</div>';
+            return;
+          }
+
+          var html = "";
+          for (var i = 0; i < filtered.length; i++) {
+            var c = filtered[i],
+              selClass = selected && c[2] === selected[2] ? " selected" : "";
+            html +=
+              '<div class="phone-popup-item' +
+              selClass +
+              '" role="option" aria-selected="' +
+              (selClass ? "true" : "false") +
+              '" data-iso="' +
+              c[2] +
+              '" tabindex="0"><img class="flag-img" src="' +
+              flagSrc(c[2]) +
+              '" alt="" /><span class="pp-name">' +
+              c[0] +
+              '</span><span class="pp-code">+' +
+              c[1] +
+              "</span></div>";
+          }
+          listEl.innerHTML = html;
+        }
+
+        /* ── Position popup centered on screen ── */
+        function positionPopup() {
+          popup.style.left = "50%";
+          popup.style.top = "50%";
+          popup.style.transform = "translate(-50%, -50%)";
+        }
+
+        /* ── Select country ── */
+        function doSelect(iso) {
+          for (var i = 0; i < C.length; i++) {
+            if (C[i][2] === iso) {
+              selected = C[i];
+              flagImgEl.src = flagSrc(iso);
+              flagImgEl.alt = C[i][0];
+              codeEl.textContent = "+" + C[i][1];
+              doClose();
+              setTimeout(function () {
+                phoneEl.focus();
+              }, 50);
+              return;
+            }
+          }
+        }
+
+        function doOpen() {
+          if (isOpen) return;
+          if (!popup) createPopup();
+          isOpen = true;
+          popup.querySelector(".phone-popup-search-input").value = "";
+          renderList(popup.querySelector(".phone-popup-list"), "");
+          positionPopup();
+          popup.classList.add("open");
+          flagBtn.classList.add("open");
+          flagBtn.setAttribute("aria-expanded", "true");
+          setTimeout(function () {
+            popup.querySelector(".phone-popup-search-input").focus();
+          }, 100);
+        }
+
+        function doClose() {
+          if (!isOpen) return;
+          isOpen = false;
+          popup.classList.remove("open");
+          flagBtn.classList.remove("open");
+          flagBtn.setAttribute("aria-expanded", "false");
+        }
+
+        /* ── Events ── */
+        flagBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          isOpen ? doClose() : doOpen();
+        });
+
+        document.addEventListener("click", function (e) {
+          if (isOpen && !popup.contains(e.target) && e.target !== flagBtn)
+            doClose();
+        });
+
+        window.addEventListener("resize", function () {
+          if (isOpen) positionPopup();
+        });
+      })();
+    </script>
+
+    <!-- Form validation -->
     <script>
       (function () {
         const form = document.getElementById("contactForm");
@@ -1268,7 +1755,6 @@
             input.type === "email" &&
             input.value &&
             !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
-
           if ((isRequired && isEmpty) || isEmailBad) {
             group.classList.add("has-error");
             return false;
@@ -1277,15 +1763,13 @@
           return true;
         }
 
-        // Live validation on blur
         form.querySelectorAll("input, textarea").forEach(function (el) {
           el.addEventListener("blur", function () {
             validateField(el);
           });
           el.addEventListener("input", function () {
-            if (el.closest(".form-group").classList.contains("has-error")) {
+            if (el.closest(".form-group").classList.contains("has-error"))
               validateField(el);
-            }
           });
         });
 
@@ -1304,8 +1788,6 @@
           btn.classList.add("sending");
           label.textContent = "Sending…";
 
-          // EmailJS send (uses existing main.js service IDs if configured)
-          // Falls back to showing success after a short delay for demo
           setTimeout(function () {
             btn.classList.remove("sending");
             form
@@ -1316,9 +1798,7 @@
                 el.style.display = "none";
               });
             const success = document.getElementById("formSuccess");
-            if (success) {
-              success.style.display = "block";
-            }
+            if (success) success.style.display = "block";
           }, 1800);
         });
       })();
