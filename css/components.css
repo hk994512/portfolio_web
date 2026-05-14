@@ -710,3 +710,59 @@
   color: rgba(255, 255, 255, 0.28);
   font-size: 0.84rem;
 }
+
+/* ── GitHub Stats Component ── */
+
+.gh-stats-card {
+  font-family: "Poppins";
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.gh-stats-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+.gh-progress-bar {
+  display: flex;
+  height: 10px;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.gh-progress-bar span {
+  height: 100%;
+  display: block;
+}
+
+.gh-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+}
+
+.gh-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-sec);
+  font-weight: 500;
+}
+
+.gh-legend-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
