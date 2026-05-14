@@ -98,8 +98,7 @@
 
 .about-lottie {
   flex-shrink: 0;
-  width: clamp(220px, 28vw, 380px);
-  min-height: 300px;
+  width: clamp(200px, 24vw, 320px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,7 +106,6 @@
 
 .about-lottie #lottieContainer {
   width: 100%;
-  min-height: 300px;
 }
 
 .about-content {
@@ -481,8 +479,8 @@
   }
 
   .about-lottie {
-    width: clamp(180px, 60vw, 300px);
-    margin: 0 auto;
+    width: clamp(160px, 50vw, 260px);
+    margin: 0 auto 10px;
   }
 
   .chips {
@@ -530,15 +528,15 @@
   overflow: hidden;
   /* fade edges */
   -webkit-mask-image: linear-gradient(to right,
-          transparent 0%,
-          black 8%,
-          black 92%,
-          transparent 100%);
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%);
   mask-image: linear-gradient(to right,
-          transparent 0%,
-          black 8%,
-          black 92%,
-          transparent 100%);
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%);
 }
 
 .testimonials-track-wrap {
@@ -574,8 +572,8 @@
 
 .t-card {
   background: linear-gradient(145deg,
-          rgba(255, 255, 255, 0.04),
-          rgba(108, 99, 255, 0.05));
+      rgba(255, 255, 255, 0.04),
+      rgba(108, 99, 255, 0.05));
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   padding: 1.8rem;
@@ -584,8 +582,8 @@
   flex-shrink: 0;
   width: 320px;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   cursor: default;
 }
@@ -596,8 +594,8 @@
   inset: 0;
   border-radius: inherit;
   background: radial-gradient(circle at top right,
-          rgba(108, 99, 255, 0.09) 0%,
-          transparent 70%);
+      rgba(108, 99, 255, 0.09) 0%,
+      transparent 70%);
   pointer-events: none;
 }
 
@@ -605,7 +603,7 @@
   transform: translateY(-8px) scale(1.02);
   border-color: rgba(108, 99, 255, 0.45);
   box-shadow: 0 20px 60px rgba(108, 99, 255, 0.18),
-        0 0 0 1px rgba(108, 99, 255, 0.2);
+    0 0 0 1px rgba(108, 99, 255, 0.2);
 }
 
 .t-card::after {
@@ -617,8 +615,8 @@
   height: 120px;
   border-radius: 50%;
   background: radial-gradient(circle,
-          rgba(108, 99, 255, 0.15) 0%,
-          transparent 70%);
+      rgba(108, 99, 255, 0.15) 0%,
+      transparent 70%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.4s;
@@ -701,10 +699,10 @@
   inset: -3px;
   border-radius: 50%;
   background: conic-gradient(from 0deg,
-          #6c63ff,
-          #a855f7,
-          #ec4899,
-          #6c63ff);
+      #6c63ff,
+      #a855f7,
+      #ec4899,
+      #6c63ff);
   animation: spinRing 4s linear infinite;
   opacity: 0;
   transition: opacity 0.35s;
