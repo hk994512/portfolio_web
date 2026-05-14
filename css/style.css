@@ -224,7 +224,6 @@ button {
   width: 100%;
 }
 
-/* Mobile nav also Mooli */
 .mobile-nav a {
   font-family: "Poppins", sans-serif;
 }
@@ -277,7 +276,9 @@ button {
   font-weight: 600;
   color: var(--text-sec);
   border-bottom: 1px solid var(--border);
-  transition: color var(--transition), background var(--transition);
+  transition:
+    color var(--transition),
+    background var(--transition);
 }
 .mobile-nav a:hover {
   color: var(--accent);
@@ -495,7 +496,9 @@ button {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: clamp(18px, 2.5vw, 28px);
-  transition: border-color var(--transition), transform var(--transition),
+  transition:
+    border-color var(--transition),
+    transform var(--transition),
     box-shadow var(--transition);
 }
 .service-card:hover {
@@ -536,7 +539,9 @@ button {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: transform var(--transition), box-shadow var(--transition),
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
     border-color var(--transition);
   display: flex;
   flex-direction: column;
@@ -677,7 +682,9 @@ button {
   padding: clamp(20px, 3vw, 32px);
   display: flex;
   gap: 20px;
-  transition: border-color var(--transition), transform var(--transition);
+  transition:
+    border-color var(--transition),
+    transform var(--transition);
 }
 .edu-card:hover {
   font-family: "Poppins";
@@ -998,7 +1005,9 @@ footer {
 .fade-up {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 .fade-up.visible {
   opacity: 1;
@@ -1074,7 +1083,9 @@ footer {
   background: #1a1f2e;
   border: 1.5px solid rgba(108, 99, 255, 0.3);
   border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 9999px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1178,4 +1189,35 @@ footer {
 /* Open flag button caret */
 .phone-flag-btn.open .phone-flag-caret {
   transform: rotate(180deg);
+}
+
+.btn-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Poppins";
+  padding: 14px 28px;
+  font-weight: bold;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border: 2px solid #00e5b0;
+  border-radius: 8px;
+  color: #00bfa5;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-book:hover {
+  font-family: "Poppins";
+  background: #00e5b0;
+  /* color: #0f0f1a;*/
+  color: #2d3650;
+  font-weight: bold;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 229, 176, 0.3);
 }

@@ -1,3 +1,36 @@
+(function () {
+  var threshold = 160;
+  function isDevToolsOpen() {
+    return (
+      window.outerWidth - window.innerWidth > threshold ||
+      window.outerHeight - window.innerHeight > threshold
+    );
+  }
+  function handleDevTools() {
+    if (isDevToolsOpen()) {
+      document.body.innerHTML = "";
+      window.location.replace("about:blank");
+    }
+  }
+  window.addEventListener("resize", handleDevTools);
+  setInterval(handleDevTools, 1000);
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey &&
+        e.shiftKey &&
+        (e.key === "I" || e.key === "J" || e.key === "C")) ||
+      (e.ctrlKey && e.key === "U")
+    ) {
+      e.preventDefault();
+      return false;
+    }
+  });
+})();
+
 document.addEventListener("DOMContentLoaded", function () {
   /* ══════════════════════════════════════════════════════════════════
      EmailJS — SETUP
@@ -74,8 +107,8 @@ document.addEventListener("DOMContentLoaded", function () {
           const navH =
             parseInt(
               getComputedStyle(document.documentElement).getPropertyValue(
-                "--nav-h"
-              )
+                "--nav-h",
+              ),
             ) || 68;
           const top =
             target.getBoundingClientRect().top + window.scrollY - navH;
@@ -144,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0.1 },
   );
 
   document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
@@ -213,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
           await emailjs.send(
             EMAILJS_SERVICE_ID,
             EMAILJS_TEMPLATE_ID,
-            templateParams
+            templateParams,
           );
           showToast("Message sent successfully! ✓", "success");
           form.reset();
@@ -235,6 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
             email: { stringValue: form.email.value.trim() },
             "phone number": { stringValue: form.phone.value.trim() },
             message: { stringValue: form.message.value.trim() },
+
             timestamp: { stringValue: new Date().toISOString() },
           },
         };
