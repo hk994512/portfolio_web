@@ -80,16 +80,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ── Smooth scroll WITHOUT hash in URL ───────────────────────────── */
-  // Intercept ALL anchor clicks that target a section id
   document.querySelectorAll('a[href^="#"], a[data-section]').forEach((link) => {
     link.addEventListener("click", function (e) {
       const href = this.getAttribute("href");
       const section = this.getAttribute("data-section");
 
-      // Determine target id
       let targetId = null;
       if (section === "hero" || href === "#" || href === "#hero") {
-        // Scroll to top — no hash added
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: "smooth" });
         history.replaceState(null, "", window.location.pathname);
@@ -113,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
           const top =
             target.getBoundingClientRect().top + window.scrollY - navH;
           window.scrollTo({ top, behavior: "smooth" });
-          // Push clean URL without hash
           history.pushState(null, "", window.location.pathname);
         }
       }
@@ -126,13 +122,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function setActiveNav() {
     const scrollY = window.scrollY + 90;
-    let found = false;
     sections.forEach((sec) => {
       const top = sec.offsetTop;
       const height = sec.offsetHeight;
       const id = sec.getAttribute("id");
       if (scrollY >= top && scrollY < top + height) {
-        found = true;
         navLinks.forEach((a) => {
           a.classList.remove("active");
           const aSection = a.getAttribute("data-section");
@@ -143,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
     });
-    // If near top, activate Home
     if (window.scrollY < 80) {
       navLinks.forEach((a) => {
         a.classList.remove("active");
@@ -192,6 +185,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  /* ══════════════════════════════════════════════════════════════════
+     HELPER — read the currently selected country code + name
+     from the phone picker rendered in index.html.
+     Returns an object: { dialCode: "+92", countryName: "Pakistan" }
+  ══════════════════════════════════════════════════════════════════ */
+  function getSelectedCountry() {
+    const codeEl = document.getElementById("selectedCode");
+    const flagImg = document.getElementById("selectedFlagImg");
+    return {
+      dialCode: codeEl ? codeEl.textContent.trim() : "",
+      countryName: flagImg ? flagImg.getAttribute("alt") || "" : "",
+    };
+  }
+
   /* ── Contact form with EmailJS ────────────────────────────────────── */
   const form = document.getElementById("contactForm");
 
@@ -227,7 +234,12 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.disabled = true;
       btn.innerHTML = '<span class="btn-spinner"></span> Sending…';
 
-      // Try EmailJS first; fall back to Firestore if not configured
+      // ── Read country picker values ─────────────────────────────────
+      const { dialCode, countryName } = getSelectedCountry();
+      const rawPhone = form.phone.value.trim();
+      // Full phone combines dial code + number, e.g. "+92 3001234567"
+      const fullPhone = rawPhone ? dialCode + " " + rawPhone : dialCode;
+
       const useEmailJS =
         typeof emailjs !== "undefined" &&
         EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY";
@@ -238,7 +250,9 @@ document.addEventListener("DOMContentLoaded", function () {
           from_name:
             form.firstName.value.trim() + " " + form.lastName.value.trim(),
           from_email: form.email.value.trim(),
-          phone: form.phone.value.trim() || "N/A",
+          phone: fullPhone || "N/A",
+          country_code: dialCode || "N/A",
+          country: countryName || "N/A",
           message: form.message.value.trim(),
           reply_to: form.email.value.trim(),
         };
@@ -261,17 +275,25 @@ document.addEventListener("DOMContentLoaded", function () {
           "https://firestore.googleapis.com/v1/projects/" +
           projectId +
           "/databases/(default)/documents/messages";
+
         const body = {
           fields: {
             "first name": { stringValue: form.firstName.value.trim() },
             "last name": { stringValue: form.lastName.value.trim() },
             email: { stringValue: form.email.value.trim() },
-            "phone number": { stringValue: form.phone.value.trim() },
+            // Country name resolved from flag alt text, e.g. "Pakistan"
+            country: { stringValue: countryName },
+            // Dial code only, e.g. "+92"
+            "country code": { stringValue: dialCode },
+            // Raw number typed by the user, e.g. "3001234567"
+            "phone number": { stringValue: rawPhone },
+            // Dial code + number combined, e.g. "+92 3001234567"
+            "full phone": { stringValue: fullPhone },
             message: { stringValue: form.message.value.trim() },
-
             timestamp: { stringValue: new Date().toISOString() },
           },
         };
+
         try {
           const res = await fetch(url, {
             method: "POST",
@@ -302,7 +324,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ── Typed role effect ────────────────────────────────────────────── */
-  // Order: Software Engineer first, then the rest
   const roles = [
     "Software Engineer",
     "Flutter Mobile Developer",

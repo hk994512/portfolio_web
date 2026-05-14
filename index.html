@@ -59,7 +59,6 @@
       .stat-label {
         font-size: 0.78rem;
         color: var(--text-muted, #8892a4);
-        /* text-transform: uppercase; */
         letter-spacing: 0.05em;
         font-weight: 500;
       }
@@ -122,7 +121,6 @@
         margin-bottom: 0.5rem;
         color: var(--text, #eaeaea);
         letter-spacing: 0.03em;
-        /* text-transform: uppercase; */
       }
       .form-group input,
       .form-group textarea {
@@ -328,7 +326,6 @@
         font-size: 0.82rem;
         font-weight: 500;
         letter-spacing: 0.06em;
-        /* text-transform: uppercase; */
       }
       .contact-divider::before,
       .contact-divider::after {
@@ -506,30 +503,102 @@
       }
 
       /* ══════════════════════════════════════════
-         TESTIMONIALS SECTION
+         TESTIMONIALS — ANIMATED CAROUSEL
       ══════════════════════════════════════════ */
-      .testimonial-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2.5rem;
+
+      /* Section header */
+      #testimonials .section-label,
+      #testimonials .section-sub {
+        text-align: center;
       }
+
+      /* Carousel wrapper */
+      .testimonials-carousel-outer {
+        position: relative;
+        margin-top: 2.5rem;
+        overflow: hidden;
+        /* fade edges */
+        -webkit-mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          black 8%,
+          black 92%,
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          black 8%,
+          black 92%,
+          transparent 100%
+        );
+      }
+
+      .testimonials-track-wrap {
+        overflow: hidden;
+        cursor: grab;
+        user-select: none;
+      }
+      .testimonials-track-wrap:active {
+        cursor: grabbing;
+      }
+
+      /* Two rows that scroll in opposite directions */
+      .testimonials-track {
+        display: flex;
+        gap: 1.4rem;
+        width: max-content;
+        padding: 0.5rem 0;
+      }
+      .testimonials-track.row-forward {
+        animation: scrollForward 40s linear infinite;
+      }
+      .testimonials-track.row-backward {
+        animation: scrollBackward 36s linear infinite;
+        margin-top: 1.4rem;
+      }
+      .testimonials-track:hover,
+      .testimonials-track.paused {
+        animation-play-state: paused;
+      }
+
+      @keyframes scrollForward {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      @keyframes scrollBackward {
+        0% {
+          transform: translateX(-50%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      /* Individual card */
       .t-card {
         background: linear-gradient(
           145deg,
-          rgba(255, 255, 255, 0.035),
-          rgba(108, 99, 255, 0.04)
+          rgba(255, 255, 255, 0.04),
+          rgba(108, 99, 255, 0.05)
         );
-        border: 1px solid rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 20px;
-        padding: 2rem;
+        padding: 1.8rem;
         position: relative;
         overflow: hidden;
+        flex-shrink: 0;
+        width: 320px;
         transition:
-          transform 0.3s ease,
+          transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
           border-color 0.3s ease,
           box-shadow 0.3s ease;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+        cursor: default;
       }
       .t-card::before {
         content: "";
@@ -538,16 +607,41 @@
         border-radius: inherit;
         background: radial-gradient(
           circle at top right,
-          rgba(108, 99, 255, 0.07) 0%,
+          rgba(108, 99, 255, 0.09) 0%,
           transparent 70%
         );
         pointer-events: none;
       }
       .t-card:hover {
-        transform: translateY(-6px);
-        border-color: rgba(108, 99, 255, 0.35);
-        box-shadow: 0 16px 48px rgba(108, 99, 255, 0.12);
+        transform: translateY(-8px) scale(1.02);
+        border-color: rgba(108, 99, 255, 0.45);
+        box-shadow:
+          0 20px 60px rgba(108, 99, 255, 0.18),
+          0 0 0 1px rgba(108, 99, 255, 0.2);
       }
+
+      /* Glow orb behind each card */
+      .t-card::after {
+        content: "";
+        position: absolute;
+        top: -30px;
+        right: -30px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(108, 99, 255, 0.15) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .t-card:hover::after {
+        opacity: 1;
+      }
+
       .t-badge {
         display: inline-block;
         background: rgba(108, 99, 255, 0.12);
@@ -558,92 +652,181 @@
         font-size: 0.7rem;
         font-weight: 700;
         letter-spacing: 0.05em;
-        /* text-transform: uppercase; */
-        margin-bottom: 1rem;
+        margin-bottom: 0.9rem;
         font-family: "Mooli";
       }
       .t-quote-mark {
         position: absolute;
-        top: -6px;
-        right: 20px;
-        font-size: 80px;
+        top: -10px;
+        right: 18px;
+        font-size: 90px;
         font-weight: 900;
-        color: rgba(108, 99, 255, 0.08);
+        color: rgba(108, 99, 255, 0.07);
         line-height: 1;
         font-family: Georgia, serif;
         pointer-events: none;
         user-select: none;
+        transition: color 0.3s;
+      }
+      .t-card:hover .t-quote-mark {
+        color: rgba(108, 99, 255, 0.14);
       }
       .t-stars {
         color: #f5c542;
-        font-size: 1rem;
+        font-size: 0.95rem;
         letter-spacing: 2px;
-        margin-bottom: 1rem;
+        margin-bottom: 0.9rem;
       }
       .t-review {
         color: var(--text-muted, #8892a4);
-        line-height: 1.8;
-        font-size: 0.93rem;
-        margin-bottom: 1.6rem;
+        line-height: 1.75;
+        font-size: 0.88rem;
+        margin-bottom: 1.4rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
       .t-divider {
         height: 1px;
-        background: rgba(255, 255, 255, 0.06);
-        margin-bottom: 1.2rem;
+        background: rgba(255, 255, 255, 0.07);
+        margin-bottom: 1.1rem;
       }
       .t-client {
         display: flex;
         align-items: center;
         gap: 12px;
       }
-      .t-client img {
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid rgba(108, 99, 255, 0.5);
+
+      /* Avatar with animated ring */
+      .t-avatar-wrap {
+        position: relative;
         flex-shrink: 0;
       }
+      .t-avatar-wrap::before {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 0deg,
+          #6c63ff,
+          #a855f7,
+          #ec4899,
+          #6c63ff
+        );
+        animation: spinRing 4s linear infinite;
+        opacity: 0;
+        transition: opacity 0.35s;
+        z-index: 0;
+      }
+      .t-card:hover .t-avatar-wrap::before {
+        opacity: 1;
+      }
+      @keyframes spinRing {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .t-avatar-wrap img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2.5px solid rgba(108, 99, 255, 0.5);
+        display: block;
+        position: relative;
+        z-index: 1;
+        background: #1a1a2e;
+        transition: border-color 0.35s;
+      }
+      .t-card:hover .t-avatar-wrap img {
+        border-color: transparent;
+      }
+
+      .t-client-info {
+        flex: 1;
+        min-width: 0;
+      }
       .t-client-name {
-        font-size: 0.95rem;
+        font-size: 0.92rem;
         font-weight: 700;
         color: var(--text, #eaeaea);
         line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .t-client-role {
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         color: var(--accent, #6c63ff);
         font-weight: 500;
         margin-top: 2px;
       }
-      .t-platform {
-        margin-left: auto;
-        font-size: 0.68rem;
-        color: var(--text-muted, #8892a4);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 6px;
-        padding: 3px 8px;
-        white-space: nowrap;
-        font-weight: 500;
-        flex-shrink: 0;
-      }
       .t-verified {
         display: inline-flex;
         align-items: center;
-        gap: 4px;
-        font-size: 0.7rem;
+        gap: 3px;
+        font-size: 0.68rem;
         color: #4caf8a;
         font-weight: 600;
-        margin-top: 0.35rem;
+        margin-top: 0.3rem;
       }
       .t-verified svg {
-        width: 12px;
-        height: 12px;
+        width: 11px;
+        height: 11px;
         flex-shrink: 0;
       }
+      .t-platform {
+        margin-left: auto;
+        font-size: 0.66rem;
+        color: var(--text-muted, #8892a4);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 6px;
+        padding: 3px 8px;
+        white-space: nowrap;
+        font-weight: 600;
+        flex-shrink: 0;
+        align-self: flex-start;
+        letter-spacing: 0.04em;
+      }
+
+      /* Dots nav */
+      .t-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 2rem;
+      }
+      .t-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(108, 99, 255, 0.25);
+        transition: all 0.3s;
+        cursor: pointer;
+        border: none;
+        padding: 0;
+      }
+      .t-dot.active {
+        width: 24px;
+        border-radius: 3px;
+        background: var(--accent, #6c63ff);
+      }
+
+      /* Pause-on-hover note */
+      .t-hint {
+        text-align: center;
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.2);
+        margin-top: 1rem;
+        letter-spacing: 0.04em;
+      }
+
       @media (max-width: 600px) {
         .t-card {
-          padding: 1.4rem;
+          width: 270px;
+          padding: 1.3rem;
         }
       }
     </style>
@@ -1276,7 +1459,7 @@
     </section>
 
     <!-- ═══════════════════════════════════════════
-         TESTIMONIALS — inline section, same page
+         TESTIMONIALS — ANIMATED INFINITE CAROUSEL
     ════════════════════════════════════════════ -->
     <section id="testimonials" class="section">
       <div class="container">
@@ -1286,222 +1469,810 @@
           mobile app development, UI/UX implementation, and cross-platform
           solutions.
         </p>
+      </div>
 
-        <div class="testimonial-grid">
-          <!-- Card 1 -->
-          <div class="t-card fade-up">
-            <div class="t-quote-mark">"</div>
-            <div class="t-badge">⭐ Top Rated</div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-review">
-              Muhammad delivered an exceptional Flutter application with smooth
-              performance and modern UI. Communication was professional and the
-              project was completed before deadline. Truly one of the best
-              developers I've worked with.
-            </p>
-            <div class="t-divider"></div>
-            <div class="t-client">
-              <img
-                src="https://i.pravatar.cc/150?img=12"
-                alt="James Anderson"
-                loading="lazy"
-              />
-              <div>
-                <div class="t-client-name">James Anderson</div>
-                <div class="t-client-role">Startup Founder</div>
-                <div class="t-verified">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Verified Client
+      <!-- Full-bleed carousel (no container constraint) -->
+      <div class="testimonials-carousel-outer fade-up">
+        <!-- ROW 1 — scrolls left -->
+        <div class="testimonials-track-wrap">
+          <div class="testimonials-track row-forward" id="rowForward">
+            <!-- Card 1 -->
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-badge">⭐ Top Rated</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Muhammad delivered an exceptional Flutter application with
+                smooth performance and modern UI. Communication was professional
+                and the project was completed before deadline. Truly one of the
+                best developers I've worked with.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=12"
+                    alt="James Anderson"
+                    loading="lazy"
+                  />
                 </div>
-              </div>
-              <span class="t-platform">Upwork</span>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="t-card fade-up" style="transition-delay: 0.06s">
-            <div class="t-quote-mark">"</div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-review">
-              One of the best Flutter developers I've worked with. The UI was
-              pixel-perfect, animations were smooth, and the Firebase
-              integration worked flawlessly. Would hire again without
-              hesitation.
-            </p>
-            <div class="t-divider"></div>
-            <div class="t-client">
-              <img
-                src="https://i.pravatar.cc/150?img=32"
-                alt="Sarah Williams"
-                loading="lazy"
-              />
-              <div>
-                <div class="t-client-name">Sarah Williams</div>
-                <div class="t-client-role">Product Manager</div>
-                <div class="t-verified">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Verified Client
+                <div class="t-client-info">
+                  <div class="t-client-name">James Anderson</div>
+                  <div class="t-client-role">Startup Founder</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
                 </div>
+                <span class="t-platform">Upwork</span>
               </div>
-              <span class="t-platform">Fiverr</span>
             </div>
-          </div>
 
-          <!-- Card 3 -->
-          <div class="t-card fade-up" style="transition-delay: 0.12s">
-            <div class="t-quote-mark">"</div>
-            <!-- <div class="t-badge">✔ Verified Client</div> -->
-            <div class="t-badge">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="#1877F2"
-                style="vertical-align: middle; margin-right: 5px"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="11"
+            <!-- Card 2 -->
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                One of the best Flutter developers I've worked with. The UI was
+                pixel-perfect, animations were smooth, and the Firebase
+                integration worked flawlessly. Would hire again without
+                hesitation.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=32"
+                    alt="Sarah Williams"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Sarah Williams</div>
+                  <div class="t-client-role">Product Manager</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Fiverr</span>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-badge">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
                   fill="#1877F2"
-                  stroke="white"
-                  stroke-width="2"
-                />
-                <polyline
-                  points="7 12.5 10.5 16 17 9"
-                  fill="none"
-                  stroke="white"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              Verified Client
-            </div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-review">
-              Highly recommended for mobile app development. Clean architecture,
-              responsive layouts, and excellent attention to detail throughout
-              the entire project. Delivered exactly what we envisioned.
-            </p>
-            <div class="t-divider"></div>
-            <div class="t-client">
-              <img
-                src="https://i.pravatar.cc/150?img=45"
-                alt="Michael Brown"
-                loading="lazy"
-              />
-              <div>
-                <div class="t-client-name">Michael Brown</div>
-                <div class="t-client-role">Business Owner</div>
-                <div class="t-verified">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Verified Client
-                </div>
+                  style="vertical-align: middle; margin-right: 4px"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="11"
+                    fill="#1877F2"
+                    stroke="white"
+                    stroke-width="2"
+                  />
+                  <polyline
+                    points="7 12.5 10.5 16 17 9"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Verified Client
               </div>
-              <span class="t-platform">Direct</span>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Highly recommended for mobile app development. Clean
+                architecture, responsive layouts, and excellent attention to
+                detail throughout the entire project. Delivered exactly what we
+                envisioned.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=45"
+                    alt="Michael Brown"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Michael Brown</div>
+                  <div class="t-client-role">Business Owner</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Direct</span>
+              </div>
             </div>
-          </div>
 
-          <!-- Card 4 -->
-          <div class="t-card fade-up" style="transition-delay: 0.18s">
-            <div class="t-quote-mark">"</div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-review">
-              The app performance optimization and UI redesign exceeded our
-              expectations. Great experience working together and very fast
-              delivery. The app now runs buttery-smooth on all devices.
-            </p>
-            <div class="t-divider"></div>
-            <div class="t-client">
-              <img
-                src="https://i.pravatar.cc/150?img=23"
-                alt="Emily Watson"
-                loading="lazy"
-              />
-              <div>
-                <div class="t-client-name">Emily Watson</div>
-                <div class="t-client-role">UI/UX Consultant</div>
-                <div class="t-verified">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Verified Client
+            <!-- Card 4 -->
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                The app performance optimization and UI redesign exceeded our
+                expectations. Great experience working together and very fast
+                delivery. The app now runs buttery-smooth on all devices.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=23"
+                    alt="Emily Watson"
+                    loading="lazy"
+                  />
                 </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Emily Watson</div>
+                  <div class="t-client-role">UI/UX Consultant</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">LinkedIn</span>
               </div>
-              <span class="t-platform">LinkedIn</span>
             </div>
-          </div>
 
-          <!-- Card 5 -->
-          <div class="t-card fade-up" style="transition-delay: 0.24s">
-            <div class="t-quote-mark">"</div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-review">
-              Amazing Flutter expertise with excellent problem-solving skills.
-              The code quality was clean, scalable, and production-ready. Hamza
-              understood the requirements from day one and executed them
-              perfectly.
-            </p>
-            <div class="t-divider"></div>
-            <div class="t-client">
-              <img
-                src="https://i.pravatar.cc/150?img=15"
-                alt="Daniel Lee"
-                loading="lazy"
-              />
-              <div>
-                <div class="t-client-name">Daniel Lee</div>
-                <div class="t-client-role">Tech Entrepreneur</div>
-                <div class="t-verified">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Verified Client
+            <!-- Card 5 -->
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Amazing Flutter expertise with excellent problem-solving skills.
+                The code quality was clean, scalable, and production-ready.
+                Hamza understood the requirements from day one and executed them
+                perfectly.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=15"
+                    alt="Daniel Lee"
+                    loading="lazy"
+                  />
                 </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Daniel Lee</div>
+                  <div class="t-client-role">Tech Entrepreneur</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Upwork</span>
               </div>
-              <span class="t-platform">Upwork</span>
             </div>
-          </div>
 
-          <!-- Card 6 -->
-          <div class="t-card fade-up" style="transition-delay: 0.3s">
-            <div class="t-quote-mark">"</div>
-            <div class="t-badge">🏅 5 Star Review</div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-review">
-              Professional, responsive, and highly skilled developer. The final
-              application looked premium and worked perfectly across Android and
-              iOS. A pleasure to work with from start to finish.
-            </p>
-            <div class="t-divider"></div>
-            <div class="t-client">
-              <img
-                src="https://i.pravatar.cc/150?img=28"
-                alt="Olivia Martinez"
-                loading="lazy"
-              />
-              <div>
-                <div class="t-client-name">Olivia Martinez</div>
-                <div class="t-client-role">Agency Director</div>
-                <div class="t-verified">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Verified Client
+            <!-- Card 6 -->
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-badge">🏅 5 Star Review</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Professional, responsive, and highly skilled developer. The
+                final application looked premium and worked perfectly across
+                Android and iOS. A pleasure to work with from start to finish.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=28"
+                    alt="Olivia Martinez"
+                    loading="lazy"
+                  />
                 </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Olivia Martinez</div>
+                  <div class="t-client-role">Agency Director</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Direct</span>
               </div>
-              <span class="t-platform">Direct</span>
+            </div>
+
+            <!-- ── CLONES for seamless loop (Row 1) ── -->
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-badge">⭐ Top Rated</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Muhammad delivered an exceptional Flutter application with
+                smooth performance and modern UI. Communication was professional
+                and the project was completed before deadline. Truly one of the
+                best developers I've worked with.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=12"
+                    alt="James Anderson"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">James Anderson</div>
+                  <div class="t-client-role">Startup Founder</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Upwork</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                One of the best Flutter developers I've worked with. The UI was
+                pixel-perfect, animations were smooth, and the Firebase
+                integration worked flawlessly. Would hire again without
+                hesitation.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=32"
+                    alt="Sarah Williams"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Sarah Williams</div>
+                  <div class="t-client-role">Product Manager</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Fiverr</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Highly recommended for mobile app development. Clean
+                architecture, responsive layouts, and excellent attention to
+                detail throughout the entire project. Delivered exactly what we
+                envisioned.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=45"
+                    alt="Michael Brown"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Michael Brown</div>
+                  <div class="t-client-role">Business Owner</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Direct</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                The app performance optimization and UI redesign exceeded our
+                expectations. Great experience working together and very fast
+                delivery. The app now runs buttery-smooth on all devices.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=23"
+                    alt="Emily Watson"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Emily Watson</div>
+                  <div class="t-client-role">UI/UX Consultant</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">LinkedIn</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Amazing Flutter expertise with excellent problem-solving skills.
+                The code quality was clean, scalable, and production-ready.
+                Hamza understood the requirements from day one and executed them
+                perfectly.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=15"
+                    alt="Daniel Lee"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Daniel Lee</div>
+                  <div class="t-client-role">Tech Entrepreneur</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Upwork</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-badge">🏅 5 Star Review</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Professional, responsive, and highly skilled developer. The
+                final application looked premium and worked perfectly across
+                Android and iOS. A pleasure to work with from start to finish.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=28"
+                    alt="Olivia Martinez"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Olivia Martinez</div>
+                  <div class="t-client-role">Agency Director</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Direct</span>
+              </div>
             </div>
           </div>
+          <!-- /row-forward -->
+        </div>
+
+        <!-- ROW 2 — scrolls right (different avatars for variety) -->
+        <div class="testimonials-track-wrap">
+          <div class="testimonials-track row-backward" id="rowBackward">
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-badge">🔥 Repeat Client</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Hired Hamza for the third time and he continues to impress. Each
+                project delivered faster and better than before. His Flutter
+                knowledge is absolutely top-tier.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=51"
+                    alt="Lucas Turner"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Lucas Turner</div>
+                  <div class="t-client-role">CTO, SaaS Startup</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Upwork</span>
+              </div>
+            </div>
+
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                The Supabase integration was seamless and the real-time features
+                worked flawlessly. Really impressed with the code structure and
+                developer documentation Hamza provided.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=47"
+                    alt="Priya Sharma"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Priya Sharma</div>
+                  <div class="t-client-role">Lead Engineer</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">LinkedIn</span>
+              </div>
+            </div>
+
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                What stood out most was his attention to UX details. The
+                micro-animations and transitions feel premium — our users
+                noticed the difference immediately. Exceeded every expectation.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=60"
+                    alt="Marco Rossi"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Marco Rossi</div>
+                  <div class="t-client-role">Creative Director</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Fiverr</span>
+              </div>
+            </div>
+
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-badge">💎 Premium Work</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Outstanding developer. Very communicative, always available, and
+                delivered a beautiful cross-platform app in record time. The
+                dark mode implementation was chef's kiss.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=55"
+                    alt="Aisha Khan"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Aisha Khan</div>
+                  <div class="t-client-role">Product Designer</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Direct</span>
+              </div>
+            </div>
+
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Fast, reliable, and skilled. Hamza rebuilt our legacy Android
+                app in Flutter and the performance improvement was massive.
+                Highly recommend for any serious Flutter project.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=67"
+                    alt="Tom Fischer"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Tom Fischer</div>
+                  <div class="t-client-role">Android Lead</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Upwork</span>
+              </div>
+            </div>
+
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                The Firebase Auth + Firestore setup was solid and secure. Hamza
+                also helped us with state management using Riverpod — the whole
+                codebase is clean and maintainable. Great work!
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=41"
+                    alt="Nina Clarke"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Nina Clarke</div>
+                  <div class="t-client-role">Backend Architect</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">LinkedIn</span>
+              </div>
+            </div>
+
+            <!-- CLONES for Row 2 -->
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-badge">🔥 Repeat Client</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Hired Hamza for the third time and he continues to impress. Each
+                project delivered faster and better than before. His Flutter
+                knowledge is absolutely top-tier.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=51"
+                    alt="Lucas Turner"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Lucas Turner</div>
+                  <div class="t-client-role">CTO, SaaS Startup</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Upwork</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                The Supabase integration was seamless and the real-time features
+                worked flawlessly. Really impressed with the code structure and
+                developer documentation Hamza provided.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=47"
+                    alt="Priya Sharma"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Priya Sharma</div>
+                  <div class="t-client-role">Lead Engineer</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">LinkedIn</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                What stood out most was his attention to UX details. The
+                micro-animations and transitions feel premium — our users
+                noticed the difference immediately. Exceeded every expectation.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=60"
+                    alt="Marco Rossi"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Marco Rossi</div>
+                  <div class="t-client-role">Creative Director</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Fiverr</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-badge">💎 Premium Work</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Outstanding developer. Very communicative, always available, and
+                delivered a beautiful cross-platform app in record time. The
+                dark mode implementation was chef's kiss.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=55"
+                    alt="Aisha Khan"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Aisha Khan</div>
+                  <div class="t-client-role">Product Designer</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Direct</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                Fast, reliable, and skilled. Hamza rebuilt our legacy Android
+                app in Flutter and the performance improvement was massive.
+                Highly recommend for any serious Flutter project.
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=67"
+                    alt="Tom Fischer"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Tom Fischer</div>
+                  <div class="t-client-role">Android Lead</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">Upwork</span>
+              </div>
+            </div>
+            <div class="t-card">
+              <div class="t-quote-mark">"</div>
+              <div class="t-stars">★★★★★</div>
+              <p class="t-review">
+                The Firebase Auth + Firestore setup was solid and secure. Hamza
+                also helped us with state management using Riverpod — the whole
+                codebase is clean and maintainable. Great work!
+              </p>
+              <div class="t-divider"></div>
+              <div class="t-client">
+                <div class="t-avatar-wrap">
+                  <img
+                    src="https://i.pravatar.cc/150?img=41"
+                    alt="Nina Clarke"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="t-client-info">
+                  <div class="t-client-name">Nina Clarke</div>
+                  <div class="t-client-role">Backend Architect</div>
+                  <div class="t-verified">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Verified Client
+                  </div>
+                </div>
+                <span class="t-platform">LinkedIn</span>
+              </div>
+            </div>
+          </div>
+          <!-- /row-backward -->
         </div>
       </div>
+      <!-- /carousel-outer -->
+
+      <p class="t-hint">Hover over any card to pause · 12 reviews shown</p>
     </section>
 
     <!-- CONTACT -->
@@ -1996,6 +2767,33 @@
         window.addEventListener("resize", function () {
           if (isOpen) positionPopup();
         });
+      })();
+    </script>
+
+    <!-- Testimonials: pause on hover / touch -->
+    <script>
+      (function () {
+        var tracks = document.querySelectorAll(".testimonials-track");
+        tracks.forEach(function (track) {
+          // Pause on mouse enter
+          track.addEventListener("mouseenter", function () {
+            track.style.animationPlayState = "paused";
+          });
+          track.addEventListener("mouseleave", function () {
+            track.style.animationPlayState = "running";
+          });
+        });
+
+        // Respect reduced-motion preference
+        var mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+        function applyMotion() {
+          tracks.forEach(function (t) {
+            t.style.animationDuration = mq.matches ? "0s" : "";
+            t.style.animationPlayState = mq.matches ? "paused" : "running";
+          });
+        }
+        mq.addEventListener("change", applyMotion);
+        applyMotion();
       })();
     </script>
 
