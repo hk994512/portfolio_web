@@ -1,37 +1,59 @@
-(function () {
-  var threshold = 160;
-  function isDevToolsOpen() {
-    return (
-      window.outerWidth - window.innerWidth > threshold ||
-      window.outerHeight - window.innerHeight > threshold
-    );
-  }
-  function handleDevTools() {
-    if (isDevToolsOpen()) {
-      document.body.innerHTML = "";
-      window.location.replace("about:blank");
-    }
-  }
-  window.addEventListener("resize", handleDevTools);
-  setInterval(handleDevTools, 1000);
-  document.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-  });
-  document.addEventListener("keydown", function (e) {
-    if (
-      e.key === "F12" ||
-      (e.ctrlKey &&
-        e.shiftKey &&
-        (e.key === "I" || e.key === "J" || e.key === "C")) ||
-      (e.ctrlKey && e.key === "U")
-    ) {
-      e.preventDefault();
-      return false;
-    }
-  });
-})();
 
 document.addEventListener("DOMContentLoaded", function () {
+  /* ── Splash Screen ────────────────────────────────────────────────── */
+  const splash = document.getElementById("splashScreen");
+  if (splash) {
+    // Lock scroll while splash is visible
+    document.body.style.overflow = "hidden";
+    document.body.style.opacity = "0";
+
+    // Show the body (splash sits on top at z-index 9999)
+    setTimeout(function () {
+      document.body.style.transition = "opacity 0.01s";
+      document.body.style.opacity = "1";
+    }, 50);
+
+    // Animate loading bar + live counter via requestAnimationFrame
+    const bar     = document.getElementById("splashBar");
+    const counter = document.getElementById("splashCounter");
+    const DURATION = 1600; // ms — matches total reveal time
+    const DELAY    = 300;  // slight delay before bar starts
+
+    setTimeout(function () {
+      const start = performance.now();
+
+      function easeOut(t) {
+        // Slow down near 100% (mirrors the CSS 80%→100% slowdown)
+        return t < 0.8 ? t / 0.8 * 0.88 : 0.88 + ((t - 0.8) / 0.2) * 0.12;
+      }
+
+      function tick(now) {
+        const elapsed = Math.min(now - start, DURATION);
+        const t       = elapsed / DURATION;
+        const pct     = Math.round(easeOut(t) * 100);
+
+        if (bar)     bar.style.width   = pct + "%";
+        if (counter) counter.textContent = pct + "%";
+
+        if (elapsed < DURATION) {
+          requestAnimationFrame(tick);
+        } else {
+          if (bar)     bar.style.width   = "100%";
+          if (counter) counter.textContent = "100%";
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }, DELAY);
+
+    // After loading finishes, zoom-out splash and reveal page
+    setTimeout(function () {
+      splash.classList.add("hide");
+      document.body.style.overflow = "";
+      setTimeout(function () { splash.style.display = "none"; }, 550);
+    }, 1800);
+  }
+
   /* ══════════════════════════════════════════════════════════════════
      EmailJS — SETUP
      1. Go to https://www.emailjs.com/ → sign up free
@@ -46,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID"; // ← replace
   const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // ← replace
 
-  if (typeof emailjs !== "undefined") {
+  if (typeof emailjs !== "undefined" && EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
     emailjs.init(EMAILJS_PUBLIC_KEY);
   }
 
@@ -121,6 +143,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".nav-links a, .mobile-nav a");
 
   function setActiveNav() {
+    // Force contact active if user is scrolled to the absolute bottom of page
+    const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 5);
+    if (isAtBottom) {
+      navLinks.forEach((a) => {
+        a.classList.remove("active");
+        const aSection = a.getAttribute("data-section");
+        const aHref = a.getAttribute("href");
+        if (aSection === "contact" || aHref === "#contact") {
+          a.classList.add("active");
+        }
+      });
+      return;
+    }
+
     const scrollY = window.scrollY + 90;
     sections.forEach((sec) => {
       const top = sec.offsetTop;
@@ -358,6 +394,101 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   typeLoop();
+
+  /* ── Custom Cursor Logic ─────────────────────────────────────────── */
+  const cursor = document.getElementById("customCursor");
+  const follower = document.getElementById("customCursorFollower");
+
+  if (cursor && follower && window.matchMedia("(pointer: fine)").matches) {
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    let followerX = 0, followerY = 0;
+    let isVisible = false;
+
+    window.addEventListener("mousemove", function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!isVisible) {
+        cursor.style.opacity = "1";
+        follower.style.opacity = "1";
+        isVisible = true;
+      }
+    });
+
+    function updateCursorPosition() {
+      // Small dot follows with standard interpolation
+      cursorX += (mouseX - cursorX) * 0.22;
+      cursorY += (mouseY - cursorY) * 0.22;
+
+      // Follower follows with more inertia (lag)
+      followerX += (mouseX - followerX) * 0.12;
+      followerY += (mouseY - followerY) * 0.12;
+
+      // Update CSS variables
+      cursor.style.setProperty("--cursor-x", cursorX + "px");
+      cursor.style.setProperty("--cursor-y", cursorY + "px");
+      follower.style.setProperty("--follower-x", followerX + "px");
+      follower.style.setProperty("--follower-y", followerY + "px");
+
+      requestAnimationFrame(updateCursorPosition);
+    }
+    requestAnimationFrame(updateCursorPosition);
+
+    // Active hover targets
+    const hoverSelectors = 'a, button, select, [role="button"], .work-card, .service-card, .edu-card, .t-card, .phone-flag-btn, .hamburger, .social-btn, .work-btn, .btn, .btn-book';
+    const hideCursorSelectors = 'input, textarea';
+
+    document.addEventListener("mouseover", function (e) {
+      if (e.target.closest(hideCursorSelectors)) {
+        cursor.style.opacity = "0";
+        follower.style.opacity = "0";
+      } else if (e.target.closest(hoverSelectors)) {
+        cursor.classList.add("hovered");
+        follower.classList.add("hovered");
+        if (isVisible) {
+          cursor.style.opacity = "1";
+          follower.style.opacity = "1";
+        }
+      } else {
+        if (isVisible) {
+          cursor.style.opacity = "1";
+          follower.style.opacity = "1";
+        }
+      }
+    });
+
+    document.addEventListener("mouseout", function (e) {
+      if (e.target.closest(hideCursorSelectors)) {
+        if (isVisible) {
+          cursor.style.opacity = "1";
+          follower.style.opacity = "1";
+        }
+      }
+      if (!e.target.closest(hoverSelectors) || (e.relatedTarget && !e.relatedTarget.closest(hoverSelectors))) {
+        cursor.classList.remove("hovered");
+        follower.classList.remove("hovered");
+      }
+    });
+
+    // Handle clicks
+    window.addEventListener("mousedown", function () {
+      cursor.classList.add("clicked");
+      follower.classList.add("clicked");
+    });
+
+    window.addEventListener("mouseup", function () {
+      cursor.classList.remove("clicked");
+      follower.classList.remove("clicked");
+    });
+
+    // Hide if mouse leaves document
+    document.addEventListener("mouseleave", function () {
+      cursor.style.opacity = "0";
+      follower.style.opacity = "0";
+      isVisible = false;
+    });
+  }
 
   /* ── Clean URL on load (remove any #hash) ────────────────────────── */
   if (window.location.hash) {

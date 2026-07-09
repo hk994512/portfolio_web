@@ -24,6 +24,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
 }
 
 html {
@@ -139,16 +140,57 @@ button {
   font-family: "Mooli";
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 14px;
-  background: rgba(0, 230, 118, 0.12);
-  border: 1px solid rgba(0, 230, 118, 0.35);
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(0, 230, 118, 0.08);
+  border: 1px solid rgba(0, 230, 118, 0.25);
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 700;
   color: #00e676;
   letter-spacing: 0.8px;
-  animation: pulse-badge 2.5s ease-in-out infinite;
+}
+
+.pulse-dot-wrapper {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #00e676;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #00e676;
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 1;
+  animation: pulse-grow 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+@keyframes pulse-grow {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
 }
 
 .avatar-ring {
@@ -189,7 +231,7 @@ button {
 .services-grid {
   font-family: "Poppins";
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 20px;
 }
 
