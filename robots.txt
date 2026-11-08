@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://engrhamzadev.netlify.app/sitemap.xml
+Sitemap: https://engrhamza.vercel.app/sitemap.xml
