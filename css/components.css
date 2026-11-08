@@ -54,7 +54,7 @@
 }
 
 .chips {
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -71,7 +71,7 @@
 }
 
 .form-row {
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -79,14 +79,14 @@
 }
 
 .form-group {
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
 .form-group label {
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-sec);
@@ -94,7 +94,7 @@
 
 .form-group input,
 .form-group textarea {
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   background: var(--bg);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-sm);
@@ -132,14 +132,14 @@
 }
 
 .form-submit-wrap {
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .form-submit {
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   min-width: 200px;
   text-align: center;
   justify-content: center;
@@ -218,7 +218,8 @@
   background: #1a1f2e;
   border: 1.5px solid rgba(108, 99, 255, 0.3);
   border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6),
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
     0 0 0 9999px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -320,10 +321,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   padding: 14px 28px;
   font-weight: bold;
-  transition: transform 0.3s ease,
+  transition:
+    transform 0.3s ease,
     box-shadow 0.3s ease;
   border: 2px solid #00e5b0;
   border-radius: 8px;
@@ -337,7 +339,7 @@
 }
 
 .btn-book:hover {
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   background: #00e5b0;
   /* color: #0f0f1a;*/
   color: #2d3650;
@@ -362,17 +364,18 @@
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.85rem 1.1rem;
-  border-radius: 12px;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
   border: 1.5px solid rgba(108, 99, 255, 0.2);
   background: rgba(255, 255, 255, 0.04);
   color: var(--text, #eaeaea);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-family: inherit;
-  transition: border-color 0.25s,
-        box-shadow 0.25s,
-        background 0.25s,
-        transform 0.2s;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    background 0.25s,
+    transform 0.2s;
   outline: none;
   box-sizing: border-box;
 }
@@ -381,8 +384,9 @@
 .form-group textarea:focus {
   border-color: var(--accent, #6c63ff);
   background: rgba(108, 99, 255, 0.07);
-  box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.12),
-        0 2px 12px rgba(108, 99, 255, 0.08);
+  box-shadow:
+    0 0 0 4px rgba(108, 99, 255, 0.12),
+    0 2px 12px rgba(108, 99, 255, 0.08);
   transform: translateY(-1px);
 }
 
@@ -430,18 +434,21 @@
   font-weight: 700;
   border-radius: 50px;
   letter-spacing: 0.04em;
-  transition: transform 0.2s,
-        box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .form-submit::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg,
-          transparent 30%,
-          rgba(255, 255, 255, 0.18) 50%,
-          transparent 70%);
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 70%
+  );
   transform: translateX(-100%);
   transition: transform 0.5s;
 }
@@ -570,9 +577,10 @@
   border-radius: 12px;
   border: 1.5px solid rgba(108, 99, 255, 0.2);
   background: rgba(255, 255, 255, 0.04);
-  transition: border-color 0.25s,
-        box-shadow 0.25s,
-        background 0.25s;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    background 0.25s;
   overflow: visible;
   position: relative;
   height: 50px;
@@ -581,8 +589,9 @@
 .phone-input-wrapper:focus-within {
   border-color: var(--accent, #6c63ff);
   background: rgba(108, 99, 255, 0.07);
-  box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.12),
-        0 2px 12px rgba(108, 99, 255, 0.08);
+  box-shadow:
+    0 0 0 4px rgba(108, 99, 255, 0.12),
+    0 2px 12px rgba(108, 99, 255, 0.08);
 }
 
 .phone-flag-btn {
@@ -714,7 +723,7 @@
 /* ── GitHub Stats Component ── */
 
 .gh-stats-card {
-  font-family: "Poppins";
+  font-family: "Inter", sans-serif;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -765,4 +774,20 @@
   height: 10px;
   border-radius: 50%;
   flex-shrink: 0;
+}
+
+.hero-card-company-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: inherit;
+  text-decoration: none;
+  transition: opacity var(--transition), gap var(--transition);
+}
+
+.hero-card-company-link:hover {
+  opacity: 0.8;
+  gap: 7px;
 }

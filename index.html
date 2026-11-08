@@ -1,21 +1,58 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script src="js/main.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Muhammad Ameer Hamza | Flutter Developer</title>
+    <meta name="theme-color" content="#050607" />
+    <title>
+      Muhammad Ameer Hamza | Flutter Developer & AI-Assisted Web Developer
+    </title>
 
+    <!-- Primary SEO -->
     <meta
       name="description"
-      content="Flutter Developer specializing in cross-platform mobile apps using Flutter, Dart, Firebase, and modern convert Figma to modern mobile apps."
+      content="Muhammad Ameer Hamza — Flutter Developer & AI-Assisted Web Developer based in Lahore, Pakistan. Building cross-platform mobile apps (Flutter, Dart, Firebase) and modern client websites with great SEO and fast delivery."
     />
     <meta
       name="keywords"
-      content="Flutter Developer, Flutter App Developer, Mobile App Developer, Dart Developer, Firebase Developer, Cross Platform App Developer, Flutter Portfolio, Android App Developer, iOS App Developer, Personal Portfolio, Muhammad Ameer Hamza, M Hamza Khan"
+      content="Flutter Developer, Flutter App Developer, Mobile App Developer, Dart Developer, Firebase Developer, Cross Platform App Developer, Flutter Portfolio, Android App Developer, iOS App Developer, AI Assisted Web Developer, HTML CSS JavaScript Website, SEO Optimized Website, Muhammad Ameer Hamza, M Hamza Khan, Lahore Pakistan"
     />
     <meta name="author" content="Muhammad Ameer Hamza" />
     <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://engrhamzadev.netlify.app/" />
+    <meta
+      property="og:title"
+      content="Muhammad Ameer Hamza | Flutter Developer & AI-Assisted Web Developer"
+    />
+    <meta
+      property="og:description"
+      content="Flutter Developer & AI-Assisted Web Developer. Cross-platform apps, Firebase, REST APIs, and modern client websites with great SEO."
+    />
+    <meta
+      property="og:image"
+      content="https://engrhamzadev.netlify.app/assets/avatar.png"
+    />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Muhammad Ameer Hamza | Flutter Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Flutter Developer & AI-Assisted Web Developer based in Lahore, Pakistan."
+    />
+    <meta
+      name="twitter:image"
+      content="https://engrhamzadev.netlify.app/assets/avatar.png"
+    />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://engrhamzadev.netlify.app/" />
     <link
       rel="sitemap"
       type="application/xml"
@@ -26,449 +63,414 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700;800&family=Mooli&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Great+Vibes&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/sections.css" />
     <link rel="stylesheet" href="css/animations.css" />
-    <link rel="stylesheet" href="css/lang.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="css/theme-v2.css" />
+    <link rel="preload" as="image" href="assets/avatar.png" />
     <link rel="icon" href="favicon.ico" />
+    <script src="js/theme.js"></script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Muhammad Ameer Hamza",
+        "url": "https://engrhamzadev.netlify.app/",
+        "image": "https://engrhamzadev.netlify.app/assets/avatar.png",
+        "jobTitle": "Flutter Developer & AI-Assisted Web Developer",
+        "worksFor": { "@type": "Organization", "name": "Freelance" },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lahore",
+          "addressCountry": "PK"
+        },
+        "sameAs": [
+          "https://github.com/hk994512",
+          "https://www.linkedin.com/in/muhammad-ameer-hamza-a41858250",
+          "https://x.com/HamzKhan173520"
+        ],
+        "knowsAbout": [
+          "Flutter",
+          "Dart",
+          "Firebase",
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "REST API",
+          "Mobile App Development",
+          "AI-Assisted Development",
+          "SEO"
+        ]
+      }
+    </script>
   </head>
 
   <body>
-    <!-- CUSTOM CURSOR -->
-    <div class="custom-cursor" id="customCursor"></div>
-    <div class="custom-cursor-follower" id="customCursorFollower"></div>
-
-    <!-- SPLASH SCREEN -->
-    <div id="splashScreen">
-      <div class="splash-text-block">
-        <h1 class="splash-name">Muhammad Ameer Hamza</h1>
-        <p class="splash-sub">Flutter Mobile Engineer</p>
-      </div>
-      <div class="splash-loader-block">
-        <div class="splash-bar-wrap">
-          <div class="splash-bar" id="splashBar"></div>
-        </div>
-        <span class="splash-counter" id="splashCounter">0%</span>
-      </div>
-    </div>
-
+   
     <!-- NAVBAR -->
     <nav id="navbar">
       <div class="container nav-inner">
-        <a href="#" class="nav-logo">M Hamza Khan</a>
-        <ul class="nav-links">
-          <li><a href="#" class="active" data-section="hero">Home</a></li>
-          <li><a href="#about" data-section="about">About</a></li>
-          <li><a href="#services" data-section="services">Services</a></li>
-          <li><a href="#works" data-section="works">Projects</a></li>
-          <li><a href="#education" data-section="education">Education</a></li>
-          <li>
-            <a href="#certificates" data-section="certificates">Certificates</a>
-          </li>
+        <!-- Logo: dot + name + blinking cursor -->
+        <a href="#" class="nav-logo">
+          <span class="nav-logo-dot"></span>
+          <span class="nav-logo-text"
+            ><span class="nav-name-full">Hamza</span
+            ><span class="nav-name-short">Hamza</span
+            ><span class="nav-cursor" aria-hidden="true"></span
+          ></span>
+        </a>
 
-          <li><a href="#contact" data-section="contact">Contact</a></li>
+        <span class="nav-divider nav-divider-start"></span>
+
+        <!-- Navigation -->
+        <ul class="nav-links">
+          <li><a href="#works">Projects</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="toolkit.html">Toolkit</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-          <span></span><span></span><span></span>
+
+        <span class="nav-divider"></span>
+
+        <!-- Theme toggle -->
+        <button
+          type="button"
+          id="themeToggle"
+          class="theme-toggle"
+          aria-label="Toggle light / dark theme"
+        >
+          <svg
+            class="icon-moon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+          <svg
+            class="icon-sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+            />
+          </svg>
         </button>
       </div>
     </nav>
-
-    <!-- Mobile nav -->
-    <div class="mobile-nav" id="mobileNav">
-      <a href="#" data-section="hero">Home</a>
-      <a href="#about" data-section="about">About</a>
-      <a href="#services" data-section="services">Services</a>
-      <a href="#works" data-section="works">Projects</a>
-      <a href="#education" data-section="education">Education</a>
-      <a href="#certificates" data-section="certificates">Certificates</a>
-      <a href="#contact" data-section="contact">Contact</a>
-    </div>
 
     <!-- HERO -->
     <section id="hero">
       <div class="container">
         <div class="hero-inner">
           <div class="hero-text fade-up">
-            <div class="hero-badge-wrap">
-              <div class="hero-badge">Hello, I'm</div>
-              <span class="available-badge">
-                <span class="pulse-dot-wrapper">
-                  <span class="pulse-dot"></span>
-                  <span class="pulse-ring"></span>
-                </span>
-                Available for Freelance Projects
-              </span>
-            </div>
-            <h1 class="hero-name">M Hamza Khan</h1>
-            <p class="hero-role">
-              <span id="typedRole"></span><span class="cursor-blink">|</span>
-            </p>
+            <p class="hero-eyebrow">Flutter Developer ▪ Cross-Platform Apps</p>
+            <h1 class="hero-name">
+              I build apps people<br />actually enjoy using.
+            </h1>
             <p class="hero-tagline">
-              Premium cross-platform Flutter applications engineered for
-              performance, refined design, and exceptional user experience.
+              I build scalable, polished Flutter apps for businesses that need
+              software to last — smooth performance where it matters, clean
+              architecture everywhere else, and a bias toward pixel detail
+              throughout.
             </p>
+
+            <!-- Buttons + social icons on one row -->
             <div class="hero-btns">
-              <a href="assets/Hamza-CV.pdf" download class="btn btn-primary">
+              <a href="#works" class="btn btn-primary">View Projects</a>
+              <a
+                href="https://calendly.com/hamzakhan00561"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-outline"
+                >Book a Call</a
+              >
+
+              <div class="hero-socials">
+                <a
+                  href="https://github.com/hk994512"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="GitHub"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/muhammad-ameer-hamza-a41858250"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="LinkedIn"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                    />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </a>
+                <a href="mailto:hamzakhan00561@gmail.com" aria-label="Email">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROFILE INFO CARD -->
+          <div class="hero-card fade-up" style="transition-delay: 0.15s">
+            <div class="hero-card-top">
+              <img
+                class="hero-card-avatar"
+                src="assets/avatar.png"
+                alt="Muhammad Ameer Hamza"
+                width="48"
+                height="48"
+                decoding="async"
+              />
+              <div>
+                <p class="hero-card-name">M Hamza Khan</p>
+                <p class="hero-card-role">Flutter Developer</p>
+                <span class="available-badge">
+                  <span class="pulse-dot-wrapper">
+                    <span class="pulse-dot"></span>
+                    <span class="pulse-ring"></span>
+                  </span>
+                  Available
+                </span>
+              </div>
+            </div>
+
+            <div class="hero-card-grid">
+              <div class="hero-card-item">
+                <span class="hero-card-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="hero-card-label">Based in</p>
+                  <p class="hero-card-value">Lahore, Pakistan</p>
+                </div>
+              </div>
+              <div class="hero-card-item">
+                <span class="hero-card-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"
+                    />
+                    <path d="M22 10v6" />
+                    <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="hero-card-label">Education</p>
+                  <p class="hero-card-value">BSCS</p>
+                </div>
+              </div>
+              <div class="hero-card-item">
+                <span class="hero-card-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                    <line x1="12" y1="12" x2="12" y2="12" />
+                    <path d="M12 12h.01" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="hero-card-label">Currently at</p>
+                  <p class="hero-card-value">
+                    <a
+                      href="https://crudics.com/"
+                      target="_blank"
+                      rel="noopener"
+                      class="hero-card-company-link"
+                    >
+                      <svg
+                        width="13"
+                        height="13"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                        />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                      Crudics
+                    </a>
+                  </p>
+                </div>
+              </div>
+              <div class="hero-card-item">
+                <span class="hero-card-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="6" />
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="hero-card-label">Specialization</p>
+                  <p class="hero-card-value">Flutter &amp; Firebase</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resume: View (opens in browser tab) + Download (secondary icon) -->
+            <div class="hero-card-resume-row">
+              <a
+                href="assets/resume/Muhammad_Ameer_Hamza_Resume.pdf"
+                target="_blank"
+                rel="noopener"
+                class="hero-card-resume"
+              >
+                View Resume
                 <svg
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2.5"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                  />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+              <a
+                href="assets/resume/Muhammad_Ameer_Hamza_Resume.pdf"
+                download
+                class="hero-card-resume hero-card-resume-secondary"
+                aria-label="Download Resume"
+              >
+                Download Resume
+                <svg
+                  width="14"
+                  height="14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="7 10 12 15 17 10" />
                   <line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
-                Download CV
               </a>
-              <a
-                href="https://wa.me/+923081736926"
-                target="_blank"
-                rel="noopener"
-                class="btn btn-outline"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
-                  />
-                  <path
-                    d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.186-1.443A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.371l-.36-.214-3.724.868.936-3.42-.235-.372A9.818 9.818 0 1 1 12 21.818z"
-                  />
-                </svg>
-                Hire Me
-              </a>
-              <a
-                href="https://calendly.com/hamzakhan00561"
-                target="_blank"
-                class="btn-book"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                Book a Call
-              </a>
-            </div>
-            <div class="stats-strip">
-              <div class="stat-item">
-                <span class="stat-number">2+</span
-                ><span class="stat-label">Years Experience</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">6+</span
-                ><span class="stat-label">Projects Shipped</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">5+</span
-                ><span class="stat-label">Happy Clients</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">100%</span
-                ><span class="stat-label">Cross-Platform Code</span>
-              </div>
-            </div>
-          </div>
-          <div class="hero-avatar fade-up" style="transition-delay: 0.15s">
-            <div class="avatar-ring">
-              <img src="assets/bg-image-modified.png" alt="M Hamza Khan" />
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section">
-      <div class="container">
-        <div class="about-inner">
-          <div class="about-lottie fade-up">
-            <div id="lottieContainer" style="width: 100%"></div>
+        <div class="stats-strip fade-up" style="transition-delay: 0.2s">
+          <div class="stat-item">
+            <span class="stat-number">1+</span
+            ><span class="stat-label">Years Experience</span>
           </div>
-          <div class="about-content fade-up" style="transition-delay: 0.1s">
-            <p class="section-label">About Me</p>
-            <p class="about-desc">
-              Hello! I'm
-              <strong style="color: var(--text)">M Hamza Khan</strong>, a
-              passionate Flutter Developer specializing in building beautiful,
-              high-performance cross-platform applications for Android, iOS,
-              Web, macOS, Linux, and Windows.
-            </p>
-            <p class="about-desc">
-              I strive to ensure astounding performance with state-of-the-art
-              security. Currently Graduated my BS in Computer Science from the
-              University of Engineering and Technology, Taxila.
-            </p>
-            <div class="chips">
-              <span class="chip">Flutter</span><span class="chip">Dart</span
-              ><span class="chip">Firebase</span>
-              <div style="flex-basis: 100%; height: 0"></div>
-              <span class="chip">Android</span><span class="chip">iOS</span
-              ><span class="chip">Supabase</span>
-              <div style="flex-basis: 100%; height: 0"></div>
-              <span class="chip">Rest Api</span
-              ><span class="chip">Local Database</span>
-            </div>
-
-            <div class="gh-stats-card">
-              <p class="gh-stats-title">Skills</p>
-              <div class="skills-circles" id="skillsCircles">
-                <!-- Flutter -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="90"
-                    data-color="#54C5F8"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg"
-                        alt="Flutter"
-                      />
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #54c5f8">90%</span>
-                  <span class="skill-label">Flutter</span>
-                </div>
-
-                <!-- Dart -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="88"
-                    data-color="#0175C2"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg"
-                        alt="Dart"
-                      />
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #0175c2">88%</span>
-                  <span class="skill-label">Dart</span>
-                </div>
-
-                <!-- Firebase -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="85"
-                    data-color="#FFCA28"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
-                        alt="Firebase"
-                      />
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #ffca28">85%</span>
-                  <span class="skill-label">Firebase</span>
-                </div>
-
-                <!-- Supabase -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="75"
-                    data-color="#3ECF8E"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg"
-                        alt="Supabase"
-                      />
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #3ecf8e">75%</span>
-                  <span class="skill-label">Supabase</span>
-                </div>
-
-                <!-- REST API -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="80"
-                    data-color="#FF6B35"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg"
-                        alt="REST API"
-                      />
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #ff6b35">80%</span>
-                  <span class="skill-label">Rest API</span>
-                </div>
-
-                <!-- Git / GitHub -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="80"
-                    data-color="#F05032"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg"
-                        alt="Git"
-                      />
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #f05032">80%</span>
-                  <span class="skill-label">Version Control</span>
-                </div>
-
-                <!-- SQLite -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="70"
-                    data-color="#44A1C8"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg"
-                        alt="SQLite"
-                      />
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #44a1c8">70%</span>
-                  <span class="skill-label">SQLite</span>
-                </div>
-
-                <!-- Android (official logo) -->
-                <!-- Android (official logo, colored green via mask) -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="80"
-                    data-color="#3DDC84"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <div
-                        class="icon-mask"
-                        style="
-                          width: 28px;
-                          height: 28px;
-                          background-color: #3ddc84;
-                          -webkit-mask-image: url(&quot;https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/android.svg&quot;);
-                          mask-image: url(&quot;https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/android.svg&quot;);
-                          -webkit-mask-size: contain;
-                          mask-size: contain;
-                          -webkit-mask-repeat: no-repeat;
-                          mask-repeat: no-repeat;
-                        "
-                      ></div>
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #3ddc84">80%</span>
-                  <span class="skill-label">Android</span>
-                </div>
-
-                <!-- iOS / Apple (white) -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="70"
-                    data-color="#A2AAAD"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <img
-                        class="icon-white"
-                        src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/apple.svg"
-                        alt="iOS"
-                      />
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #a2aaad">70%</span>
-                  <span class="skill-label">iOS</span>
-                </div>
-                <!-- Hive (Flutter local DB) -->
-                <!-- Hive -->
-                <div class="skill-circle-item">
-                  <div
-                    class="skill-circle-wrap"
-                    data-percent="75"
-                    data-color="#6F4FF2"
-                  >
-                    <svg viewBox="0 0 80 80">
-                      <circle class="track" cx="40" cy="40" r="32" />
-                      <circle class="progress" cx="40" cy="40" r="32" />
-                    </svg>
-                    <div class="skill-icon">
-                      <img src="assets/hive.png" alt="Hive" />
-                    </div>
-                  </div>
-                  <span class="skill-percent" style="color: #6f4ff2">75%</span>
-                  <span class="skill-label">Hive</span>
-                </div>
-              </div>
-            </div>
+          <div class="stat-item">
+            <span class="stat-number">5+</span
+            ><span class="stat-label">Projects Shipped</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">BSCS</span
+            ><span class="stat-label">Computer Science</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span
+            ><span class="stat-label">Cross-Platform Code</span>
           </div>
         </div>
       </div>
@@ -477,214 +479,306 @@
     <!-- SERVICES -->
     <section id="services" class="section">
       <div class="container">
+        <p class="eyebrow fade-up">SERVICES</p>
         <p class="section-label fade-up">What I Do</p>
         <p class="section-sub fade-up">
-          Services I offer to bring your ideas to life
+          Flutter development services focused on clean UI, reliable
+          functionality, and maintainable mobile applications.
         </p>
         <div class="services-grid">
-          <!-- Card 1 -->
           <div class="service-card fade-up">
             <div class="service-icon-wrap">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
-                alt="Web"
+              <svg
                 class="service-icon"
-              />
+                aria-hidden="true"
+                focusable="false"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 128"
+              >
+                <g fill="#3FB6D3">
+                  <path
+                    d="M12.3 64.2L76.3 0h39.4L32.1 83.6zM76.3 128h39.4L81.6 93.9l34.1-34.8H76.3L42.2 93.5z"
+                  />
+                </g>
+                <path
+                  fill="#27AACD"
+                  d="M81.6 93.9l-20-20-19.4 19.6 19.4 19.6z"
+                />
+                <path
+                  fill="#19599A"
+                  d="M115.7 128L81.6 93.9l-20 19.2L76.3 128z"
+                />
+                <linearGradient
+                  id="flutter-original-a"
+                  gradientUnits="userSpaceOnUse"
+                  x1="59.365"
+                  y1="116.36"
+                  x2="86.825"
+                  y2="99.399"
+                >
+                  <stop offset="0" stop-color="#1b4e94" />
+                  <stop offset=".63" stop-color="#1a5497" />
+                  <stop offset="1" stop-color="#195a9b" />
+                </linearGradient>
+                <path
+                  fill="url(#flutter-original-a)"
+                  d="M61.6 113.1l30.8-8.4-10.8-10.8z"
+                />
+              </svg>
             </div>
-            <p class="service-title">Web Development</p>
+            <p class="service-title">Flutter App Development</p>
             <p class="service-desc">
-              Responsive, high-performance web apps built with modern frameworks
-              and clean, efficient code.
+              Cross-platform mobile applications for Android and iOS using
+              Flutter and Dart, with responsive UI, reusable components, and
+              clean code.
             </p>
           </div>
-          <!-- Card 2 -->
+
           <div class="service-card fade-up" style="transition-delay: 0.05s">
             <div class="service-icon-wrap">
               <svg
                 class="service-icon"
-                viewBox="0 0 384 512"
-                fill="#8892a4"
+                aria-hidden="true"
+                focusable="false"
                 xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 128"
               >
                 <path
-                  d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+                  fill="#0acf83"
+                  d="M45.5 129c11.9 0 21.5-9.6 21.5-21.5V86H45.5C33.6 86 24 95.6 24 107.5S33.6 129 45.5 129zm0 0"
+                />
+                <path
+                  fill="#a259ff"
+                  d="M24 64.5C24 52.6 33.6 43 45.5 43H67v43H45.5C33.6 86 24 76.4 24 64.5zm0 0"
+                />
+                <path
+                  fill="#f24e1e"
+                  d="M24 21.5C24 9.6 33.6 0 45.5 0H67v43H45.5C33.6 43 24 33.4 24 21.5zm0 0"
+                />
+                <path
+                  fill="#ff7262"
+                  d="M67 0h21.5C100.4 0 110 9.6 110 21.5S100.4 43 88.5 43H67zm0 0"
+                />
+                <path
+                  fill="#1abcfe"
+                  d="M110 64.5c0 11.9-9.6 21.5-21.5 21.5S67 76.4 67 64.5 76.6 43 88.5 43 110 52.6 110 64.5zm0 0"
                 />
               </svg>
             </div>
-            <p class="service-title">App Development</p>
+            <p class="service-title">Figma to Flutter</p>
             <p class="service-desc">
-              Cross-platform mobile applications with native performance, smooth
-              animations, and robust functionality.
+              Converting Figma designs into responsive Flutter interfaces with
+              attention to spacing, typography, components, animations, and
+              different screen sizes.
             </p>
           </div>
-          <!-- Card 3 -->
+
           <div class="service-card fade-up" style="transition-delay: 0.1s">
-            <div class="service-icon-wrap">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
-                alt="Firebase"
+            <div class="service-icon-wrap duo">
+              <svg
                 class="service-icon"
-              />
+                aria-hidden="true"
+                focusable="false"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 128"
+              >
+                <path
+                  fill="#ffa000"
+                  d="M17.474 103.276 33.229 2.462a2.91 2.91 0 0 1 5.44-.924l16.294 30.39 6.494-12.366a2.91 2.91 0 0 1 5.15 0l43.97 83.714H17.474Z"
+                />
+                <path
+                  fill="#f57c00"
+                  d="M71.903 64.005 54.955 31.913l-37.481 71.363Z"
+                />
+                <path
+                  fill="#ffca28"
+                  d="M110.577 103.276 98.51 28.604a2.913 2.913 0 0 0-1.984-2.286 2.906 2.906 0 0 0-2.94.714l-76.112 76.243 42.115 23.618a8.728 8.728 0 0 0 8.51 0l42.478-23.618Z"
+                />
+                <path
+                  fill="#fff"
+                  fill-opacity=".2"
+                  d="M98.51 28.604a2.913 2.913 0 0 0-1.984-2.286 2.906 2.906 0 0 0-2.94.713L78.479 42.178 66.6 19.562a2.91 2.91 0 0 0-5.15 0l-6.494 12.365L38.662 1.538A2.91 2.91 0 0 0 35.605.044a2.907 2.907 0 0 0-2.384 2.425L17.474 103.276h-.051l.05.058.415.204 75.676-75.764a2.91 2.91 0 0 1 4.932 1.571l11.965 74.003.116-.073L98.51 28.603Zm-80.898 74.534L33.228 3.182A2.91 2.91 0 0 1 35.613.756a2.911 2.911 0 0 1 3.057 1.495l16.292 30.39 6.495-12.366a2.91 2.91 0 0 1 5.15 0L78.245 42.41 17.61 103.138Z"
+                />
+                <path
+                  fill="#a52714"
+                  d="M68.099 126.18a8.728 8.728 0 0 1-8.51 0l-42.015-23.55-.102.647 42.115 23.61a8.728 8.728 0 0 0 8.51 0l42.48-23.61-.11-.67-42.37 23.575z"
+                  opacity=".2"
+                />
+              </svg>
+              <svg
+                class="service-icon"
+                aria-hidden="true"
+                focusable="false"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 128"
+              >
+                <defs>
+                  <linearGradient
+                    id="sb-a"
+                    x1="53.974"
+                    x2="94.163"
+                    y1="54.974"
+                    y2="71.829"
+                    gradientTransform="translate(29.387 60.096) scale(1.1436)"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0" stop-color="#249361" />
+                    <stop offset="1" stop-color="#3ecf8e" />
+                  </linearGradient>
+                  <linearGradient
+                    id="sb-b"
+                    x1="36.156"
+                    x2="54.484"
+                    y1="30.578"
+                    y2="65.081"
+                    gradientTransform="translate(29.387 60.096) scale(1.1436)"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0" />
+                    <stop offset="1" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  fill="url(#sb-a)"
+                  d="M102.24 186.21c-3.267 4.117-9.904 1.862-9.977-3.397l-1.156-76.906h51.715c9.365 0 14.587 10.817 8.763 18.149z"
+                  transform="translate(-27.722 -60.338)"
+                />
+                <path
+                  fill="url(#sb-b)"
+                  fill-opacity=".2"
+                  d="M102.24 186.21c-3.267 4.117-9.904 1.862-9.977-3.397l-1.156-76.906h51.715c9.365 0 14.587 10.817 8.763 18.149z"
+                  transform="translate(-27.722 -60.338)"
+                />
+                <path
+                  fill="#3ecf8e"
+                  d="M53.484 2.128c3.267-4.117 9.905-1.862 9.977 3.396l.508 76.907H12.902c-9.365 0-14.587-10.817-8.764-18.149z"
+                />
+              </svg>
             </div>
-            <p class="service-title">Backend Development</p>
+            <p class="service-title">Firebase &amp; Supabase</p>
             <p class="service-desc">
-              Secure, scalable backend solutions using Firebase and Supabase for
-              reliable, future-proof infrastructure.
+              Integrating authentication, databases, storage, push
+              notifications, and other backend services with Flutter
+              applications.
             </p>
           </div>
-          <!-- Card 4 -->
+
           <div class="service-card fade-up" style="transition-delay: 0.15s">
             <div class="service-icon-wrap">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg"
-                alt="Flutter"
+              <svg
                 class="service-icon"
-              />
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 128 128"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill="#f37036"
+                  d="M113.117 26.066C92.168-1.062 53.191-6.07 26.062 14.883c-27.125 20.953-32.128 59.93-11.175 87.055 20.957 27.124 59.937 32.124 87.058 11.167 27.114-20.953 32.118-59.918 11.172-87.039Zm0 0"
+                />
+                <path
+                  fill="#fff"
+                  d="M91.078 24.164a10.038 10.038 0 0 0-5.781 2.426 10.028 10.028 0 0 0-1.54 13.465 10.028 10.028 0 0 0 13.276 2.715h.002v.001l.156.155a10.63 10.63 0 0 0 1.965-1.45A10.341 10.341 0 0 0 99 27.107v-.002l-8.844 8.789-.156-.155 8.844-8.793a10.038 10.038 0 0 0-7.766-2.78zM79.434 38.551c-4.24-.007-11.163 4.799-28.067 21.703l.084.086c-.092-.032-.185-.035-.185-.035l-6.364 6.308a1.035 1.035 0 0 0 .93 1.762l10.914-2.328a.307.307 0 0 0 .092-.17l.242.25-3.72 3.69h-.18l-22.086 22.26 7.086 6.824a1.254 1.254 0 0 0 1.476.149 1.327 1.327 0 0 0 .645-1.356l-1.035-4.5a.534.534 0 0 1 0-.62 117.285 117.285 0 0 0 26.738-17.583l-4.535-4.537.086-.014-2.69-2.689.172-.174.182.186-.094.091 7.137 7.293v-.003c13.68-12.954 23.39-23.367 20.865-30.375a3.83 3.83 0 0 0-1.107-2.208v.004a3.778 3.778 0 0 0-.483-.306c-.083-.088-.156-.178-.244-.264l-.066.066a3.778 3.778 0 0 0-.582-.29l.289-.292c-1.796-1.6-3.28-2.924-5.5-2.93zM30.94 92.21l-5.171 5.172v.004a1.03 1.03 0 0 0-.457 1.125 1.035 1.035 0 0 0 .921.789l12.672.875-7.965-7.965z"
+                />
+                <path
+                  fill="#f37036"
+                  d="M91.95 23.31a11.047 11.047 0 0 0-7.759 3.17 10.988 10.988 0 0 0-2.39 11.641c-4.741-2.03-11.155 1.51-31.106 21.457a.932.932 0 0 0-.037.094 1.242 1.242 0 0 0-.119.062l-6.309 6.364a1.97 1.97 0 0 0-.363 2.324 2.012 2.012 0 0 0 1.707.984l.313-.203 8.424-1.797-4.03 4.067a.873.873 0 0 0-.054.166l-19.75 19.799a.798.798 0 0 0-.192.238l-5.086 5.09a1.967 1.967 0 0 0-.414 2.043 1.995 1.995 0 0 0 1.656 1.265l12.618.88a1.01 1.01 0 0 0 .52-.415.886.886 0 0 0 0-1.035l-.026-.025a2.243 2.243 0 0 0 .705-.58 2.237 2.237 0 0 0 .406-1.876l-.984-4.187a126.725 126.725 0 0 0 26.334-16.861 1.091 1.091 0 0 0 .248.103c.254-.019.492-.128.672-.308 13.55-12.83 21.515-21.622 21.515-28.602a8.03 8.03 0 0 0-.431-2.85 10.957 10.957 0 0 0 3.845.83l-.015.004a11.219 11.219 0 0 0 5.183-1.45.775.775 0 0 0 .004.001.835.835 0 0 0 .617-.055 9.398 9.398 0 0 0 2.07-1.652 10.873 10.873 0 0 0 3.258-7.758 10.873 10.873 0 0 0-3.257-7.758.93.93 0 0 0-.118-.091 11.045 11.045 0 0 0-7.656-3.078zm-.087 1.772a9.27 9.27 0 0 1 5.586 1.914l-8.068 8.117a.84.84 0 0 0-.076.098.83.83 0 0 0-.239.55.832.832 0 0 0 .313.65h.002l6.1 6.1a9.044 9.044 0 0 1-10.028-1.913c-2.586-2.6-3.336-6.504-1.953-9.891 1.383-3.39 4.68-5.605 8.363-5.625zm7.12 3.432a8.87 8.87 0 0 1 2.033 5.674 9.15 9.15 0 0 1-2.688 6.464 9.989 9.989 0 0 1-1.098.895L92.307 36.7l-.963-.963.265-.265 7.373-6.96zm-.366 4.193a.777.777 0 0 0-.55.031.731.731 0 0 0-.36.426.73.73 0 0 0 .05.559 2.226 2.226 0 0 1-.257 2.328.64.64 0 0 0-.195.488c.004.184.07.36.195.492a.58.58 0 0 0 .414 0 .68.68 0 0 0 .672-.207 3.573 3.573 0 0 0 .465-3.777v.004a.777.777 0 0 0-.434-.344zM79.34 39.43a5.584 5.584 0 0 1 3.31 1.226 4.756 4.756 0 0 0-2.681 1.34L57.162 64.701l-4.476-4.476c11.828-11.772 19.06-17.921 23.556-19.936a5.584 5.584 0 0 1 3.098-.86zm3.965 2.96a2.895 2.895 0 0 1 2.043.844 2.786 2.786 0 0 1 .879 2.121 2.869 2.869 0 0 1-.985 2.07l-24.25 21.106-2.617-2.617 22.887-22.68a2.895 2.895 0 0 1 2.043-.843zm2.994 6.698c-1.69 6.702-10.647 15.783-19.987 24.607l-3.777-3.773L86.3 49.088zM51.367 61.547l.274.27 3.513 3.513-9.63 2.06 5.843-5.843zm5.793 5.84.004.004 1.168 1.195a1.086 1.086 0 0 0 .018.084l.078.012.248.254.82.84-5.385.66 3.05-3.05zm3.867 4.076 3.578 3.576A126.992 126.992 0 0 1 38.75 91.695a1.44 1.44 0 0 0-.777 1.653l1.035 4.5a.31.31 0 0 1 0 .363.31.31 0 0 1-.414 0l-6.102-6.152L51.3 72.975l9.728-1.512zm-29.933 21.94.869.814 4.492 4.492-10.016-.648 4.655-4.659z"
+                />
+              </svg>
             </div>
-            <p class="service-title">Flutter Development</p>
+            <p class="service-title">REST API Integration</p>
             <p class="service-desc">
-              Beautiful natively compiled apps for multiple platforms from a
-              single codebase, reducing time while maintaining quality.
+              Connecting Flutter applications with REST APIs, handling requests,
+              authentication, JSON responses, error states, and data models.
             </p>
           </div>
-          <!-- Card 5 -->
+
           <div class="service-card fade-up" style="transition-delay: 0.2s">
             <div class="service-icon-wrap">
               <svg
                 class="service-icon"
-                viewBox="0 0 24 24"
-                fill="none"
+                aria-hidden="true"
+                focusable="false"
                 xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 128"
               >
-                <defs>
-                  <linearGradient
-                    id="androidGrad"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                  >
-                    <stop offset="0%" stop-color="#3DDC84" />
-                    <stop offset="100%" stop-color="#00A855" />
-                  </linearGradient>
-                  <filter
-                    id="androidGlow"
-                    x="-20%"
-                    y="-20%"
-                    width="140%"
-                    height="140%"
-                  >
-                    <feDropShadow
-                      dx="0"
-                      dy="4"
-                      stdDeviation="6"
-                      flood-color="#3DDC84"
-                      flood-opacity="0.3"
-                    />
-                  </filter>
-                </defs>
                 <path
-                  d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4483-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0004.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.244 13.8533 7.85 12 7.85c-1.8533 0-3.5902.394-5.1367 1.1002L4.841 5.447a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3435-4.1021-2.6892-7.5743-6.1185-9.4396"
-                  fill="url(#androidGrad)"
-                  filter="url(#androidGlow)"
+                  fill="#00c4b3"
+                  d="M35.2 34.9l-8.3-8.3v59.7l.1 2.8c0 1.3.2 2.8.7 4.3l65.6 23.1 16.3-7.2-74.4-74.4z"
+                />
+                <path
+                  d="M27.7 93.4zm81.9 15.9l-16.3 7.2-65.4-23.1c1.3 4.8 4 10.1 7 13.2l21.3 21.2 47.6.1 5.8-18.6z"
+                  fill="#22d3c5"
+                />
+                <path
+                  fill="#0075c9"
+                  d="M1.7 65.1C-.4 67.3.7 72 4 75.5l14.7 14.8 9.2 3.3c-.3-1.5-.7-3-.7-4.3l-.1-2.8-.2-59.8m82.7 82.6l7.2-16.4-23-65.6c-1.5-.3-3-.6-4.3-.7l-2.9-.1-59.6.1"
+                />
+                <path
+                  d="M93.6 27.3c.2 0 .2 0 0 0 .2 0 .2 0 0 0zm16 82l17.7-5.8V54.8l-20.4-20.5c-3-3-8.3-5.8-13.2-7l23.1 65.6"
+                  fill="#00a8e1"
+                />
+                <path
+                  fill="#00c4b3"
+                  d="M90.5 18.2L75.7 3.5c-3.4-3.4-8-4.4-10.4-2.3L26.9 26.6h59.5l2.9.1c1.3 0 2.8.2 4.3.7l-3.1-9.2z"
                 />
               </svg>
             </div>
-            <p class="service-title">Android Development</p>
+            <p class="service-title">State Management</p>
             <p class="service-desc">
-              High-performance Android apps with Material Design principles and
-              seamless ecosystem integration.
+              Building scalable Flutter apps with Provider, Riverpod, GetX, and
+              BLoC/Cubit for predictable application state and clean UI updates.
             </p>
           </div>
-          <!-- Card 6 -->
+
           <div class="service-card fade-up" style="transition-delay: 0.25s">
             <div class="service-icon-wrap">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg"
-                alt="Supabase"
+              <svg
                 class="service-icon"
-              />
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill="#3DDC84"
+                  d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"
+                />
+              </svg>
             </div>
-            <p class="service-title">Supabase Backend</p>
+            <p class="service-title">App Maintenance &amp; Improvements</p>
             <p class="service-desc">
-              Realtime PostgreSQL backends with authentication, storage, and
-              scalable open-source infrastructure.
+              Fixing bugs, improving existing Flutter applications, adding new
+              features, optimizing UI, and keeping projects maintainable as they
+              grow.
             </p>
           </div>
         </div>
       </div>
     </section>
-
     <!-- WORKS -->
     <section id="works" class="section">
       <div class="container">
-        <p class="section-label fade-up">Featured Projects</p>
-        <p class="section-sub fade-up">Products I have developed</p>
+        <p class="eyebrow fade-up">SELECTED WORK</p>
+        <p class="section-label fade-up">Apps Designed, Built &amp; Shipped</p>
+        <p class="section-sub fade-up">
+          A curated selection of Flutter apps built end-to-end, from UI to
+          backend.
+        </p>
         <div class="works-grid">
-          <div class="work-card featured fade-up">
-            <div class="work-img-wrap">
-              <img
-                src="assets/work_pro.png"
-                alt="Personal Portfolio"
-                loading="lazy"
-              />
-              <span class="featured-badge">FEATURED</span>
-            </div>
-            <div class="work-body">
-              <p class="work-title">Personal Portfolio</p>
-              <p class="work-subtitle">Web Development</p>
-              <div class="work-tags">
-                <span class="tag">Flutter</span><span class="tag">Dart</span
-                ><span class="tag">Firebase</span
-                ><span class="tag">Animations</span>
-              </div>
-              <p class="work-desc">
-                A production-ready web — built solo from scratch, integrating
-                Firebase backend, clean MVVM architecture, and pixel-perfect UI
-                across iOS and Android.
-              </p>
-              <div class="work-actions">
-                <a
-                  href="https://engrhamzadev.netlify.app/"
-                  target="_blank"
-                  rel="noopener"
-                  class="work-btn work-btn-primary"
-                >
-                  <svg
-                    width="14"
-                    height="14"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-                    />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                  View Project
-                </a>
-                <a
-                  href="https://github.com/hk994512"
-                  target="_blank"
-                  rel="noopener"
-                  class="work-btn work-btn-ghost"
-                  ><img src="assets/github.svg" alt="GitHub"
-                /></a>
-              </div>
-            </div>
-          </div>
           <div
             class="work-card featured fade-up"
             style="transition-delay: 0.05s"
           >
+            <span class="work-number">01</span>
             <div class="work-img-wrap">
               <img
-                src="assets/tv_project.png"
-                alt="Swift Streamz"
+                src="assets/project-swift-streamz.png"
+                alt="Swift Streamz — Flutter live TV streaming app"
+                width="340"
+                height="220"
                 loading="lazy"
+                decoding="async"
               />
               <span class="featured-badge">FEATURED</span>
             </div>
@@ -734,11 +828,15 @@
             </div>
           </div>
           <div class="work-card fade-up" style="transition-delay: 0.1s">
+            <span class="work-number">02</span>
             <div class="work-img-wrap">
               <img
-                src="assets/fitness.png"
-                alt="Fitness Tracker"
+                src="assets/project-fitness-tracker.png"
+                alt="Fitness Tracker Pro — Flutter health app"
+                width="340"
+                height="220"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="work-body">
@@ -787,11 +885,15 @@
             </div>
           </div>
           <div class="work-card fade-up" style="transition-delay: 0.15s">
+            <span class="work-number">03</span>
             <div class="work-img-wrap">
               <img
-                src="assets/work_pro2.png"
-                alt="Messenger Pro"
+                src="assets/project-messenger-pro.png"
+                alt="Messenger Pro — Flutter real-time chat app"
+                width="340"
+                height="220"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="work-body">
@@ -840,11 +942,15 @@
             </div>
           </div>
           <div class="work-card fade-up" style="transition-delay: 0.2s">
+            <span class="work-number">04</span>
             <div class="work-img-wrap">
               <img
-                src="assets/sadapay.png"
-                alt="SadaPay Clone"
+                src="assets/project-sadapay.png"
+                alt="SadaPay Clone — Flutter fintech app"
+                width="340"
+                height="220"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="work-body">
@@ -892,11 +998,65 @@
             </div>
           </div>
           <div class="work-card fade-up" style="transition-delay: 0.25s">
+            <span class="work-number">05</span>
             <div class="work-img-wrap">
               <img
-                src="assets/statusly.png"
-                alt="StatusSaver Pro"
+                src="assets/project-quran-academy.png"
+                alt="Hafiz Salman Quran Academy — client website"
+                width="340"
+                height="220"
                 loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="work-body">
+              <p class="work-title">Hafiz Salman Quran Academy</p>
+              <p class="work-subtitle">Client Website — Web Development</p>
+              <div class="work-tags">
+                <span class="tag">React</span><span class="tag">Vite</span
+                ><span class="tag">AI-Assisted Dev</span>
+              </div>
+              <p class="work-desc">
+                A modern online Quran academy website built for a client using
+                React and Vite, developed with AI-assisted workflows for fast,
+                high-quality delivery.
+              </p>
+              <div class="work-actions">
+                <a
+                  href="https://hafizsalmanacademy.netlify.app/"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-primary"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                    />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View Live Site
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="work-card fade-up" style="transition-delay: 0.3s">
+            <span class="work-number">06</span>
+            <div class="work-img-wrap">
+              <img
+                src="assets/project-status-saver.png"
+                alt="StatusSaver Pro — Flutter WhatsApp status saver"
+                width="340"
+                height="220"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="work-body">
@@ -912,7 +1072,12 @@
                 saving, premium UI, and fast performance optimized for Android.
               </p>
               <div class="work-actions">
-                <a href="#contact" class="work-btn work-btn-primary">
+                <a
+                  href="https://github.com/hk994512/WhatApp-Status-Saver-"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-primary"
+                >
                   <svg
                     width="14"
                     height="14"
@@ -922,10 +1087,67 @@
                     viewBox="0 0 24 24"
                   >
                     <path
-                      d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
                     />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
                   </svg>
-                  Request Demo
+                  View Project
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANMOL MARBLE -->
+          <div class="work-card fade-up" style="transition-delay: 0.35s">
+            <span class="work-number">07</span>
+            <div class="work-img-wrap">
+              <img
+                src="assets/anmol-marble.png"
+                alt="Anmol Marble & Work — SEO optimized business website"
+                width="340"
+                height="220"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="work-body">
+              <p class="work-title">Anmol Marble &amp; Work</p>
+              <p class="work-subtitle">Client Website — Web Development</p>
+              <div class="work-tags">
+                <span class="tag">HTML</span><span class="tag">CSS</span
+                ><span class="tag">JavaScript</span
+                ><span class="tag">AI-Assisted Dev</span
+                ><span class="tag">SEO Optimized</span>
+              </div>
+              <p class="work-desc">
+                A fully SEO-optimized business website for a marble &amp;
+                construction company, built with HTML, CSS &amp; JavaScript
+                using AI-assisted workflows. Features fast load times,
+                structured data, and mobile-first design.
+              </p>
+              <div class="work-actions">
+                <a
+                  href="https://anmolmarbleandwork.me/"
+                  target="_blank"
+                  rel="noopener"
+                  class="work-btn work-btn-primary"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                    />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View Live Site
                 </a>
               </div>
             </div>
@@ -937,64 +1159,55 @@
     <!-- EDUCATION -->
     <section id="education" class="section">
       <div class="container">
+        <p class="eyebrow fade-up">EDUCATION</p>
         <p class="section-label fade-up">Educational Journey</p>
         <p class="section-sub fade-up">
           Building expertise through continuous learning
         </p>
-        <div class="edu-list">
-          <div class="edu-card fade-up">
-            <div class="edu-icon">
-              <img src="assets/graduation.svg" alt="Graduation" />
-            </div>
-            <div class="edu-body">
-              <p class="edu-title">Matriculation</p>
-              <p class="edu-subtitle">
-                Al-Hasnain Public Secondary School, Tehsil Alipur, Pakistan
-                &nbsp;·&nbsp; 2018 – 2020
-              </p>
-              <p class="edu-desc">
-                Built a strong foundation in Mathematics, Physics, Chemistry,
-                and Computer Science. Participated in school competitions,
-                developing teamwork and problem-solving skills.
-              </p>
-            </div>
-          </div>
-          <div class="edu-card fade-up" style="transition-delay: 0.08s">
-            <div class="edu-icon">
-              <img src="assets/school-bag.svg" alt="School" />
-            </div>
-            <div class="edu-body">
-              <p class="edu-title">Intermediate (ICS)</p>
-              <p class="edu-subtitle">
-                Al-Farooq Higher Secondary School, Tehsil Alipur, Pakistan
-                &nbsp;·&nbsp; 2020 – 2022
-              </p>
-              <p class="edu-desc">
-                Completed ICS with distinction in Computer Science and
-                Mathematics. Gained hands-on knowledge of C++, data structures,
-                and networking. Won recognition at inter-school programming
-                competitions.
-              </p>
-            </div>
-          </div>
-          <div class="edu-card fade-up" style="transition-delay: 0.16s">
-            <div class="edu-icon">
-              <img src="assets/student.svg" alt="University" />
-            </div>
-            <div class="edu-body">
-              <p class="edu-title">Bachelor of Science in Computer Science</p>
-              <p class="edu-subtitle">
-                University of Engineering and Technology, Taxila &nbsp;·&nbsp;
-                2022-2026
-              </p>
-              <p class="edu-desc">
-                Graduated in BSCS from UET Taxila — one of Pakistan's top
-                engineering universities. Core domains: DSA, OS, DBMS, Software
-                Engineering, and AI. Final year project: Cross-Platform Flutter
-                app with Firebase backend, using Riverpod and FastApi.
-              </p>
-            </div>
-          </div>
+        <div class="edu-table-wrap fade-up">
+          <table class="edu-table">
+            <thead>
+              <tr>
+                <th>Degree</th>
+                <th>Institution</th>
+                <th>Period</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="edu-row">
+                <td>
+                  <span class="edu-row-icon">
+                    <img src="assets/graduation.svg" alt="Matric" />
+                  </span>
+                  <span class="edu-row-degree">Matriculation</span>
+                </td>
+                <td class="edu-row-inst">Al-Hasnain Public Secondary School</td>
+                <td><span class="edu-row-year">2018 – 2020</span></td>
+              </tr>
+              <tr class="edu-row">
+                <td>
+                  <span class="edu-row-icon">
+                    <img src="assets/school-bag.svg" alt="ICS" />
+                  </span>
+                  <span class="edu-row-degree">Intermediate (ICS)</span>
+                </td>
+                <td class="edu-row-inst">Al-Farooq Higher Secondary School</td>
+                <td><span class="edu-row-year">2020 – 2022</span></td>
+              </tr>
+              <tr class="edu-row">
+                <td>
+                  <span class="edu-row-icon">
+                    <img src="assets/student.svg" alt="BSCS" />
+                  </span>
+                  <span class="edu-row-degree">BSCS</span>
+                </td>
+                <td class="edu-row-inst">
+                  University of Engineering &amp; Technology, Taxila
+                </td>
+                <td><span class="edu-row-year">2022 – 2026</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -1002,6 +1215,7 @@
     <!-- CERTIFICATES -->
     <section id="certificates" class="section">
       <div class="container">
+        <p class="eyebrow fade-up">CREDENTIALS</p>
         <p class="section-label fade-up">Certificates</p>
         <p class="section-sub fade-up">
           Verified credentials from industry-leading platforms
@@ -1010,9 +1224,12 @@
           <div class="cert-card fade-up">
             <div class="cert-img-wrap">
               <img
-                src="assets/Certs/cert 1.jpg"
-                alt="The Git & Github Bootcamp"
+                src="assets/Certs/cert-git-github.jpg"
+                alt="The Git & Github Bootcamp certificate"
+                width="360"
+                height="220"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="cert-body">
@@ -1056,9 +1273,12 @@
           <div class="cert-card fade-up" style="transition-delay: 0.1s">
             <div class="cert-img-wrap">
               <img
-                src="assets/Certs/cert 2.jpg"
-                alt="Flutter Masterclass"
+                src="assets/Certs/cert-flutter-masterclass.jpg"
+                alt="Flutter Masterclass certificate"
+                width="360"
+                height="220"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="cert-body">
@@ -1105,123 +1325,125 @@
     <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="container">
-        <div class="contact-hero fade-up">
-          <img src="assets/contact_image.jpg" alt="Contact" loading="lazy" />
-          <div class="contact-hero-overlay">
-            <h2>Get In Touch</h2>
-            <p>Let's build something great together</p>
+        <p class="eyebrow fade-up">GET IN TOUCH</p>
+        <p class="section-label fade-up">Contact Me</p>
+        <p class="section-sub fade-up">Have a project in mind? Let's talk.</p>
+
+        <div class="contact-layout fade-up">
+          <!-- LEFT: Info + action buttons -->
+          <div class="contact-info">
+            <p class="contact-info-heading">Let's Talk</p>
+            <p class="contact-info-sub">
+              Available for freelance work and full-time roles. Tell me about
+              your project — I typically respond within 24 hours.
+            </p>
+            <div class="contact-info-actions">
+              <a
+                href="https://calendly.com/hamzakhan00561"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary contact-action-btn"
+                >Book a Call</a
+              >
+              <a
+                href="mailto:hamzakhan00561@gmail.com"
+                class="btn btn-ghost contact-action-btn"
+                >Email</a
+              >
+              <a
+                href="https://www.linkedin.com/in/muhammad-ameer-hamza-a41858250"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-ghost contact-action-btn"
+                >LinkedIn</a
+              >
+            </div>
+          </div>
+
+          <!-- RIGHT: Compact send-a-message card -->
+          <div class="contact-card">
+            <div class="contact-card-header">
+              <p class="contact-card-title">Send a Message</p>
+              <p class="contact-card-sub">
+                Goes straight to my inbox — I read every one.
+              </p>
+            </div>
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Your email"
+                  required
+                />
+                <span class="form-error">Valid email is required</span>
+              </div>
+              <div class="form-group">
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  maxlength="2000"
+                  placeholder="What are you building?"
+                  required
+                ></textarea>
+                <div class="char-counter">
+                  <span id="charCount">0</span>/2000
+                </div>
+                <span class="form-error">Message is required</span>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary form-submit contact-submit-btn"
+              >
+                <span class="btn-spinner"></span>
+                <span class="btn-label">Send Message</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+              <div class="form-feedback" id="formFeedback" aria-live="polite">
+                <span class="form-feedback-icon" id="formFeedbackIcon"></span>
+                <span class="form-feedback-msg" id="formFeedbackMsg"></span>
+              </div>
+            </form>
           </div>
         </div>
-        <form class="contact-form fade-up" id="contactForm" novalidate>
-          <div class="contact-divider">Send me a message</div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="firstName">First Name *</label>
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                placeholder="First name"
-                required
-              />
-              <span class="form-error">First name is required</span>
-            </div>
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                placeholder="Last name"
-              />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="your@email.com"
-                required
-              />
-              <span class="form-error">Valid email is required</span>
-            </div>
-            <div class="form-group" id="phoneGroup">
-              <label>Phone</label>
-              <div class="phone-input-wrapper" id="phoneWrapper">
-                <button
-                  type="button"
-                  class="phone-flag-btn"
-                  id="phoneFlagBtn"
-                  aria-haspopup="listbox"
-                  aria-expanded="false"
-                  aria-label="Select country code"
-                >
-                  <img
-                    id="selectedFlagImg"
-                    class="flag-img"
-                    src="https://flagcdn.com/w40/pk.png"
-                    alt="Pakistan"
-                  />
-                  <span class="phone-dial-code" id="selectedCode">+92</span>
-                  <span class="phone-flag-caret" aria-hidden="true">▼</span>
-                </button>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  class="phone-number-input"
-                  placeholder="Enter phone number"
-                  autocomplete="tel-national"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="form-group form-msg-wrap">
-            <label for="message">Message *</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="6"
-              placeholder="Tell me about your project, idea, or just say hi…"
-              required
-            ></textarea>
-            <span class="form-error">Message is required</span>
-          </div>
-          <div class="form-submit-wrap">
-            <button type="submit" class="btn btn-primary form-submit">
-              <span class="btn-spinner"></span>
-              <span class="btn-label">Send Message</span>
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-                style="margin-left: 6px; vertical-align: middle"
-              >
-                <line x1="22" y1="2" x2="11" y2="13" />
-                <polygon points="22 2 15 22 11 13 2 9 22 2" />
-              </svg>
-            </button>
-          </div>
-          <div class="form-success-msg" id="formSuccess">
-            <div class="success-icon">🎉</div>
-            <h3>Message Sent!</h3>
-            <p>
-              Thanks for reaching out — I'll get back to you within 24 hours.
-            </p>
-          </div>
-        </form>
       </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-      <div class="container footer-inner">
+      <div class="container footer-inner-v2">
+        <div class="footer-top-row">
+          <div class="footer-left">
+            <p class="footer-copy">
+              Designed &amp; Developed by
+              <span class="footer-name-script">M Hamza Khan</span> &copy; 2026
+            </p>
+            <p class="footer-location">Lahore Punjab, Pakistan</p>
+          </div>
+          <div class="footer-right">
+            <nav class="footer-links">
+              <a href="#works">Projects</a>
+              <a href="#education">Education</a>
+              <a href="#certificates">Certificates</a>
+              <a href="#contact">Contact</a>
+            </nav>
+          </div>
+        </div>
         <div class="footer-socials">
           <a
             href="https://github.com/hk994512"
@@ -1248,14 +1470,6 @@
             ><img src="assets/twitter.svg" alt="X"
           /></a>
           <a
-            href="https://wa.me/+923081736926"
-            target="_blank"
-            rel="noopener"
-            class="social-btn"
-            aria-label="WhatsApp"
-            ><img src="assets/whatsapp.svg" alt="WhatsApp"
-          /></a>
-          <a
             href="mailto:hamzakhan00561@gmail.com"
             class="social-btn"
             aria-label="Email"
@@ -1267,7 +1481,6 @@
               stroke="currentColor"
               stroke-width="2"
               viewBox="0 0 24 24"
-              style="color: #fff"
             >
               <path
                 d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
@@ -1276,35 +1489,21 @@
             </svg>
           </a>
         </div>
-        <p class="footer-copy">
-          Designed &amp; Developed by
-          <span class="footer-name-script">M Hamza Khan</span> &copy; 2026
-        </p>
       </div>
     </footer>
 
-    <button id="scrollTop" aria-label="Scroll to top">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <line x1="12" y1="19" x2="12" y2="5"></line>
-        <polyline points="5 12 12 5 19 12"></polyline>
-      </svg>
-    </button>
     <div id="toast" class="toast"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-
-    <!-- External Scripts -->
-    <script src="js/lang.js"></script>
-    <script src="js/phone-picker.js"></script>
-    <script src="js/testimonials.js"></script>
+    <!-- Scripts -->
+    <script
+      src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"
+      defer
+    ></script>
+    <script
+      src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"
+      defer
+    ></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/nav.js" defer></script>
   </body>
 </html>

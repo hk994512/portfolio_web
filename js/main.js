@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   /* ── Splash Screen ────────────────────────────────────────────────── */
   const splash = document.getElementById("splashScreen");
@@ -14,31 +13,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 50);
 
     // Animate loading bar + live counter via requestAnimationFrame
-    const bar     = document.getElementById("splashBar");
+    const bar = document.getElementById("splashBar");
     const counter = document.getElementById("splashCounter");
     const DURATION = 1600; // ms — matches total reveal time
-    const DELAY    = 300;  // slight delay before bar starts
+    const DELAY = 300; // slight delay before bar starts
 
     setTimeout(function () {
       const start = performance.now();
 
       function easeOut(t) {
         // Slow down near 100% (mirrors the CSS 80%→100% slowdown)
-        return t < 0.8 ? t / 0.8 * 0.88 : 0.88 + ((t - 0.8) / 0.2) * 0.12;
+        return t < 0.8 ? (t / 0.8) * 0.88 : 0.88 + ((t - 0.8) / 0.2) * 0.12;
       }
 
       function tick(now) {
         const elapsed = Math.min(now - start, DURATION);
-        const t       = elapsed / DURATION;
-        const pct     = Math.round(easeOut(t) * 100);
+        const t = elapsed / DURATION;
+        const pct = Math.round(easeOut(t) * 100);
 
-        if (bar)     bar.style.width   = pct + "%";
+        if (bar) bar.style.width = pct + "%";
         if (counter) counter.textContent = pct + "%";
 
         if (elapsed < DURATION) {
           requestAnimationFrame(tick);
         } else {
-          if (bar)     bar.style.width   = "100%";
+          if (bar) bar.style.width = "100%";
           if (counter) counter.textContent = "100%";
         }
       }
@@ -50,26 +49,40 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
       splash.classList.add("hide");
       document.body.style.overflow = "";
-      setTimeout(function () { splash.style.display = "none"; }, 550);
+      setTimeout(function () {
+        splash.style.display = "none";
+      }, 550);
     }, 1800);
   }
 
   /* ══════════════════════════════════════════════════════════════════
-     EmailJS — SETUP
-     1. Go to https://www.emailjs.com/ → sign up free
-     2. Create a Service (Gmail) → note your SERVICE_ID
-     3. Create an Email Template with variables:
-        {{from_name}}, {{from_email}}, {{phone}}, {{message}}
-        → note your TEMPLATE_ID
-     4. Copy your Public Key from Account → API Keys
-     5. Replace the three placeholders below
+     FIREBASE / FIRESTORE — SETUP
+     1. Go to https://console.firebase.google.com → create/open a project
+     2. Build → Firestore Database → Create database (production mode)
+     3. Firestore → Rules tab → paste the "messages" create-only rule
+        (see the chat message that came with this file)
+     4. Project Settings → General → Your apps → Add app (Web) → copy
+        the firebaseConfig object it gives you and paste it below
+     5. In index.html <head>, add before main.js:
+        <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
   ══════════════════════════════════════════════════════════════════ */
-  const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY"; // ← replace
-  const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID"; // ← replace
-  const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // ← replace
+  const firebaseConfig = {
+    apiKey: "AIzaSyALH79fe9yy8fJZldQgXOA5U4wPRgVL_7s",
+    authDomain: "hamzakhan-web.firebaseapp.com",
+    projectId: "hamzakhan-web",
+    storageBucket: "hamzakhan-web.firebasestorage.app",
+    messagingSenderId: "964601477858",
+    appId: "1:964601477858:web:6e22b2fc1f8030052fbcbb",
+  };
 
-  if (typeof emailjs !== "undefined" && EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+  const firebaseReady =
+    typeof firebase !== "undefined" && firebaseConfig.apiKey !== "YOUR_API_KEY";
+
+  let db = null;
+  if (firebaseReady) {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
   }
 
   /* ── Lottie animation ─────────────────────────────────────────────── */
@@ -84,22 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* ── Navbar ───────────────────────────────────────────────────────── */
-  const hamburger = document.getElementById("hamburger");
-  const mobileNav = document.getElementById("mobileNav");
+  /* ── Navbar / scroll-to-top button (optional element) ───────────── */
   const scrollTopBtn = document.getElementById("scrollTop");
-
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("open");
-    mobileNav.classList.toggle("open");
-  });
-
-  mobileNav.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => {
-      hamburger.classList.remove("open");
-      mobileNav.classList.remove("open");
-    });
-  });
 
   /* ── Smooth scroll WITHOUT hash in URL ───────────────────────────── */
   document.querySelectorAll('a[href^="#"], a[data-section]').forEach((link) => {
@@ -140,11 +139,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* ── Active nav on scroll ─────────────────────────────────────────── */
   const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll(".nav-links a, .mobile-nav a");
+  const navLinks = document.querySelectorAll(".nav-links a");
 
   function setActiveNav() {
     // Force contact active if user is scrolled to the absolute bottom of page
-    const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 5);
+    const isAtBottom =
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 5;
     if (isAtBottom) {
       navLinks.forEach((a) => {
         a.classList.remove("active");
@@ -188,14 +189,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleScroll() {
     setActiveNav();
-    scrollTopBtn.classList.toggle("show", window.scrollY > 400);
+    if (scrollTopBtn) {
+      scrollTopBtn.classList.toggle("show", window.scrollY > 400);
+    }
   }
 
   window.addEventListener("scroll", handleScroll, { passive: true });
-  scrollTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    history.replaceState(null, "", window.location.pathname);
-  });
+
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      history.replaceState(null, "", window.location.pathname);
+    });
+  }
 
   /* ── Fade-up on scroll ────────────────────────────────────────────── */
   const observer = new IntersectionObserver(
@@ -221,28 +227,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  /* ══════════════════════════════════════════════════════════════════
-     HELPER — read the currently selected country code + name
-     from the phone picker rendered in index.html.
-     Returns an object: { dialCode: "+92", countryName: "Pakistan" }
-  ══════════════════════════════════════════════════════════════════ */
-  function getSelectedCountry() {
-    const codeEl = document.getElementById("selectedCode");
-    const flagImg = document.getElementById("selectedFlagImg");
-    return {
-      dialCode: codeEl ? codeEl.textContent.trim() : "",
-      countryName: flagImg ? flagImg.getAttribute("alt") || "" : "",
-    };
+  /* ── Character counter for message textarea ─────────────────────── */
+  const msgArea = document.getElementById("message");
+  const charCount = document.getElementById("charCount");
+  if (msgArea && charCount) {
+    msgArea.addEventListener("input", () => {
+      charCount.textContent = msgArea.value.length;
+    });
   }
 
   /* ── Contact form with EmailJS ────────────────────────────────────── */
+  /* Form has only two fields: email and message. There is no phone
+     field in the HTML, so it must never be referenced here — doing so
+     throws a TypeError and silently breaks the whole submit handler. */
   const form = document.getElementById("contactForm");
 
-  function showToast(msg, type) {
-    const t = document.getElementById("toast");
-    t.textContent = msg;
-    t.className = "toast " + type + " show";
-    setTimeout(() => t.classList.remove("show"), 4000);
+  function showFeedback(msg, type) {
+    const box = document.getElementById("formFeedback");
+    const icon = document.getElementById("formFeedbackIcon");
+    const text = document.getElementById("formFeedbackMsg");
+    if (!box) return;
+    box.className = "form-feedback " + type + " show";
+    icon.textContent = type === "success" ? "✓" : "✕";
+    text.textContent = msg;
+    setTimeout(() => { box.className = "form-feedback"; }, 5000);
   }
 
   function validateField(input) {
@@ -267,88 +275,50 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!valid) return;
 
       const btn = form.querySelector(".form-submit");
+      const btnLabel = btn.querySelector(".btn-label");
       btn.disabled = true;
-      btn.innerHTML = '<span class="btn-spinner"></span> Sending…';
+      if (btnLabel) {
+        btnLabel.textContent = "Sending…";
+      } else {
+        btn.innerHTML = '<span class="btn-spinner"></span> Sending…';
+      }
 
-      // ── Read country picker values ─────────────────────────────────
-      const { dialCode, countryName } = getSelectedCountry();
-      const rawPhone = form.phone.value.trim();
-      // Full phone combines dial code + number, e.g. "+92 3001234567"
-      const fullPhone = rawPhone ? dialCode + " " + rawPhone : dialCode;
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
 
-      const useEmailJS =
-        typeof emailjs !== "undefined" &&
-        EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY";
-
-      if (useEmailJS) {
-        /* ── EmailJS send ─────────────────────────────────────────── */
-        const templateParams = {
-          from_name:
-            form.firstName.value.trim() + " " + form.lastName.value.trim(),
-          from_email: form.email.value.trim(),
-          phone: fullPhone || "N/A",
-          country_code: dialCode || "N/A",
-          country: countryName || "N/A",
-          message: form.message.value.trim(),
-          reply_to: form.email.value.trim(),
-        };
+      if (firebaseReady && db) {
+        /* ── Firestore send ───────────────────────────────────────── */
         try {
-          await emailjs.send(
-            EMAILJS_SERVICE_ID,
-            EMAILJS_TEMPLATE_ID,
-            templateParams,
-          );
-          showToast("Message sent successfully! ✓", "success");
+          await db.collection("messages").add({
+            email: email,
+            message: message,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          });
+          showFeedback("Message sent! I'll get back to you within 24 hours.", "success");
           form.reset();
         } catch (err) {
-          console.error("EmailJS error:", err);
-          showToast("Failed to send. Please try again.", "error");
+          console.error("Firestore error:", err);
+          showFeedback("Failed to send. Please try again.", "error");
         }
       } else {
-        /* ── Firestore fallback ───────────────────────────────────── */
-        const projectId = "hamzakhan-web";
-        const url =
-          "https://firestore.googleapis.com/v1/projects/" +
-          projectId +
-          "/databases/(default)/documents/messages";
-
-        const body = {
-          fields: {
-            "first name": { stringValue: form.firstName.value.trim() },
-            "last name": { stringValue: form.lastName.value.trim() },
-            email: { stringValue: form.email.value.trim() },
-            // Country name resolved from flag alt text, e.g. "Pakistan"
-            country: { stringValue: countryName },
-            // Dial code only, e.g. "+92"
-            "country code": { stringValue: dialCode },
-            // Raw number typed by the user, e.g. "3001234567"
-            "phone number": { stringValue: rawPhone },
-            // Dial code + number combined, e.g. "+92 3001234567"
-            "full phone": { stringValue: fullPhone },
-            message: { stringValue: form.message.value.trim() },
-            timestamp: { stringValue: new Date().toISOString() },
-          },
-        };
-
-        try {
-          const res = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-          });
-          if (res.ok) {
-            showToast("Message sent successfully", "success");
-            form.reset();
-          } else {
-            throw new Error("fail");
-          }
-        } catch (_) {
-          showToast("Failed to send. Please try again.", "error");
-        }
+        /* Firebase config is still placeholders — nothing is set up
+           to actually store the message yet. Tell the visitor plainly
+           instead of pretending it sent. */
+        console.warn(
+          "Firestore is not configured yet — set firebaseConfig in main.js.",
+        );
+        showFeedback(
+          "Contact form isn't set up yet — please email me directly.",
+          "error"
+        );
       }
 
       btn.disabled = false;
-      btn.textContent = "Send Message";
+      if (btnLabel) {
+        btnLabel.textContent = "Send Message";
+      } else {
+        btn.textContent = "Send Message";
+      }
     });
 
     form.querySelectorAll("[required]").forEach((f) => {
@@ -360,14 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ── Typed role effect ────────────────────────────────────────────── */
-  const roles = [
-    "Software Engineer",
-    "Flutter Mobile Developer",
-    "iOS Developer",
-    "Android App Developer",
-    "Frontend Mobile Developer",
-    "Cross Platform Developer",
-  ];
+  const roles = ["Flutter Developer", "Mobile Engineer", "iOS & Android"];
   const typed = document.getElementById("typedRole");
   let ri = 0,
     ci = 0,
@@ -394,101 +357,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   typeLoop();
-
-  /* ── Custom Cursor Logic ─────────────────────────────────────────── */
-  const cursor = document.getElementById("customCursor");
-  const follower = document.getElementById("customCursorFollower");
-
-  if (cursor && follower && window.matchMedia("(pointer: fine)").matches) {
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-    let followerX = 0, followerY = 0;
-    let isVisible = false;
-
-    window.addEventListener("mousemove", function (e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      if (!isVisible) {
-        cursor.style.opacity = "1";
-        follower.style.opacity = "1";
-        isVisible = true;
-      }
-    });
-
-    function updateCursorPosition() {
-      // Small dot follows with standard interpolation
-      cursorX += (mouseX - cursorX) * 0.22;
-      cursorY += (mouseY - cursorY) * 0.22;
-
-      // Follower follows with more inertia (lag)
-      followerX += (mouseX - followerX) * 0.12;
-      followerY += (mouseY - followerY) * 0.12;
-
-      // Update CSS variables
-      cursor.style.setProperty("--cursor-x", cursorX + "px");
-      cursor.style.setProperty("--cursor-y", cursorY + "px");
-      follower.style.setProperty("--follower-x", followerX + "px");
-      follower.style.setProperty("--follower-y", followerY + "px");
-
-      requestAnimationFrame(updateCursorPosition);
-    }
-    requestAnimationFrame(updateCursorPosition);
-
-    // Active hover targets
-    const hoverSelectors = 'a, button, select, [role="button"], .work-card, .service-card, .edu-card, .t-card, .phone-flag-btn, .hamburger, .social-btn, .work-btn, .btn, .btn-book';
-    const hideCursorSelectors = 'input, textarea';
-
-    document.addEventListener("mouseover", function (e) {
-      if (e.target.closest(hideCursorSelectors)) {
-        cursor.style.opacity = "0";
-        follower.style.opacity = "0";
-      } else if (e.target.closest(hoverSelectors)) {
-        cursor.classList.add("hovered");
-        follower.classList.add("hovered");
-        if (isVisible) {
-          cursor.style.opacity = "1";
-          follower.style.opacity = "1";
-        }
-      } else {
-        if (isVisible) {
-          cursor.style.opacity = "1";
-          follower.style.opacity = "1";
-        }
-      }
-    });
-
-    document.addEventListener("mouseout", function (e) {
-      if (e.target.closest(hideCursorSelectors)) {
-        if (isVisible) {
-          cursor.style.opacity = "1";
-          follower.style.opacity = "1";
-        }
-      }
-      if (!e.target.closest(hoverSelectors) || (e.relatedTarget && !e.relatedTarget.closest(hoverSelectors))) {
-        cursor.classList.remove("hovered");
-        follower.classList.remove("hovered");
-      }
-    });
-
-    // Handle clicks
-    window.addEventListener("mousedown", function () {
-      cursor.classList.add("clicked");
-      follower.classList.add("clicked");
-    });
-
-    window.addEventListener("mouseup", function () {
-      cursor.classList.remove("clicked");
-      follower.classList.remove("clicked");
-    });
-
-    // Hide if mouse leaves document
-    document.addEventListener("mouseleave", function () {
-      cursor.style.opacity = "0";
-      follower.style.opacity = "0";
-      isVisible = false;
-    });
-  }
 
   /* ── Clean URL on load (remove any #hash) ────────────────────────── */
   if (window.location.hash) {

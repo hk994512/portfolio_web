@@ -1,0 +1,229 @@
+/* ══════════════════════════════════════════════════════════════
+   TOOLKIT PAGE — loaded after theme-v2.css
+   Reuses theme tokens (--text, --text-sec, --border, --accent…)
+   ══════════════════════════════════════════════════════════════ */
+
+.toolkit-page {
+  padding-top: clamp(130px, 18vh, 190px);
+  padding-bottom: 96px;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.toolkit-head {
+  padding-bottom: 56px;
+}
+
+.toolkit-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.toolkit-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.25rem, 4.2vw, 3.35rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  width: fit-content;
+  max-width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--text) 0%,
+    var(--text) 60%,
+    var(--text-sec) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.toolkit-intro {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  line-height: 1.65;
+  color: var(--text);
+  opacity: 0.86;
+  max-width: 38rem;
+}
+
+/* ── Groups: label on the left, items on the right ──────────── */
+.toolkit-group {
+  display: grid;
+  grid-template-columns: minmax(180px, 296px) minmax(0, 1fr);
+  gap: 24px;
+  padding: 48px 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+/* Group label: small accent icon + mono caption */
+.toolkit-group-label {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-sec);
+  padding-top: 8px;
+}
+
+.toolkit-group-icon {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--accent);
+  background: rgba(45, 212, 191, 0.12);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.toolkit-group-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Items: icon tile + text ────────────────────────────────── */
+.toolkit-items {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.toolkit-item {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.toolkit-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  transition:
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+.toolkit-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+.toolkit-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.toolkit-item:hover .toolkit-icon {
+  border-color: var(--accent);
+}
+
+/* Black brand logos (GitHub, Claude, OpenAI, DeepSeek) would
+   vanish on dark backgrounds — flip them to white. */
+:root:not([data-theme="light"]) .icon-invert {
+  filter: invert(1) brightness(1.1);
+}
+
+/* Light theme: keep brand colors as-is, no invert */
+:root[data-theme="light"] .icon-invert {
+  filter: none;
+}
+
+.toolkit-item h3 {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 44px; /* aligns the title with the icon tile */
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+.toolkit-item p {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.85;
+  color: var(--text-sec);
+  margin-top: -4px;
+}
+
+/* Quiet one-time page-load reveal (respects reduced motion) */
+.toolkit-page .container {
+  animation: toolkit-in 0.6s ease both;
+}
+
+@keyframes toolkit-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toolkit-page .container {
+    animation: none;
+  }
+  .toolkit-icon {
+    transition: none;
+  }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  .toolkit-group {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 36px 0;
+  }
+
+  .toolkit-group-label {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .toolkit-page {
+    padding-top: 104px;
+  }
+
+  .toolkit-item {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .toolkit-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .toolkit-item h3 {
+    line-height: 40px;
+  }
+}

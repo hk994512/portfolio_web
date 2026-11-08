@@ -1,12 +1,7 @@
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes pulse-badge {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.3);
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 #2dd4c6;
   }
 
   50% {
@@ -15,7 +10,8 @@
 }
 
 @keyframes avatar-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 40px rgba(100, 255, 218, 0.2);
   }
 
@@ -25,15 +21,14 @@
 }
 
 .fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease,
-    transform 0.6s ease;
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
 .fade-up.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 @keyframes spin {
@@ -43,7 +38,8 @@
 }
 
 @keyframes shake {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
   }
 
@@ -77,7 +73,8 @@
 }
 
 @keyframes blink {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
 
@@ -113,121 +110,6 @@
 }
 
 /* ═══════════════════════════════════════════
-   SPLASH SCREEN
-═══════════════════════════════════════════ */
-@keyframes splashLogoIn {
-  0%   { opacity: 0; transform: translateY(16px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes splashBarFill {
-  0%   { width: 0%; }
-  80%  { width: 88%; }
-  100% { width: 100%; }
-}
-
-@keyframes splashFadeOut {
-  0%   { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.06); pointer-events: none; }
-}
-
-#splashScreen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: #0a0e1a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-}
-
-#splashScreen.hide {
-  animation: splashFadeOut 0.6s ease forwards;
-  pointer-events: none;
-}
-
-/* Text block */
-.splash-text-block {
-  text-align: center;
-  animation: splashLogoIn 0.6s 0.1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-.splash-name {
-  font-family: 'Mooli', sans-serif;
-  font-size: clamp(2rem, 6vw, 3rem);
-  font-weight: 400; /* Mooli is naturally bold-looking */
-  color: #fff;
-  letter-spacing: 1px;
-  margin: 0 0 8px;
-  line-height: 1.1;
-}
-
-.splash-sub {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.78rem, 2vw, 0.95rem);
-  font-weight: 500;
-  color: #64ffda;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin: 0;
-  opacity: 0.85;
-  animation: splashLogoIn 0.6s 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-/* Loader block — bar + counter row */
-.splash-loader-block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  animation: splashLogoIn 0.5s 0.35s ease both;
-}
-
-.splash-bar-wrap {
-  width: clamp(200px, 42vw, 300px);
-  height: 4px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-.splash-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #64ffda, #6c63ff, #ec4899);
-  border-radius: 99px;
-  width: 0%;
-}
-
-.splash-counter {
-  font-family: 'Mooli', sans-serif;
-  font-size: 0.78rem;
-  color: rgba(100, 255, 218, 0.7);
-  letter-spacing: 1px;
-  min-width: 36px;
-  text-align: right;
-}
-
-
-/* ═══════════════════════════════════════════
-   SCROLL PROGRESS BAR
-═══════════════════════════════════════════ */
-#scrollProgress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 0%;
-  background: linear-gradient(90deg, #64ffda 0%, #6c63ff 50%, #ec4899 100%);
-  z-index: 10000;
-  border-radius: 0 2px 2px 0;
-  box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
-  transition: width 0.1s linear;
-  pointer-events: none;
-}
-
-/* ═══════════════════════════════════════════
    PHONE DEVICE MOCKUP FRAME
 ═══════════════════════════════════════════ */
 .phone-mockup {
@@ -239,8 +121,8 @@
   border: 2.5px solid #2d3748;
   box-shadow:
     0 0 0 1px #1a202c,
-    0 12px 40px rgba(0,0,0,0.5),
-    inset 0 0 0 1px rgba(255,255,255,0.05);
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   padding: 14px 6px 18px;
   display: flex;
   flex-direction: column;
@@ -259,7 +141,7 @@
 }
 
 .phone-mockup-notch::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 3px;
@@ -304,17 +186,25 @@
   justify-content: center;
   gap: -20px;
   padding: 16px 8px 8px;
-  background: linear-gradient(160deg, rgba(100,255,218,0.04) 0%, rgba(108,99,255,0.06) 100%);
+  background: linear-gradient(
+    160deg,
+    rgba(100, 255, 218, 0.04) 0%,
+    rgba(108, 99, 255, 0.06) 100%
+  );
   min-height: 220px;
   position: relative;
   overflow: hidden;
 }
 
 .phones-scene::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 110%, rgba(100,255,218,0.08) 0%, transparent 65%);
+  background: radial-gradient(
+    ellipse at 50% 110%,
+    rgba(100, 255, 218, 0.08) 0%,
+    transparent 65%
+  );
   pointer-events: none;
 }
 
@@ -354,7 +244,7 @@
 .phones-scene .phone-mockup:nth-child(1),
 .phones-scene .phone-mockup:nth-child(2),
 .phones-scene .phone-mockup:nth-child(3) {
-  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Single centered phone (simpler) */
@@ -363,105 +253,32 @@
   align-items: center;
   justify-content: center;
   padding: 16px 8px 8px;
-  background: linear-gradient(160deg, rgba(100,255,218,0.04) 0%, rgba(108,99,255,0.06) 100%);
+  background: linear-gradient(
+    160deg,
+    rgba(100, 255, 218, 0.04) 0%,
+    rgba(108, 99, 255, 0.06) 100%
+  );
   min-height: 220px;
   position: relative;
   overflow: hidden;
 }
 
 .phone-scene-single::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 110%, rgba(108,99,255,0.08) 0%, transparent 65%);
+  background: radial-gradient(
+    ellipse at 50% 110%,
+    rgba(108, 99, 255, 0.08) 0%,
+    transparent 65%
+  );
   pointer-events: none;
 }
 
 .phone-scene-single .phone-mockup {
-  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .work-card:hover .phone-scene-single .phone-mockup {
   transform: translateY(-8px) scale(1.04);
-}
-
-/* ═══════════════════════════════════════════
-   CUSTOM CURSOR
-═══════════════════════════════════════════ */
-.custom-cursor {
-  width: 8px;
-  height: 8px;
-  background-color: var(--accent);
-  border-radius: 50%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  transform: translate3d(var(--cursor-x, 0), var(--cursor-y, 0), 0) translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 10001;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.custom-cursor-follower {
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(100, 255, 218, 0.4);
-  background: rgba(100, 255, 218, 0.03);
-  border-radius: 50%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  transform: translate3d(var(--follower-x, 0), var(--follower-y, 0), 0) translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 10000;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.08s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Hover States */
-.custom-cursor.hovered {
-  transform: translate3d(var(--cursor-x, 0), var(--cursor-y, 0), 0) translate(-50%, -50%) scale(0.2);
-  opacity: 0.5;
-}
-
-.custom-cursor-follower.hovered {
-  transform: translate3d(var(--follower-x, 0), var(--follower-y, 0), 0) translate(-50%, -50%) scale(1.6);
-  background-color: rgba(100, 255, 218, 0.12);
-  border-color: rgba(100, 255, 218, 0.85);
-  box-shadow: 0 0 15px rgba(100, 255, 218, 0.25);
-}
-
-/* Click feedback style */
-.custom-cursor.clicked {
-  transform: translate3d(var(--cursor-x, 0), var(--cursor-y, 0), 0) translate(-50%, -50%) scale(1.8);
-  background-color: var(--accent-dim);
-}
-
-.custom-cursor-follower.clicked {
-  transform: translate3d(var(--follower-x, 0), var(--follower-y, 0), 0) translate(-50%, -50%) scale(0.8);
-  border-color: var(--accent-dim);
-}
-
-/* Hide cursor on non-desktop (touch screen) devices */
-@media (pointer: coarse) {
-  .custom-cursor,
-  .custom-cursor-follower {
-    display: none !important;
-  }
-}
-
-/* Hide default cursor on desktop screens */
-@media (pointer: fine) {
-  html, body, #splashScreen {
-    cursor: none;
-  }
-  a, button, select, [role="button"], 
-  .work-card, .service-card, .edu-card, .t-card, 
-  .phone-flag-btn, .hamburger, .social-btn, .work-btn, .btn, .btn-book {
-    cursor: none !important;
-  }
-  input, textarea {
-    cursor: text !important;
-  }
 }

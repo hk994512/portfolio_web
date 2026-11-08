@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050607" />
+    <title>Toolkit | Muhammad Ameer Hamza | Flutter Developer</title>
+    <meta
+      name="description"
+      content="The Flutter, Dart, Firebase and tooling setup behind the apps I design and build."
+    />
+    <meta name="author" content="Muhammad Ameer Hamza" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Great+Vibes&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/sections.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/theme-v2.css" />
+    <link rel="stylesheet" href="css/toolkit.css" />
+    <link rel="icon" href="favicon.ico" />
+    <script src="js/theme.js"></script>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav id="navbar">
+      <div class="container nav-inner">
+        <a href="index.html" class="nav-logo">
+          <span class="nav-logo-dot"></span>
+          <span class="nav-logo-text"
+            ><span class="nav-name-full">Hamza</span
+            ><span class="nav-name-short">Hamza</span
+            ><span class="nav-cursor" aria-hidden="true"></span
+          ></span>
+        </a>
+
+        <span class="nav-divider nav-divider-start"></span>
+
+        <ul class="nav-links">
+          <li><a href="index.html#works">Projects</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="toolkit.html" class="active" aria-current="page">Toolkit</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <span class="nav-divider"></span>
+
+        <button
+          type="button"
+          id="themeToggle"
+          class="theme-toggle"
+          aria-label="Toggle light / dark theme"
+        >
+          <svg
+            class="icon-moon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+          <svg
+            class="icon-sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+            />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <main class="toolkit-page">
+      <div class="container">
+        <!-- Header -->
+        <header class="toolkit-head">
+          <p class="toolkit-eyebrow">Toolkit</p>
+          <h1 class="toolkit-title">What I Design and Build With</h1>
+          <p class="toolkit-intro">
+            The architecture and engineering decisions are mine — AI just helps
+            write some of the code alongside me. This is the current setup,
+            grouped by where each piece fits.
+          </p>
+        </header>
+
+        <!-- ═════════ Core Tech Stack ═════════ -->
+        <section class="toolkit-group">
+          <h2 class="toolkit-group-label">
+            <span class="toolkit-group-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m12 2 10 5-10 5L2 7l10-5Z" />
+                <path d="m2 17 10 5 10-5" />
+                <path d="m2 12 10 5 10-5" />
+              </svg>
+            </span>
+            Core Tech Stack
+          </h2>
+          <div class="toolkit-items">
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg"
+                  alt=""
+                />
+              </span>
+              <div>
+                <h3>Flutter + Dart</h3>
+                <p>
+                  My go-to for every mobile product — one codebase for Android
+                  and iOS, sound null safety, and a widget tree kept small
+                  enough to stay fast.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
+                  alt=""
+                />
+              </span>
+              <div>
+                <h3>Firebase</h3>
+                <p>
+                  Authentication, Firestore, Cloud Functions, push
+                  notifications, and Crashlytics — the quickest route from idea
+                  to a working backend.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg"
+                  alt=""
+                />
+              </span>
+              <div>
+                <h3>Supabase</h3>
+                <p>
+                  Relational PostgreSQL storage, auth, realtime, and row-level
+                  security when the data needs real structure.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg"
+                  alt=""
+                />
+              </span>
+              <div>
+                <h3>REST APIs + Dio</h3>
+                <p>
+                  Networking with interceptors, token refresh, and typed models,
+                  so screens never deal with raw JSON.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg"
+                  alt=""
+                />
+              </span>
+              <div>
+                <h3>Hive + SQLite</h3>
+                <p>
+                  Local storage for offline-first apps — Hive for quick
+                  key-value data, SQLite when queries get relational.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═════════ State & Architecture ═════════ -->
+        <section class="toolkit-group">
+          <h2 class="toolkit-group-label">
+            <span class="toolkit-group-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect width="8" height="8" x="3" y="3" rx="2" />
+                <path d="M7 11v4a2 2 0 0 0 2 2h4" />
+                <rect width="8" height="8" x="13" y="13" rx="2" />
+              </svg>
+            </span>
+            State &amp; Architecture
+          </h2>
+          <div class="toolkit-items">
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"
+                  />
+                  <path d="M21 3v5h-5" />
+                  <path
+                    d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"
+                  />
+                  <path d="M8 16H3v5" />
+                </svg>
+              </span>
+              <div>
+                <h3>Provider / Riverpod / Bloc</h3>
+                <p>
+                  State management chosen per project — lightweight where the
+                  app is small, more structured where many screens share state.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="6" />
+                  <circle cx="12" cy="12" r="2" />
+                </svg>
+              </span>
+              <div>
+                <h3>Clean Architecture</h3>
+                <p>
+                  Presentation, domain, and data layers kept separate, so
+                  features can change without breaking everything around them.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═════════ AI Tools ═════════ -->
+        <section class="toolkit-group">
+          <h2 class="toolkit-group-label">
+            <span class="toolkit-group-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+                />
+                <path d="M20 3v4" />
+                <path d="M22 5h-4" />
+              </svg>
+            </span>
+            AI Tools
+          </h2>
+          <div class="toolkit-items">
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg"
+                  alt=""
+                  class="icon-invert"
+                />
+              </span>
+              <div>
+                <h3>Claude &amp; Claude Code</h3>
+                <p>
+                  For working through architecture, reviewing code, and
+                  multi-file refactors I drive from the terminal.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg"
+                  alt=""
+                  class="icon-invert"
+                />
+              </span>
+              <div>
+                <h3>ChatGPT</h3>
+                <p>
+                  Fast lookups, thinking out loud, and the occasional job like
+                  reading a screenshot or sketching a UI reference.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/deepseek.svg"
+                  alt=""
+                  class="icon-invert"
+                />
+              </span>
+              <div>
+                <h3>DeepSeek</h3>
+                <p>
+                  DeepSeek is my second brain: fast lookups, thinking out loud,
+                  and the occasional task like reading a screenshot or sketching
+                  a UI reference.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg"
+                  alt=""
+                  class="icon-invert"
+                />
+              </span>
+              <div>
+                <h3>Codex</h3>
+                <p>
+                  For generating code from natural language, agentic multi-file
+                  edits in the CLI, and quick boilerplate I'd otherwise write by
+                  hand.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═════════ Tooling & Release ═════════ -->
+        <section class="toolkit-group">
+          <h2 class="toolkit-group-label">
+            <span class="toolkit-group-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+                />
+                <path
+                  d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+                />
+                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+              </svg>
+            </span>
+            Tooling &amp; Release
+          </h2>
+          <div class="toolkit-items">
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg"
+                  alt=""
+                />
+              </span>
+              <div>
+                <h3>Android Studio + VS Code</h3>
+                <p>
+                  Daily editors, paired with Flutter DevTools to profile
+                  rebuilds, memory, and jank before users notice them.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  class="icon-invert"
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
+                  alt=""
+                />
+              </span>
+              <div>
+                <h3>GitHub</h3>
+                <p>
+                  Where the code lives — every repo worth maintaining gets a
+                  README that explains the reasoning, not just the mechanics.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+                  <path d="M12 18h.01" />
+                </svg>
+              </span>
+              <div>
+                <h3>Play Console &amp; App Store Connect</h3>
+                <p>
+                  Signing, build flavors, and store submission handled end to
+                  end, so an app ships and not just runs on my device.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═════════ Design & Planning ═════════ -->
+        <section class="toolkit-group">
+          <h2 class="toolkit-group-label">
+            <span class="toolkit-group-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"
+                />
+                <path
+                  d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"
+                />
+                <path d="m2.3 2.3 7.286 7.286" />
+                <circle cx="11" cy="11" r="2" />
+              </svg>
+            </span>
+            Design &amp; Planning
+          </h2>
+          <div class="toolkit-items">
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg"
+                  alt=""
+                />
+              </span>
+              <div>
+                <h3>Figma</h3>
+                <p>
+                  Where a product idea becomes an interface, and where I convert
+                  designs into pixel-accurate Flutter screens.
+                </p>
+              </div>
+            </div>
+
+            <div class="toolkit-item">
+              <span class="toolkit-icon">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg"
+                  alt=""
+                />
+              </span>
+              <div>
+                <h3>Postman</h3>
+                <p>
+                  For designing and testing APIs, especially ones where the app
+                  and backend need to stay in sync.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container footer-inner-v2">
+        <div class="footer-left">
+          <p class="footer-copy">
+            Designed &amp; Developed by
+            <span class="footer-name-script">M Hamza Khan</span> &copy; 2026
+          </p>
+          <p class="footer-location">Lahore Punjab, Pakistan</p>
+        </div>
+        <div class="footer-right">
+          <nav class="footer-links">
+            <a href="index.html#works">Projects</a>
+            <a href="index.html#education">Education</a>
+            <a href="index.html#certificates">Certificates</a>
+            <a href="index.html#contact">Contact</a>
+          </nav>
+          <div class="footer-socials">
+            <a
+              href="https://github.com/hk994512"
+              target="_blank"
+              rel="noopener"
+              class="social-btn"
+              aria-label="GitHub"
+              ><img src="assets/github.svg" alt="GitHub"
+            /></a>
+            <a
+              href="https://www.linkedin.com/in/muhammad-ameer-hamza-a41858250"
+              target="_blank"
+              rel="noopener"
+              class="social-btn"
+              aria-label="LinkedIn"
+              ><img src="assets/linkedin.svg" alt="LinkedIn"
+            /></a>
+            <a
+              href="https://x.com/HamzKhan173520"
+              target="_blank"
+              rel="noopener"
+              class="social-btn"
+              aria-label="X (Twitter)"
+              ><img src="assets/twitter.svg" alt="X"
+            /></a>
+            <a
+              href="mailto:hamzakhan00561@gmail.com"
+              class="social-btn"
+              aria-label="Email"
+            >
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                style="color: #fff"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+  </body>
+</html>
