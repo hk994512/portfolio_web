@@ -1,37 +1,53 @@
 /* ══════════════════════════════════════════════════════════════
    TOOLKIT PAGE — loaded after theme-v2.css
    Reuses theme tokens (--text, --text-sec, --border, --accent…)
+
+   Responsive strategy (mobile-first fluid, with refinements):
+   • fluid type + spacing via clamp()
+   • ≥1100px  → label column + 2-column items grid
+   • ≤900px   → label stacks above items
+   • ≤640px   → compact tiles, comfortable reading size
+   • ≤380px   → extra-small phones
+   • ≤340px   → icon stacks above text
+   • short landscape phones, large desktops, hover-less touch
+     devices and reduced motion are handled separately
    ══════════════════════════════════════════════════════════════ */
 
 .toolkit-page {
-  padding-top: clamp(130px, 18vh, 190px);
-  padding-bottom: 96px;
+  padding-top: clamp(104px, 18vh, 190px);
+  padding-bottom: calc(
+    clamp(56px, 9vw, 96px) + env(safe-area-inset-bottom, 0px)
+  );
+  overflow-x: clip; /* never allow sideways scroll on small screens */
 }
 
 /* ── Header ─────────────────────────────────────────────────── */
 .toolkit-head {
-  padding-bottom: 56px;
+  padding-bottom: clamp(32px, 6vw, 56px);
 }
 
 .toolkit-eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.875rem;
+  font-size: clamp(0.78rem, 0.74rem + 0.2vw, 0.875rem);
   font-weight: 500;
   letter-spacing: 0.01em;
   color: var(--accent);
   text-transform: uppercase;
-  margin-bottom: 18px;
+  margin-bottom: clamp(12px, 2vw, 18px);
 }
 
 .toolkit-title {
   font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(2.25rem, 4.2vw, 3.35rem);
+  font-size: clamp(1.875rem, 1.25rem + 3.2vw, 3.35rem);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  margin-bottom: 24px;
+  margin-bottom: clamp(16px, 2.5vw, 24px);
+  padding-bottom: 0.08em; /* stops gradient-clip from cutting descenders */
   width: fit-content;
   max-width: 100%;
+  text-wrap: balance;
+  overflow-wrap: break-word;
   background: linear-gradient(
     90deg,
     var(--text) 0%,
@@ -46,19 +62,20 @@
 
 .toolkit-intro {
   font-family: "Inter", sans-serif;
-  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  font-size: clamp(0.95rem, 0.9rem + 0.4vw, 1.125rem);
   line-height: 1.65;
   color: var(--text);
   opacity: 0.86;
   max-width: 38rem;
+  text-wrap: pretty;
 }
 
 /* ── Groups: label on the left, items on the right ──────────── */
 .toolkit-group {
   display: grid;
-  grid-template-columns: minmax(180px, 296px) minmax(0, 1fr);
-  gap: 24px;
-  padding: 48px 0;
+  grid-template-columns: minmax(160px, 260px) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  padding: clamp(32px, 5vw, 48px) 0;
   border-top: 1px solid var(--line-strong);
 }
 
@@ -75,6 +92,7 @@
   text-transform: uppercase;
   color: var(--text-sec);
   padding-top: 8px;
+  min-width: 0;
 }
 
 .toolkit-group-icon {
@@ -98,9 +116,10 @@
 /* ── Items: icon tile + text ────────────────────────────────── */
 .toolkit-items {
   max-width: 640px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: clamp(22px, 3vw, 30px);
 }
 
 .toolkit-item {
@@ -108,6 +127,7 @@
   grid-template-columns: 44px minmax(0, 1fr);
   gap: 16px;
   align-items: start;
+  min-width: 0;
 }
 
 .toolkit-icon {
@@ -137,8 +157,11 @@
   height: 21px;
 }
 
-.toolkit-item:hover .toolkit-icon {
-  border-color: var(--accent);
+/* Hover effects only where a real hover exists (not on touch) */
+@media (hover: hover) {
+  .toolkit-item:hover .toolkit-icon {
+    border-color: var(--accent);
+  }
 }
 
 /* Black brand logos (GitHub, Claude, OpenAI, DeepSeek) would
@@ -152,13 +175,20 @@
   filter: none;
 }
 
+/* Title sits level with the icon tile, but may wrap to 2 lines
+   on narrow screens without leaving a huge gap (min-height, not
+   a fixed line-height). */
 .toolkit-item h3 {
   font-family: "Inter", sans-serif;
   font-size: 1rem;
   font-weight: 700;
-  line-height: 44px; /* aligns the title with the icon tile */
+  line-height: 1.3;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
   color: var(--text);
   margin-bottom: 0;
+  overflow-wrap: break-word;
 }
 
 .toolkit-item p {
@@ -167,6 +197,8 @@
   line-height: 1.85;
   color: var(--text-sec);
   margin-top: -4px;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
 }
 
 /* Quiet one-time page-load reveal (respects reduced motion) */
@@ -194,19 +226,56 @@
   }
 }
 
-/* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 760px) {
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Large desktop: use the width, items in two columns ─────── */
+@media (min-width: 1100px) {
   .toolkit-group {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(200px, 296px) minmax(0, 1fr);
+  }
+
+  .toolkit-items {
+    max-width: 980px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 56px;
+  }
+}
+
+/* ── Wide screens: slightly larger reading size ─────────────── */
+@media (min-width: 1600px) {
+  .toolkit-item h3 {
+    font-size: 1.0625rem;
+  }
+
+  .toolkit-item p {
+    font-size: 0.95rem;
+  }
+
+  .toolkit-intro {
+    max-width: 42rem;
+  }
+}
+
+/* ── Tablet & below: label stacks above its items ───────────── */
+@media (max-width: 900px) {
+  .toolkit-group {
+    grid-template-columns: minmax(0, 1fr);
     gap: 22px;
-    padding: 36px 0;
   }
 
   .toolkit-group-label {
     padding-top: 0;
   }
+
+  .toolkit-items {
+    max-width: 44rem;
+  }
 }
 
+/* ── Phones ─────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .toolkit-page {
     padding-top: 104px;
@@ -223,7 +292,79 @@
     border-radius: 10px;
   }
 
+  .toolkit-icon img {
+    width: 22px;
+    height: 22px;
+  }
+
   .toolkit-item h3 {
-    line-height: 40px;
+    min-height: 40px;
+    font-size: 0.975rem;
+  }
+
+  /* a touch larger + tighter for comfortable thumb-reading */
+  .toolkit-item p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+}
+
+/* ── Small phones ───────────────────────────────────────────── */
+@media (max-width: 380px) {
+  .toolkit-item {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .toolkit-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+  }
+
+  .toolkit-icon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .toolkit-item h3 {
+    min-height: 36px;
+    font-size: 0.95rem;
+  }
+
+  .toolkit-group-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* ── Very small / folded-style screens: icon above text ─────── */
+@media (max-width: 340px) {
+  .toolkit-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .toolkit-item h3 {
+    min-height: 0;
+  }
+
+  .toolkit-item p {
+    margin-top: 0;
+  }
+}
+
+/* ── Short landscape phones: don't waste the little height ──── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .toolkit-page {
+    padding-top: 88px;
+  }
+
+  .toolkit-head {
+    padding-bottom: 28px;
+  }
+
+  .toolkit-group {
+    padding: 28px 0;
   }
 }
