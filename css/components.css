@@ -432,7 +432,7 @@
   padding: 0.9rem 2.4rem;
   font-size: 1rem;
   font-weight: 700;
-  border-radius: 50px;
+  border-radius: 8px;
   letter-spacing: 0.04em;
   transition:
     transform 0.2s,
@@ -784,7 +784,9 @@
   font-weight: 600;
   font-size: inherit;
   text-decoration: none;
-  transition: opacity var(--transition), gap var(--transition);
+  transition:
+    opacity var(--transition),
+    gap var(--transition);
 }
 
 .hero-card-company-link:hover {
