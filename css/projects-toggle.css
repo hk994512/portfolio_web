@@ -1,0 +1,46 @@
+/* "View All Projects" button */
+.works-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.works-toggle {
+  justify-content: center;
+  min-width: 220px;
+  min-height: 48px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.works-grid .work-card.is-hidden {
+  display: none !important;
+}
+
+.works-grid .work-card.is-revealed {
+  animation: work-reveal 0.45s ease backwards;
+}
+
+@keyframes work-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Small screens: full-width button */
+@media (max-width: 600px) {
+  .works-toggle-wrap {
+    margin-top: 28px;
+  }
+
+  .works-toggle {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works-grid .work-card.is-revealed {
+    animation: none;
+  }
+}
